@@ -1,0 +1,210 @@
+// Demo mode API - works without backend
+import {
+  mockPersonas,
+  mockCautionItems,
+  mockCautionStats,
+  mockUser
+} from '../data/mockData';
+import type { Persona, CautionItem, CautionStats } from './cautionApi';
+import logger from '../utils/logger';
+import {
+  getMainSelectedPersona,
+  mainPersonaToDemo,
+  syncDemoPersonaToMain
+} from '../utils/personaBridge';
+
+import { isDemoMode } from '../config/runtime';
+
+const DEMO_MODE = isDemoMode();
+const STORAGE_KEY = 'ermits-demo-data';
+
+// Simulate network delay
+const delay = (ms: number = 500) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Save demo data to localStorage with error handling
+const saveDemoData = (data: any) => {
+  try {
+    localStorage?.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    logger.warn('Failed to save demo data to localStorage:', error);
+  }
+};
+
+const ensureDemoPersonaFromMain = (data: { user: { selectedPersona?: string | null }; selectedPersona: string | null }) => {
+  if (data.selectedPersona) return data;
+
+  const mainPersona = getMainSelectedPersona();
+  if (!mainPersona) return data;
+
+  const demoName = mainPersonaToDemo(mainPersona);
+  data.selectedPersona = demoName;
+  data.user = { ...data.user, selectedPersona: demoName };
+  saveDemoData(data);
+  return data;
+};
+
+// Get demo data from localStorage with error handling
+const getDemoData = () => {
+  try {
+    const stored = localStorage?.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        return ensureDemoPersonaFromMain(JSON.parse(stored));
+      } catch (parseError) {
+        logger.error('Failed to parse demo data, resetting:', parseError);
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  } catch (storageError) {
+    logger.warn('localStorage not available, using in-memory storage:', storageError);
+  }
+  return ensureDemoPersonaFromMain({
+    user: { ...mockUser },
+    selectedPersona: null
+  });
+};
+
+// Demo API implementation
+export const demoApi = {
+  // Check if in demo mode
+  isDemoMode: () => DEMO_MODE,
+
+  // Personas
+  getAllPersonas: async (): Promise<Persona[]> => {
+    await delay();
+    return mockPersonas;
+  },
+
+  getPersonaByName: async (name: string): Promise<Persona> => {
+    await delay();
+    const persona = mockPersonas.find(p => p.name === name);
+    if (!persona) throw new Error('Persona not found');
+    return persona;
+  },
+
+  selectPersona: async (personaName: string): Promise<{ user: any; persona: Persona }> => {
+    await delay();
+    const persona = mockPersonas.find(p => p.name === personaName);
+    if (!persona) throw new Error('Persona not found');
+
+    const demoData = getDemoData();
+    demoData.user.selectedPersona = personaName;
+    demoData.selectedPersona = personaName;
+    saveDemoData(demoData);
+    syncDemoPersonaToMain(personaName);
+
+    return {
+      user: demoData.user,
+      persona
+    };
+  },
+
+  getCurrentUserPersona: async (): Promise<Persona | null> => {
+    await delay();
+    const demoData = getDemoData();
+    if (!demoData.selectedPersona) return null;
+
+    const persona = mockPersonas.find(p => p.name === demoData.selectedPersona);
+    return persona || null;
+  },
+
+  // Cautions
+  getCautionItems: async (params?: {
+    page?: number;
+    limit?: number;
+    category?: string;
+    severity?: string;
+    startDate?: string;
+  }): Promise<{ data: CautionItem[]; pagination: any }> => {
+    await delay();
+
+    const demoData = getDemoData();
+    if (!demoData.selectedPersona) {
+      throw new Error('Please select a persona first');
+    }
+
+    let filtered = mockCautionItems.filter(item =>
+      item.personas.includes(demoData.selectedPersona)
+    );
+
+    // Apply filters
+    if (params?.category) {
+      filtered = filtered.filter(item => item.category === params.category);
+    }
+    if (params?.severity) {
+      filtered = filtered.filter(item => item.severity === params.severity);
+    }
+    if (params?.startDate) {
+      filtered = filtered.filter(item =>
+        new Date(item.publishedDate) >= new Date(params.startDate!)
+      );
+    }
+
+    // Pagination
+    const page = params?.page || 1;
+    const limit = params?.limit || 20;
+    const start = (page - 1) * limit;
+    const end = start + limit;
+
+    return {
+      data: filtered.slice(start, end),
+      pagination: {
+        total: filtered.length,
+        page,
+        limit,
+        pages: Math.ceil(filtered.length / limit)
+      }
+    };
+  },
+
+  getCautionById: async (id: string): Promise<CautionItem> => {
+    await delay();
+    const caution = mockCautionItems.find(c => c._id === id);
+    if (!caution) throw new Error('Caution not found');
+    return caution;
+  },
+
+  getCautionCategories: async (): Promise<string[]> => {
+    await delay();
+    return [...new Set(mockCautionItems.map(c => c.category))];
+  },
+
+  getCautionStats: async (): Promise<CautionStats> => {
+    await delay();
+    const demoData = getDemoData();
+    if (!demoData.selectedPersona) {
+      throw new Error('Please select a persona first');
+    }
+    return mockCautionStats;
+  },
+
+  // Auth (demo mode)
+  login: async (_email: string, _password: string): Promise<{ user: any; token: string }> => {
+    await delay();
+    const demoData = getDemoData();
+    return {
+      user: demoData.user,
+      token: 'demo-token-' + Date.now()
+    };
+  },
+
+  register: async (data: any): Promise<{ user: any; token: string }> => {
+    await delay();
+    const user = {
+      ...mockUser,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email
+    };
+    saveDemoData({ user, selectedPersona: null });
+    return {
+      user,
+      token: 'demo-token-' + Date.now()
+    };
+  },
+
+  logout: async (): Promise<void> => {
+    await delay();
+    localStorage.removeItem('token');
+  },
+};

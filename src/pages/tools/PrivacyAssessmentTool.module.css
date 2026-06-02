@@ -1,0 +1,3 @@
+.categoryScoreFill {
+  width: var(--category-score-width, 0%);
+}

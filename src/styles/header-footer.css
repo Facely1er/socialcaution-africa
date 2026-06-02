@@ -1,0 +1,1218 @@
+/* Header styles */
+:root {
+  --nav-header-height: 3.5rem;
+  --breadcrumb-bar-height: auto; /* grows with breadcrumb + progress row */
+}
+
+.nav-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  background-color: rgb(var(--color-primary)) !important;
+  color: white !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  height: var(--nav-header-height) !important;
+  overflow: visible;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Ensure header text is always white in both themes - but exclude SVG icons */
+.nav-header {
+  color: white !important;
+}
+
+.nav-header a,
+.nav-header button,
+.nav-header span {
+  color: white !important;
+}
+
+/* Exclude SVG icons from white color - must come after general rules */
+.nav-header *:not(svg) {
+  color: white !important;
+}
+
+/* All SVG icons in header use accent color - comprehensive selector */
+.nav-header svg,
+.nav-header a svg,
+.nav-header button svg,
+.nav-header .header-left svg,
+.nav-header .header-center svg,
+.nav-header .header-right svg,
+.nav-header nav svg,
+.nav-header .dropdown-container svg,
+.nav-header .dropdown-container button svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+/* Dropdown menu SVGs - more specific selector */
+.nav-header .dropdown-menu svg,
+.nav-header .dropdown-container .dropdown-menu svg,
+.nav-header .dropdown-menu a svg,
+.nav-header .dropdown-menu .flex svg,
+.nav-header .dropdown-menu .group svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: rgb(var(--color-accent)) !important;
+  stroke-width: 2 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.nav-header .container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1.5rem; /* Match footer padding */
+  padding-right: 1.5rem; /* Match footer padding */
+  overflow: visible !important; /* Allow dropdowns to show */
+  box-sizing: border-box;
+  position: relative; /* Ensure proper stacking context */
+}
+
+/* Three-column grid: equal flanking columns center the nav on the viewport */
+.header-grid {
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  align-items: center;
+  height: var(--nav-header-height);
+  gap: 0.5rem;
+  column-gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  min-height: var(--nav-header-height);
+  overflow: visible !important;
+  position: relative;
+}
+
+/* Left section: Logo and branding */
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: start;
+  grid-column: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: visible;
+}
+
+/* Branding tagline — visible on all screen sizes including mobile */
+.header-brand-tagline {
+  display: block;
+}
+
+.header-left a {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-left: 0;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  flex-shrink: 1;
+}
+
+/* Header logo — larger visual size, clamped to fixed nav bar height */
+.nav-header .header-logo > .relative {
+  width: 2.75rem;
+  height: 2.75rem;
+  max-height: calc(var(--nav-header-height) - 0.5rem);
+  max-width: calc(var(--nav-header-height) - 0.5rem);
+  flex-shrink: 0;
+}
+
+.nav-header .header-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: calc(var(--nav-header-height) - 0.5rem);
+  object-fit: contain;
+}
+
+/* Center section: Navigation — centered on the full header width */
+.header-center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  grid-column: 2;
+  justify-self: center;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: max-content !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0.5rem !important;
+  box-sizing: border-box;
+  position: relative !important;
+  z-index: auto !important;
+}
+
+/* Ensure all direct children of header-center have consistent spacing */
+.header-center > * {
+  margin: 0 !important; /* Remove any margins that could affect spacing */
+}
+
+/* Right section: Actions — mirrors left column width for balance */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  justify-self: end;
+  grid-column: 3;
+  flex-shrink: 0;
+  min-width: 0;
+  width: auto;
+  gap: 0.5rem !important;
+  margin-left: 0 !important;
+  overflow: visible;
+  flex-wrap: nowrap;
+}
+
+/* Icon-only buttons in header right section */
+.header-right a[aria-label],
+.header-right button[aria-label]:not(.header-auth-btn) {
+  min-width: 2rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right .header-auth-btn {
+  min-height: 2rem !important;
+  height: 2rem !important;
+  padding: 0.25rem 0.625rem !important;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Navigation items */
+.nav-header nav {
+  overflow: visible !important;
+  gap: 0.5rem !important; /* Even spacing between menu items */
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  position: relative !important; /* Ensure proper stacking context */
+  z-index: auto !important; /* Allow dropdowns to use their own z-index */
+}
+
+/* Ensure all nav items (including Home, dropdowns) have no margins affecting spacing */
+.nav-header nav > * {
+  margin: 0 !important;
+}
+
+/* Ensure nav items don't shrink - prevent overlap */
+.nav-header nav a,
+.nav-header nav button {
+  flex-shrink: 0 !important;
+  min-width: auto;
+  white-space: nowrap;
+  overflow: visible;
+  padding: 0.375rem 0.5rem !important;
+  margin: 0 !important;
+}
+@supports (min-width: fit-content) {
+  .nav-header nav a,
+  .nav-header nav button {
+    min-width: fit-content;
+  }
+}
+
+.nav-header nav .dropdown-container {
+  flex-shrink: 0 !important;
+  min-width: auto;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.nav-header.scrolled {
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+}
+
+/* Ensure the header doesn't overlap with content */
+main {
+  padding-top: var(--nav-header-height) !important;
+}
+
+/* When breadcrumbs are present, add extra padding to account for sticky breadcrumb bar */
+main.with-breadcrumbs {
+  padding-top: 0 !important; /* breadcrumb bar is in-flow and clears the fixed header */
+}
+
+/* Responsive adjustments for narrow screens */
+@media (width <= 1280px) {
+  .header-grid {
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem;
+    column-gap: 0.5rem;
+  }
+  
+  .header-right {
+    margin-left: 0 !important;
+    min-width: 0;
+    gap: 0.5rem !important;
+  }
+
+  .header-left {
+    max-width: none;
+    min-width: max-content;
+  }
+  
+  .header-center {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .nav-header nav {
+    gap: 0.5rem !important;
+  }
+
+  .nav-header .hidden.md\\:flex {
+    gap: 0.5rem !important;
+  }
+  
+  .header-center {
+    gap: 0.5rem !important;
+  }
+
+  .nav-header nav a,
+  .nav-header nav button {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.813rem;
+  }
+
+  .nav-header nav svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+
+  .nav-header .w-64 {
+    width: 12rem;
+  }
+}
+
+@media (width <= 1024px) {
+  .header-grid {
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem; /* Match item gap for even spacing */
+    column-gap: 0.5rem;
+  }
+  
+  .header-right {
+    margin-left: 0 !important;
+    min-width: 0;
+    gap: 0.375rem !important;
+  }
+
+  .header-left {
+    max-width: none;
+    min-width: max-content;
+  }
+  
+  .header-center {
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0.5rem !important; /* Slightly reduced gap */
+  }
+
+  .nav-header nav {
+    gap: 0.5rem !important;
+  }
+
+  .nav-header .hidden.md\\:flex {
+    gap: 0.5rem !important;
+  }
+  
+  .header-center {
+    gap: 0.5rem !important;
+  }
+
+  .nav-header nav a,
+  .nav-header nav button {
+    padding: 0.375rem 0.25rem !important;
+    font-size: 0.75rem;
+  }
+
+  .nav-header nav svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+
+  /* Make search bar even smaller on smaller screens */
+  .nav-header .w-64 {
+    width: 10rem;
+  }
+}
+
+@media (width <= 900px) {
+  .header-grid {
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem; /* Maintain minimum spacing */
+  }
+
+  .header-left {
+    max-width: none;
+    min-width: max-content;
+  }
+  
+  .header-center {
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0.5rem !important;
+  }
+
+  .header-right {
+    margin-left: 0 !important;
+    min-width: 0;
+    gap: 0.375rem !important;
+  }
+  
+  .nav-header nav {
+    gap: 0.5rem !important;
+  }
+  
+  .header-center {
+    gap: 0.5rem !important;
+  }
+  
+  .header-right {
+    gap: 0.375rem !important;
+  }
+  
+  .nav-header nav a,
+  .nav-header nav button {
+    padding: 0.375rem !important;
+    font-size: 0.688rem;
+  }
+  
+  .nav-header nav svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+  
+  .nav-header nav span.text-sm {
+    font-size: 0.688rem !important;
+  }
+  
+  /* Hide some text labels on very narrow screens, keep icons */
+  .nav-header nav a span,
+  .nav-header nav button span:not(.ml-auto) {
+    display: none;
+  }
+  
+  .nav-header nav svg {
+    margin: 0 !important;
+  }
+  
+  /* Make search bar very compact on narrow screens */
+  .nav-header .w-64 {
+    width: 8rem;
+  }
+  
+}
+
+@media (width <= 768px) {
+  :root {
+    --nav-header-height: 3.25rem;
+  }
+
+  .nav-header .container {
+    padding: 0 0.75rem;
+  }
+
+  .header-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Hide desktop navigation on mobile; keep header-right for mobile menu */
+  .header-center {
+    display: none !important;
+  }
+
+  .header-right {
+    display: flex !important;
+  }
+
+  main {
+    padding-top: var(--nav-header-height) !important;
+  }
+
+  main.with-breadcrumbs {
+    padding-top: 0 !important;
+  }
+
+  /* Show mobile menu button instead */
+  .nav-header nav.hidden.md\\:flex,
+  .nav-header .hidden.md\\:flex {
+    display: none !important;
+  }
+}
+
+/* Portrait mode optimizations - CRITICAL FIX */
+@media (orientation: portrait) and (width <= 1024px) {
+  .header-grid {
+    height: var(--nav-header-height);
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem !important; /* Match item gap for even spacing */
+    column-gap: 0.5rem !important;
+  }
+  
+  .nav-header .container {
+    padding: 0 0.75rem; /* Increased padding */
+  }
+  
+  .header-left {
+    max-width: none;
+    min-width: max-content;
+  }
+  
+  .header-center {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    gap: 0.5rem !important;
+  }
+  
+  .header-right {
+    min-width: 0 !important;
+    gap: 0.5rem !important; /* Adequate spacing */
+    margin-left: 0 !important;
+  }
+  
+  .nav-header nav {
+    gap: 0.5rem !important;
+  }
+  
+  .nav-header nav a,
+  .nav-header nav button {
+    padding: 0.375rem 0.375rem !important;
+    font-size: 0.75rem;
+  }
+
+  /* Ensure all menu items are visible in portrait mode */
+  .header-center {
+    gap: 0.5rem !important;
+  }
+  
+  .header-right {
+    gap: 0.5rem !important;
+  }
+  
+  /* Make icons slightly smaller in portrait mode */
+  .nav-header nav svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+}
+
+/* Additional fix for tablet portrait */
+@media (orientation: portrait) and (width <= 1280px) and (width > 768px) {
+  .header-grid {
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem !important;
+    column-gap: 0.5rem !important;
+  }
+  
+  .header-right {
+    min-width: 0 !important;
+  }
+  
+  .header-center {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Very small screens */
+@media (width <= 480px) {
+  :root {
+    --nav-header-height: 3rem;
+  }
+
+  .header-grid {
+    gap: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-header .container {
+    padding: 0 0.5rem;
+  }
+
+  main {
+    padding-top: var(--nav-header-height) !important;
+  }
+
+  main.with-breadcrumbs {
+    padding-top: 0 !important;
+  }
+  
+  .nav-header .flex.flex-col span {
+    font-size: 0.75rem;
+  }
+  
+  .nav-header .flex.flex-col .text-xs {
+    font-size: 0.5rem;
+  }
+}
+
+/* Ensure hover states are persistent and visible */
+.nav-header a.active,
+.nav-header button.active {
+  background-color: rgb(255 255 255 / 10%) !important;
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
+}
+
+.nav-header a:hover,
+.nav-header button:hover {
+  background-color: rgb(255 255 255 / 5%) !important;
+  color: white !important;
+}
+
+/* Ensure icons maintain consistent size and color */
+.nav-header svg {
+  width: 0.875rem !important;
+  height: 0.875rem !important;
+  flex-shrink: 0;
+}
+
+/* Ensure all navigation icons use accent color - placed after general white rule for higher specificity */
+.nav-header nav a svg,
+.nav-header nav button svg,
+.nav-header .header-left a svg,
+.nav-header .header-left button svg,
+.nav-header .header-right a svg,
+.nav-header .header-right button svg,
+.nav-header .header-right > svg,
+.nav-header .header-center a svg,
+.nav-header .header-center button svg,
+.nav-header .header-center .dropdown-container svg,
+.nav-header .header-center .dropdown-container button svg,
+.nav-header nav .dropdown-container svg,
+.nav-header nav .dropdown-container button svg,
+.nav-header .dropdown-container button svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+.nav-header nav a:hover svg,
+.nav-header nav button:hover svg,
+.nav-header .header-left a:hover svg,
+.nav-header .header-left button:hover svg,
+.nav-header .header-right a:hover svg,
+.nav-header .header-right button:hover svg,
+.nav-header .header-center a:hover svg,
+.nav-header .header-center button:hover svg,
+.nav-header .header-center .dropdown-container:hover svg,
+.nav-header .header-center .dropdown-container button:hover svg,
+.nav-header .dropdown-container button:hover svg,
+.nav-header .dropdown-container:hover button svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+/* Ensure header content fits within container */
+.nav-header .container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1.5rem; /* Match footer padding */
+  padding-right: 1.5rem; /* Match footer padding */
+  box-sizing: border-box;
+}
+
+/* Prevent any horizontal overflow */
+.nav-header * {
+  box-sizing: border-box;
+}
+
+/* Branding block — allow shrink on small screens to prevent horizontal overflow */
+.nav-header .header-brand-text {
+  min-height: 2.5rem;
+  justify-content: center;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.nav-header .header-brand-text > div:first-child {
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.nav-header .header-brand-tagline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.nav-header .header-brand-text > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure navigation items are compact */
+.nav-header nav a,
+.nav-header nav button {
+  white-space: nowrap;
+  flex-shrink: 0 !important; /* Prevent shrinking */
+  min-width: -webkit-fill-available; /* Samsung Internet 5.0+ support */
+  min-width: auto; /* Fallback for older browsers */
+  max-width: fit-content;
+  overflow: visible; /* Allow full text display */
+}
+@supports (min-width: fit-content) {
+  .nav-header nav a,
+  .nav-header nav button {
+    min-width: fit-content; /* Modern browsers */
+  }
+}
+
+/* Ensure proper centering of navigation */
+.header-center nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  flex-wrap: nowrap !important;
+  gap: 0.5rem !important; /* Even spacing between menu items */
+}
+
+/* Additional responsive improvements */
+@media (width <= 1200px) {
+  .header-grid {
+    grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .nav-header nav a,
+  .nav-header nav button {
+    padding: 0.375rem 0.375rem !important;
+    font-size: 0.813rem;
+  }
+}
+
+/* Ensure navigation stays centered on very wide screens */
+@media (width >= 1400px) {
+  .header-center {
+    justify-content: center;
+  }
+}
+
+/* Logo should not shrink */
+.nav-header a[href="/"] {
+  flex-shrink: 0;
+}
+
+/* Ensure proper container width on larger screens */
+@media (width >= 1536px) {
+  .nav-header .container {
+    max-width: 1280px;
+  }
+}
+
+@media (width >= 1920px) {
+  .nav-header .container {
+    max-width: 1400px;
+  }
+}
+
+/* Dropdown menu improvements */
+.dropdown-container {
+  position: relative !important;
+  flex-shrink: 0 !important;
+  min-width: auto;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  overflow: visible !important;
+  z-index: auto !important;
+}
+@supports (min-width: fit-content) {
+  .dropdown-container {
+    min-width: fit-content; /* Modern browsers */
+  }
+}
+
+.dropdown-container button {
+  overflow: visible !important; /* Allow full text display */
+  white-space: nowrap; /* Keep text on one line */
+  position: relative; /* Ensure button is positioned correctly */
+}
+
+.dropdown-menu {
+  position: absolute !important;
+  z-index: 1100 !important;
+  min-width: 14rem !important;
+  max-width: 20rem;
+  background-color: rgb(var(--color-card)) !important;
+  border: 1px solid rgb(var(--color-border)) !important;
+  box-shadow: 0 10px 25px rgb(0 0 0 / 30%) !important;
+  animation: slideDown 0.2s ease-out;
+  margin-top: 0.25rem !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* Flip alignment when menu would overflow the viewport on the right */
+.dropdown-menu--align-end,
+.nav-header .dropdown-menu--align-end {
+  left: auto !important;
+  right: 0 !important;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure dropdowns are visible */
+.nav-header .dropdown-container {
+  position: relative !important;
+  z-index: auto !important;
+  overflow: visible !important;
+}
+
+.nav-header .header-center .dropdown-container,
+.nav-header nav .dropdown-container {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.nav-header .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  margin-top: 0.25rem !important;
+  background-color: rgb(var(--color-card)) !important;
+  color: rgb(var(--color-text)) !important;
+  z-index: 1100 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.nav-header .dropdown-menu a {
+  background-color: transparent !important;
+  color: rgb(var(--color-text)) !important;
+}
+
+.nav-header .dropdown-menu a:hover {
+  background-color: rgb(var(--color-card-hover)) !important;
+}
+
+/* Force dropdown menu icons to use accent color - must come after text color rules */
+.nav-header .dropdown-menu a svg,
+.nav-header .dropdown-menu svg,
+.nav-header .dropdown-menu .flex svg,
+.nav-header .dropdown-menu .group svg {
+  color: rgb(var(--color-accent)) !important;
+  stroke: rgb(var(--color-accent)) !important;
+}
+
+/* Ensure dropdown menu icons have proper contrast - always use accent color */
+.nav-header .dropdown-menu a svg,
+.nav-header .dropdown-menu svg,
+.nav-header .dropdown-menu .group svg,
+.nav-header .dropdown-menu NavLink svg,
+.nav-header .dropdown-menu a .text-accent,
+.nav-header .dropdown-container .dropdown-menu a svg,
+.nav-header .dropdown-container .dropdown-menu svg,
+.dark .nav-header .dropdown-menu a svg,
+.dark .nav-header .dropdown-menu svg,
+.nav-header .dropdown-menu a:hover svg,
+.nav-header .dropdown-menu a.group:hover svg,
+.nav-header .dropdown-menu:hover svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: rgb(var(--color-accent)) !important;
+  stroke-width: 2 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Dark mode adjustments - ensure header remains consistent */
+.dark .nav-header {
+  background-color: rgb(var(--color-primary)) !important;
+  border-bottom: 1px solid rgb(var(--color-border));
+}
+
+.dark .dropdown-menu {
+  background-color: rgb(var(--color-card)) !important;
+  color: rgb(var(--color-text)) !important;
+  border-color: rgb(var(--color-border)) !important;
+}
+
+.dark .dropdown-menu a {
+  color: rgb(var(--color-text)) !important;
+}
+
+.dark .dropdown-menu a:hover {
+  background-color: rgb(var(--color-card-hover)) !important;
+}
+
+/* Footer styles */
+footer {
+  background-color: rgb(var(--color-primary));
+  color: white;
+  padding: 1rem 0 0.75rem;
+  margin-top: 0; /* Remove any margin to prevent gaps */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer .container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1.5rem; /* Match header padding */
+  padding-right: 1.5rem; /* Match header padding */
+  box-sizing: border-box;
+}
+
+/* Footer branding alignment - match header exactly */
+.footer-branding {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.footer-branding > p {
+  width: 100%;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure footer columns align properly - high specificity to override Tailwind */
+footer .grid,
+footer .footer-grid,
+footer div.grid,
+footer div.footer-grid,
+footer .container .grid,
+footer .container .footer-grid,
+footer .container div.grid,
+footer .container div.footer-grid {
+  align-items: start !important;
+  gap: 1rem !important; /* Reduced base spacing for compactness */
+  row-gap: 1.25rem !important;
+  column-gap: 1rem !important; /* Reduced column spacing */
+  grid-column-gap: 1rem !important; /* Explicit grid column gap */
+  grid-row-gap: 1.25rem !important; /* Explicit grid row gap */
+}
+
+/* Override any Tailwind gap utilities that might be applied */
+footer .grid[class*="gap"],
+footer .footer-grid[class*="gap"] {
+  gap: 1rem !important;
+  column-gap: 1rem !important;
+  row-gap: 1.25rem !important;
+  grid-column-gap: 1rem !important;
+  grid-row-gap: 1.25rem !important;
+}
+
+footer .grid > div,
+footer .footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Allow branding column - full width for description text */
+footer .footer-grid > div.footer-branding,
+footer .container .footer-grid > div.footer-branding,
+footer div.footer-grid > div.footer-branding {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Make column 2 (empty spacing column) narrower */
+footer .footer-grid > div:nth-child(2) {
+  max-width: 0.5rem !important;
+  min-width: 0.5rem !important;
+  width: 0.5rem !important;
+  overflow: hidden !important;
+}
+
+/* Ensure all footer columns have consistent spacing - no extra margins */
+footer .footer-grid > div:not(:first-child) {
+  margin-left: 0 !important;
+}
+
+/* Remove margins from all columns - grid gap handles spacing */
+footer .footer-grid > div:not(:last-child) {
+  margin-right: 0 !important;
+}
+
+/* Responsive gap adjustments for footer */
+/* Mobile: smaller gap for compact layout */
+@media (width < 768px) {
+  footer .grid,
+  footer .footer-grid,
+  footer div.grid,
+  footer div.footer-grid,
+  footer .container .grid,
+  footer .container .footer-grid,
+  footer .container div.grid,
+  footer .container div.footer-grid {
+    gap: 0.75rem !important;
+    row-gap: 1rem !important;
+    column-gap: 0.75rem !important; /* Reduced spacing for compactness */
+    grid-column-gap: 0.75rem !important;
+    grid-row-gap: 1rem !important;
+  }
+  
+  footer .footer-grid > div.footer-branding,
+  footer .container .footer-grid > div.footer-branding {
+    padding-right: 0 !important;
+  }
+}
+
+/* Tablet and up: consistent gap */
+@media (width >= 768px) {
+  footer .grid,
+  footer .footer-grid,
+  footer div.grid,
+  footer div.footer-grid,
+  footer .container .grid,
+  footer .container .footer-grid,
+  footer .container div.grid,
+  footer .container div.footer-grid {
+    gap: 1rem !important;
+    row-gap: 1.25rem !important;
+    column-gap: 1rem !important; /* Reduced spacing for compactness */
+    grid-column-gap: 1rem !important;
+    grid-row-gap: 1.25rem !important;
+  }
+  
+  footer .footer-grid > div.footer-branding,
+  footer .container .footer-grid > div.footer-branding {
+    padding-right: 0 !important;
+  }
+}
+
+/* Large screens: maintain spacing */
+@media (width >= 1024px) {
+  footer .grid,
+  footer .footer-grid,
+  footer div.grid,
+  footer div.footer-grid,
+  footer .container .grid,
+  footer .container .footer-grid,
+  footer .container div.grid,
+  footer .container div.footer-grid {
+    gap: 1rem !important;
+    row-gap: 1.25rem !important;
+    column-gap: 1rem !important; /* Reduced spacing for compactness */
+    grid-column-gap: 1rem !important;
+    grid-row-gap: 1.25rem !important;
+  }
+  
+  footer .footer-grid > div.footer-branding,
+  footer .container .footer-grid > div.footer-branding {
+    padding-right: 0 !important;
+  }
+}
+
+.footer-branding a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Match header gap */
+  margin-left: 0;
+}
+
+.footer-branding .footer-logo > .relative {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+.footer-branding .footer-logo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+.footer-column h3 {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  color: rgb(255 255 255 / 70%);
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+.footer-link svg {
+  margin-right: 0.5rem;
+  color: var(--color-accent);
+}
+
+/* Footer icon styling - match header icon styling */
+/* All SVG icons in footer use accent color, just like header */
+footer svg {
+  color: rgb(var(--color-accent)) !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure footer icons maintain accent color on hover - override any hover states */
+footer a:hover svg,
+footer a:focus svg,
+footer a:active svg,
+footer a svg:hover {
+  color: rgb(var(--color-accent)) !important;
+}
+
+/* Override any text color classes on SVG elements in footer */
+/* This ensures icons are always accent colored regardless of parent link color */
+footer a svg.text-accent,
+footer a svg[class*="text-accent"],
+footer svg.text-accent,
+footer svg[class*="text-accent"],
+footer svg.text-gray-300,
+footer svg.text-gray-400,
+footer a svg.text-gray-300,
+footer a svg.text-gray-400 {
+  color: rgb(var(--color-accent)) !important;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  padding-top: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footer-bottom-text {
+  color: rgb(255 255 255 / 50%);
+  font-size: 0.875rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-bottom-link {
+  color: rgb(255 255 255 / 50%);
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-link:hover {
+  color: var(--color-accent);
+}
+
+
+/* Mobile menu improvements */
+.nav-header .md\\:hidden {
+  max-height: calc(100vh - var(--nav-header-height));
+  overflow-y: auto;
+}
+
+.nav-header .md\\:hidden .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Dark mode footer adjustments */
+.dark footer {
+  background-color: rgb(var(--color-primary));
+}
+
+/* Responsive adjustments */
+@media (width <= 768px) {
+  footer {
+    padding: 1.25rem 0 0.75rem;
+  }
+  
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+}
+
+/* Mobile nav drawer — rendered via portal; ensure readable colors outside header context */
+.mobile-nav-drawer {
+  color: rgb(17 24 39);
+}
+
+.dark .mobile-nav-drawer {
+  color: rgb(243 244 246);
+}
+
+.mobile-nav-drawer .mobile-nav-search button {
+  color: rgb(55 65 81) !important;
+  border: 1px solid rgb(229 231 235);
+  background-color: rgb(249 250 251);
+}
+
+.dark .mobile-nav-drawer .mobile-nav-search button {
+  color: rgb(229 231 235) !important;
+  border-color: rgb(55 65 81);
+  background-color: rgb(31 41 55);
+}

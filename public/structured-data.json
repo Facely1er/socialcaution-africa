@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SocialCaution Africa",
+  "description": "Regional digital trust, scam prevention, and privacy rights education for African citizens, families, students, and small businesses",
+  "url": "https://africa.socialcaution.com",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}

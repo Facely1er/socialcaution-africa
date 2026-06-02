@@ -1,0 +1,16 @@
+.logoContainer {
+  position: relative;
+}
+
+.logoImage {
+  object-fit: contain;
+  display: block;
+}
+
+.tagline {
+  color: #666666;
+}
+
+.taglineLight {
+  color: #ffffff;
+}

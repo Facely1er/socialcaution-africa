@@ -1,0 +1,25 @@
+# Netlify redirects for SPA routing
+/*    /index.html   200
+
+# Security redirects
+/wp-admin/*  /  301!
+/admin/*     /  301!
+/.env        /  301!
+/.git/*      /  301!
+
+# SEO redirects
+/home        /  301!
+/index       /  301!
+
+# Privacy policy canonical (app route is /privacy)
+/privacy-policy  /privacy  301!
+/legal           /privacy  301!
+
+# Legacy / alias paths → valid app routes
+/test        /assessment  301!
+/quiz        /assessment  301!
+/check       /dashboard/exposure-check  301!
+/tools       /toolkit  301!
+/search      /  301!
+/bookmarks   /dashboard  301!
+/account     /dashboard/profile  301!
