@@ -20,8 +20,14 @@ import PerformanceMonitor from './components/common/PerformanceMonitor';
 
 import HomePage from './pages/HomePage';
 import AfricaHomePage from './pages/africa/AfricaHomePage';
-
-const AssessmentPage = lazy(() => import('./pages/AssessmentPage'));
+import AfricaCountriesPage from './pages/africa/AfricaCountriesPage';
+import AfricaCountryPage from './pages/africa/AfricaCountryPage';
+import ScamShieldAfricaPage from './pages/africa/ScamShieldAfricaPage';
+import AfricaPersonasPage from './pages/africa/AfricaPersonasPage';
+import AfricaPersonaStartPage from './pages/africa/AfricaPersonaStartPage';
+import AfricaActionCenterPage from './pages/africa/AfricaActionCenterPage';
+import AfricaSourcesPage from './pages/africa/AfricaSourcesPage';
+import AfricaPartnerPage from './pages/africa/AfricaPartnerPage';
 const ExposureAssessmentPage = lazy(() => import('./pages/assessment/ExposureAssessmentPage'));
 const PrivacyRightsAssessmentPage = lazy(() => import('./pages/assessment/PrivacyRightsAssessmentPage'));
 const SecurityAssessmentPage = lazy(() => import('./pages/assessment/SecurityAssessmentPage'));
@@ -31,15 +37,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-const AfricaCountriesPage = lazy(() => import('./pages/africa/AfricaCountriesPage'));
-const AfricaCountryPage = lazy(() => import('./pages/africa/AfricaCountryPage'));
-const ScamShieldAfricaPage = lazy(() => import('./pages/africa/ScamShieldAfricaPage'));
-const AfricaPersonasPage = lazy(() => import('./pages/africa/AfricaPersonasPage'));
-const AfricaPersonaStartPage = lazy(() => import('./pages/africa/AfricaPersonaStartPage'));
-const AfricaActionCenterPage = lazy(() => import('./pages/africa/AfricaActionCenterPage'));
-const AfricaSourcesPage = lazy(() => import('./pages/africa/AfricaSourcesPage'));
-const AfricaPartnerPage = lazy(() => import('./pages/africa/AfricaPartnerPage'));
-
+const AssessmentPage = lazy(() => import('./pages/AssessmentPage'));
 const PrivacyLawsPage = lazy(() => import('./pages/legal/PrivacyLawsPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/legal/PrivacyPolicyPage'));
 const TermsPage = lazy(() => import('./pages/legal/TermsPage'));

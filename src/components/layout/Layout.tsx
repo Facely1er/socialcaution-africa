@@ -14,6 +14,7 @@ import LocalOnlyBanner from '../common/LocalOnlyBanner';
 import { useSearchShortcut } from '../../hooks/useKeyboardShortcut';
 import { shouldShowPrivacyJourneyProgress } from '../../data/privacyJourneySteps';
 import { AFRICA_EDITION } from '../../config/africaEditionNav';
+import PageLoadingFallback from '../common/PageLoadingFallback';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -55,7 +56,9 @@ const Layout: React.FC = () => {
             <Navbar />
             <LocalOnlyBanner />
             <div className="pt-[var(--nav-header-height)]">
-              <Outlet />
+              <Suspense fallback={<PageLoadingFallback />}>
+                <Outlet />
+              </Suspense>
             </div>
           </div>
         </NavigationOptimizer>
@@ -105,7 +108,7 @@ const Layout: React.FC = () => {
             className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip layout-main ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'layout-main--home' : ''}`}
             role="main"
           >
-            <Suspense fallback={null}>
+            <Suspense fallback={<PageLoadingFallback />}>
               <Outlet />
             </Suspense>
           </main>

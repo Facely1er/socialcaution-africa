@@ -257,15 +257,21 @@
 
 /* Fix for page title spacing — main top padding is set in layout.css / header-footer.css */
 
-/* Ensure consistent theme transitions */
-* {
+/* Theme transitions — scoped to avoid jank on large DOM trees */
+body,
+.btn-primary,
+.btn-secondary,
+.card,
+.nav-header,
+a,
+button {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
 
-/* Ensure sections fill available space */
-section {
+/* Section layout — page-section spacing owned by Section component */
+section:not(.page-section) {
   min-height: 0;
   display: flex;
   flex-direction: column;

@@ -31,6 +31,30 @@ const MetaTagManager = () => {
           keywords: 'privacy assessment, digital privacy evaluation, privacy test',
           ogType: 'article'
         },
+        '/africa/countries': {
+          title: 'Choose your country — SocialCaution Africa',
+          description: 'Country-specific digital safety, privacy rights, and reporting guidance across Africa.',
+          keywords: 'Africa countries, data protection, digital safety, privacy rights',
+          ogType: 'website',
+        },
+        '/africa/scamshield': {
+          title: 'ScamShield Africa — SocialCaution',
+          description: 'Practical scam prevention for mobile money, WhatsApp fraud, and fake investment schemes.',
+          keywords: 'Africa scams, mobile money fraud, WhatsApp scams, fraud prevention',
+          ogType: 'website',
+        },
+        '/africa/partner': {
+          title: 'National Partnership — SocialCaution Africa',
+          description: 'Partnership tiers for national digital trust deployments across Africa.',
+          keywords: 'Africa partnership, national edition, digital trust, ERMITS',
+          ogType: 'website',
+        },
+        '/africa/sources': {
+          title: 'Source Register — SocialCaution Africa',
+          description: 'Official authority and law references for the Africa Edition.',
+          keywords: 'Africa data protection authorities, source register, legal references',
+          ogType: 'website',
+        },
         '/dashboard': {
           title: 'Privacy Dashboard - Social Caution',
           description: 'Your personalized privacy control center with tailored recommendations, progress tracking, and improvement roadmap.',
@@ -51,7 +75,23 @@ const MetaTagManager = () => {
         }
       };
 
-      const config = pageConfigs[pathname] || pageConfigs['/'];
+      const config =
+        pageConfigs[pathname] ??
+        (pathname.startsWith('/africa/countries/')
+          ? {
+              title: 'Country profile — SocialCaution Africa',
+              description: 'Digital trust profile with local laws, rights, risks, and reporting channels.',
+              keywords: 'Africa country, data protection, privacy rights, reporting',
+              ogType: 'website',
+            }
+          : pathname.startsWith('/africa/action-center/')
+            ? {
+                title: 'Your safety plan — SocialCaution Africa',
+                description: 'Personalized digital safety and privacy action plan.',
+                keywords: 'safety plan, privacy plan, Africa digital safety',
+                ogType: 'website',
+              }
+            : pageConfigs['/']);
 
       // Update document title
       document.title = config.title;

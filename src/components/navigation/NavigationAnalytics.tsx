@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import logger from '../../utils/logger';
 
@@ -17,190 +17,56 @@ interface NavigationAnalyticsProps {
 
 const NavigationAnalytics: React.FC<NavigationAnalyticsProps> = ({ children }) => {
   const location = useLocation();
-  const [navigationEvents, setNavigationEvents] = useState<NavigationEvent[]>([]);
-  const [sessionStart] = useState<number>(Date.now());
+  const sessionStartRef = useRef(Date.now());
+  const navigationEventsRef = useRef<NavigationEvent[]>([]);
+  const lastTrackedPathRef = useRef<string | null>(null);
 
-  // Track page view
-  const trackPageView = useCallback((path: string) => {
-    // Send analytics data to your analytics service
+  // Track page views once per pathname — refs avoid effect ↔ state feedback loops
+  useEffect(() => {
+    if (lastTrackedPathRef.current === location.pathname) return;
+    lastTrackedPathRef.current = location.pathname;
+
+    const now = Date.now();
+    const navigationEvent: NavigationEvent = {
+      path: location.pathname,
+      timestamp: now,
+      userAgent: navigator.userAgent,
+      screenSize: `${window.screen.width}x${window.screen.height}`,
+      source: document.referrer || 'direct',
+    };
+
+    const events = navigationEventsRef.current;
+    if (events.length > 0) {
+      const lastEvent = events[events.length - 1];
+      lastEvent.duration = now - lastEvent.timestamp;
+    }
+    navigationEventsRef.current = [...events, navigationEvent].slice(-50);
+
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('config', 'GA_MEASUREMENT_ID', {
-        page_path: path,
-        page_title: document.title
+        page_path: location.pathname,
+        page_title: document.title,
       });
     }
 
-    // Track custom navigation metrics
-    const sessionDuration = Date.now() - sessionStart;
-    const navigationCount = navigationEvents.length;
-    
-    // Store navigation data in localStorage for analysis
-    const navigationData = {
-      path,
-      timestamp: Date.now(),
-      sessionDuration,
-      navigationCount,
-      userAgent: navigator.userAgent,
-      screenSize: `${window.screen.width}x${window.screen.height}`
-    };
-
     try {
+      const navigationData = {
+        path: location.pathname,
+        timestamp: now,
+        sessionDuration: now - sessionStartRef.current,
+        navigationCount: navigationEventsRef.current.length,
+        userAgent: navigator.userAgent,
+        screenSize: `${window.screen.width}x${window.screen.height}`,
+      };
       const existingData = JSON.parse(localStorage.getItem('navigationAnalytics') || '[]');
       existingData.push(navigationData);
-      
-      // Keep only last 100 navigation events
-      const trimmedData = existingData.slice(-100);
-      localStorage.setItem('navigationAnalytics', JSON.stringify(trimmedData));
+      localStorage.setItem('navigationAnalytics', JSON.stringify(existingData.slice(-100)));
     } catch (error) {
       logger.warn('Failed to store navigation analytics:', error);
     }
-  }, [sessionStart, navigationEvents]);
 
-  // Track navigation events
-  useEffect(() => {
-    const navigationEvent: NavigationEvent = {
-      path: location.pathname,
-      timestamp: Date.now(),
-      userAgent: navigator.userAgent,
-      screenSize: `${window.screen.width}x${window.screen.height}`,
-      source: document.referrer || 'direct'
-    };
-
-    setNavigationEvents(prev => {
-      const newEvents = [...prev];
-      
-      // Calculate duration for previous page
-      if (newEvents.length > 0) {
-        const lastEvent = newEvents[newEvents.length - 1];
-        lastEvent.duration = navigationEvent.timestamp - lastEvent.timestamp;
-      }
-      
-      newEvents.push(navigationEvent);
-      
-      // Keep only last 50 navigation events
-      return newEvents.slice(-50);
-    });
-
-    // Track page view analytics
-    trackPageView(location.pathname);
-  }, [location.pathname, trackPageView]);
-
-  // Track user interactions
-  useEffect(() => {
-    const trackInteraction = (event: Event) => {
-      const target = event.target as HTMLElement;
-      
-      // Track clicks on navigation elements
-      if (target.closest('nav') || target.closest('[data-navigation]')) {
-        // const interactionData = {
-        //   type: 'navigation_click',
-        //   element: target.tagName,
-        //   path: location.pathname,
-        //   timestamp: Date.now()
-        // };
-        
-        // Send interaction data
-        // Track navigation interaction (commented out for production)
-      }
-    };
-
-    document.addEventListener('click', trackInteraction);
-    
-    return () => {
-      document.removeEventListener('click', trackInteraction);
-    };
-  }, [location.pathname]);
-
-  // Track performance metrics
-  useEffect(() => {
-    const trackPerformance = () => {
-      if ('performance' in window) {
-        const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-        
-        if (navigation) {
-          const performanceData = {
-            path: location.pathname,
-            timestamp: Date.now(),
-            loadTime: navigation.loadEventEnd - navigation.loadEventStart,
-            domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
-            firstPaint: performance.getEntriesByName('first-paint')[0]?.startTime || 0,
-            firstContentfulPaint: performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 0
-          };
-          
-          // Store performance data
-          try {
-            const existingData = JSON.parse(localStorage.getItem('performanceAnalytics') || '[]');
-            existingData.push(performanceData);
-            localStorage.setItem('performanceAnalytics', JSON.stringify(existingData.slice(-50)));
-          } catch (error) {
-            logger.warn('Failed to store performance analytics:', error);
-          }
-        }
-      }
-    };
-
-    // Track performance after page load
-    const timer = setTimeout(trackPerformance, 1000);
-    
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
-
-  // Track user engagement
-  useEffect(() => {
-    let engagementTimer: NodeJS.Timeout;
-    let isEngaged = false;
-
-    const trackEngagement = () => {
-      if (!isEngaged) {
-        isEngaged = true;
-        
-        // const engagementData = {
-        //   path: location.pathname,
-        //   timestamp: Date.now(),
-        //   type: 'user_engagement'
-        // };
-        
-        // Track user engagement (commented out for production)
-      }
-    };
-
-    const resetEngagement = () => {
-      isEngaged = false;
-    };
-
-    // Track engagement on user activity
-    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    
-    events.forEach(event => {
-      document.addEventListener(event, trackEngagement, { once: true });
-    });
-
-    // Reset engagement after 30 seconds of inactivity
-    engagementTimer = setTimeout(resetEngagement, 30000);
-
-    return () => {
-      events.forEach(event => {
-        document.removeEventListener(event, trackEngagement);
-      });
-      clearTimeout(engagementTimer);
-    };
-  }, [location.pathname]);
-
-  // Track navigation patterns
-  useEffect(() => {
-    // Navigation pattern tracking (currently unused but kept for future analytics)
-    // const navigationPattern = {
-    //   path: location.pathname,
-    //   timestamp: Date.now(),
-    //   referrer: document.referrer,
-    //   navigationHistory: navigationEvents.map(e => e.path)
-    // };
-
-    // Analyze navigation patterns
     const pathSegments = location.pathname.split('/').filter(Boolean);
     const section = pathSegments[0] || 'home';
-    
-    // Track section popularity
     try {
       const sectionData = JSON.parse(localStorage.getItem('sectionAnalytics') || '{}');
       sectionData[section] = (sectionData[section] || 0) + 1;
@@ -209,12 +75,11 @@ const NavigationAnalytics: React.FC<NavigationAnalyticsProps> = ({ children }) =
       logger.warn('Failed to store section analytics:', error);
     }
 
-    // Track common navigation paths
-    if (navigationEvents.length > 1) {
-      const lastPath = navigationEvents[navigationEvents.length - 2]?.path;
+    const eventsSnapshot = navigationEventsRef.current;
+    if (eventsSnapshot.length > 1) {
+      const lastPath = eventsSnapshot[eventsSnapshot.length - 2]?.path;
       if (lastPath) {
         const pathTransition = `${lastPath} -> ${location.pathname}`;
-        
         try {
           const transitionData = JSON.parse(localStorage.getItem('transitionAnalytics') || '{}');
           transitionData[pathTransition] = (transitionData[pathTransition] || 0) + 1;
@@ -224,7 +89,34 @@ const NavigationAnalytics: React.FC<NavigationAnalyticsProps> = ({ children }) =
         }
       }
     }
-  }, [location.pathname, navigationEvents]);
+  }, [location.pathname]);
+
+  // Performance sample — once per route, delayed
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      if (!('performance' in window)) return;
+      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+      if (!navigation) return;
+
+      try {
+        const performanceData = {
+          path: location.pathname,
+          timestamp: Date.now(),
+          loadTime: navigation.loadEventEnd - navigation.loadEventStart,
+          domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+          firstPaint: performance.getEntriesByName('first-paint')[0]?.startTime || 0,
+          firstContentfulPaint: performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 0,
+        };
+        const existingData = JSON.parse(localStorage.getItem('performanceAnalytics') || '[]');
+        existingData.push(performanceData);
+        localStorage.setItem('performanceAnalytics', JSON.stringify(existingData.slice(-50)));
+      } catch (error) {
+        logger.warn('Failed to store performance analytics:', error);
+      }
+    }, 1000);
+
+    return () => window.clearTimeout(timer);
+  }, [location.pathname]);
 
   return <>{children}</>;
 };

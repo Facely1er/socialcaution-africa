@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '../../lib/motion';
 import { Search, X, ArrowRight, Clock, Star, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { AFRICA_EDITION } from '../../config/africaEditionNav';
 interface SearchResult {
   id: string;
   title: string;
@@ -30,7 +31,23 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   // Search results data
-  const searchData: SearchResult[] = useMemo(() => [
+  const searchData: SearchResult[] = useMemo(() => {
+    if (AFRICA_EDITION) {
+      return [
+        { id: 'home', title: 'Home', description: 'Choose your profile', path: '/', type: 'page', category: 'Africa', icon: Search, priority: 10, keywords: ['home', 'persona', 'profile'] },
+        { id: 'countries', title: 'Countries', description: 'Country-specific guidance', path: '/africa/countries', type: 'page', category: 'Africa', icon: Search, priority: 9, keywords: ['country', 'nigeria', 'kenya', 'ghana', 'senegal'] },
+        { id: 'scamshield', title: 'ScamShield Africa', description: 'Scam prevention guide', path: '/africa/scamshield', type: 'page', category: 'Africa', icon: Search, priority: 9, keywords: ['scam', 'fraud', 'mobile money', 'whatsapp'] },
+        { id: 'partner', title: 'Partner', description: 'National partnership tiers', path: '/africa/partner', type: 'page', category: 'Africa', icon: Search, priority: 8, keywords: ['partner', 'government', 'deployment'] },
+        { id: 'sources', title: 'Source register', description: 'Official authority references', path: '/africa/sources', type: 'page', category: 'Africa', icon: Search, priority: 7, keywords: ['sources', 'authority', 'law', 'verification'] },
+        { id: 'about', title: 'About ERMITS', description: 'About the platform', path: '/about', type: 'page', category: 'Info', icon: Search, priority: 6, keywords: ['about', 'ermits'] },
+        { id: 'contact', title: 'Contact', description: 'Get in touch', path: '/contact', type: 'page', category: 'Info', icon: Search, priority: 6, keywords: ['contact', 'briefing', 'support'] },
+        { id: 'parent', title: 'Parent / Guardian', description: 'Family safety plan', path: '/africa/personas/start/parent-guardian', type: 'persona', category: 'Profiles', icon: Search, priority: 8, keywords: ['parent', 'family', 'child', 'school'] },
+        { id: 'mobile-money', title: 'Mobile Money User', description: 'Wallet and USSD safety', path: '/africa/personas/start/mobile-money-user', type: 'persona', category: 'Profiles', icon: Search, priority: 8, keywords: ['mobile money', 'm-pesa', 'otp', 'sim swap'] },
+        { id: 'sme', title: 'Small Business Owner', description: 'SME digital trust plan', path: '/africa/personas/start/small-business-owner', type: 'persona', category: 'Profiles', icon: Search, priority: 7, keywords: ['business', 'sme', 'customer data'] },
+      ];
+    }
+
+    return [
     // Main pages
     {
       id: 'home',
@@ -178,7 +195,8 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
       priority: 6,
       keywords: ['advocate', 'advanced', 'expert', 'privacy']
     }
-  ], []);
+  ];
+  }, []);
 
   // Handle result click
   const handleResultClick = useCallback((result: SearchResult) => {
