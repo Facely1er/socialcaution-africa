@@ -20,7 +20,7 @@ Timeout: 15000ms
 
 Call log:
   - Expect "not toHaveURL" with timeout 15000ms
-    31 × unexpected value "https://beta.socialcaution.com/404"
+    33 × unexpected value "https://beta.socialcaution.com/404"
 
 ```
 
