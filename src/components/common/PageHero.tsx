@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { motion } from '../../lib/motion';
 import { LucideIcon } from 'lucide-react';
+import './PageHero.css';
 // import Icon from './Icon';
 
 interface FloatingElement {
@@ -39,6 +40,15 @@ const PageHero: React.FC<PageHeroProps> = ({
   children,
   className = ''
 }) => {
+  const setBackgroundLayerVars = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !backgroundImage) return;
+      node.style.setProperty('--page-hero-bg-image', `url(${backgroundImage})`);
+      node.style.setProperty('--page-hero-bg-opacity', String(backgroundImageOpacity));
+    },
+    [backgroundImage, backgroundImageOpacity]
+  );
+
   const getBackgroundClasses = () => {
     switch (backgroundType) {
       case 'gradient':
@@ -56,15 +66,10 @@ const PageHero: React.FC<PageHeroProps> = ({
     <div className={`relative overflow-hidden ${getBackgroundClasses()} ${className}`}>
       {/* Background image layer (if provided) - behind everything */}
       {backgroundImage && (
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: backgroundImageOpacity
-          }}
+        <div
+          ref={setBackgroundLayerVars}
+          className="page-hero__bg-layer"
+          aria-hidden="true"
         />
       )}
       
@@ -82,8 +87,7 @@ const PageHero: React.FC<PageHeroProps> = ({
       <div className="container mx-auto px-4 py-12 md:py-16 lg:py-20 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1 
-            className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight break-words"
-            style={{ lineHeight: '1.1', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+            className="page-hero__title text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -93,8 +97,7 @@ const PageHero: React.FC<PageHeroProps> = ({
           
           {subtitle && (
             <motion.p 
-              className="text-base md:text-lg lg:text-xl text-white/90 mb-4 leading-relaxed"
-              style={{ lineHeight: '1.3', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+              className="page-hero__subtitle text-base md:text-lg lg:text-xl text-white/90 mb-4 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -105,8 +108,7 @@ const PageHero: React.FC<PageHeroProps> = ({
           
           {description && (
             <motion.p 
-              className="text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed"
-              style={{ lineHeight: '1.4', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+              className="page-hero__description text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
