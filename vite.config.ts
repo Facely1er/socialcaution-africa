@@ -57,22 +57,22 @@ export default defineConfig(({ mode }) => {
         name: 'SocialCaution Africa',
         short_name: 'SC Africa',
         description: 'Digital trust, scam prevention, and privacy rights for Africa',
-        theme_color: '#FF6B35',
+        theme_color: '#0A2342',
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
         icons: [
           {
-            src: '/favicon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml',
+            src: '/socialcaution.png',
+            sizes: '512x512',
+            type: 'image/png',
             purpose: 'any'
           },
           {
             src: '/favicon.svg',
-            sizes: '512x512',
+            sizes: 'any',
             type: 'image/svg+xml',
-            purpose: 'maskable'
+            purpose: 'any'
           }
         ]
       },

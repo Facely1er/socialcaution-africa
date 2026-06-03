@@ -13,14 +13,16 @@ const COUNTRY_ISO: Record<string, string> = {
   ghana: 'GH',
   nigeria: 'NG',
   kenya: 'KE',
+  senegal: 'SN',
   'south-africa': 'ZA',
 };
 
 const AUTHORITY_ABBREV: Record<string, string> = {
-  'cote-divoire': 'ARTCI · PLCC',
+  'cote-divoire': 'ARTCI · ANSSI',
   ghana: 'DPC Ghana · CSA',
-  nigeria: 'NDPC · CERT',
+  nigeria: 'NDPC · ngCERT',
   kenya: 'ODPC · KE-CIRT',
+  senegal: 'CDP · DGPN',
   'south-africa': 'Info Regulator · SAPS',
 };
 

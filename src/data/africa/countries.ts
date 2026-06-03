@@ -37,7 +37,7 @@ export const africaCountries: AfricaCountry[] = [
     authority: 'Autorité de Régulation des Télécommunications/TIC de Côte d’Ivoire (ARTCI)',
     authorityUrl: 'https://www.artci.ci',
     complaintUrl: 'https://www.artci.ci',
-    cybercrimeReportingUrl: 'https://www.plcc.ci',
+    cybercrimeReportingUrl: 'https://www.anssi.gouv.ci/modes-operatoires-menaces/formulaire-declaration-incident/',
     consumerProtectionUrl: 'https://commerce.gouv.ci',
     financialFraudChannel: 'Bank/mobile-money provider fraud desk and national cybercrime reporting channels',
     telecomEscalation: 'Mobile network operator support, then ARTCI escalation where applicable',
@@ -47,10 +47,10 @@ export const africaCountries: AfricaCountry[] = [
     reportingChannels: ['National cybercrime reporting channels', 'Telecom/mobile money provider support', 'Data protection authority complaint path'],
     recommendedPersonas: ['mobile-money-user', 'parent-guardian', 'student', 'small-business-owner'],
     launchStatus: 'MVP',
-    lastVerifiedDate: '2026-06-01',
+    lastVerifiedDate: '2026-06-03',
     confidenceLevel: 'needs-official-verification',
-    sourceUrls: ['https://www.artci.ci', 'https://www.plcc.ci'],
-    verificationNote: 'MVP profile. Validate complaint URLs, complaint forms, and current authority procedures against official pages before public launch.'
+    sourceUrls: ['https://www.artci.ci', 'https://www.anssi.gouv.ci'],
+    verificationNote: 'MVP profile. PLCC functions are under ANSSI; incident reporting via the official ANSSI online form.'
   },
   {
     slug: 'ghana',
@@ -109,7 +109,7 @@ export const africaCountries: AfricaCountry[] = [
     authority: 'Nigeria Data Protection Commission',
     authorityUrl: 'https://ndpc.gov.ng',
     complaintUrl: 'https://ndpc.gov.ng',
-    cybercrimeReportingUrl: 'https://www.cert.gov.ng',
+    cybercrimeReportingUrl: 'https://cert.gov.ng/incident-report/individual',
     consumerProtectionUrl: 'https://fccpc.gov.ng',
     financialFraudChannel: 'Bank fraud desk, mobile-money provider support, and national cybercrime reporting channels',
     telecomEscalation: 'Provider support, then relevant telecom regulator escalation where applicable',
@@ -119,10 +119,34 @@ export const africaCountries: AfricaCountry[] = [
     reportingChannels: ['NDPC complaint path', 'Cybercrime reporting resources', 'Bank fraud desk'],
     recommendedPersonas: ['small-business-owner', 'online-seller', 'student', 'civil-servant-employee'],
     launchStatus: 'MVP',
-    lastVerifiedDate: '2026-06-01',
+    lastVerifiedDate: '2026-06-03',
     confidenceLevel: 'needs-official-verification',
-    sourceUrls: ['https://ndpc.gov.ng', 'https://www.cert.gov.ng', 'https://fccpc.gov.ng'],
-    verificationNote: 'MVP profile. Validate current NDPC, CERT, and consumer protection reporting workflows before launch.'
+    sourceUrls: ['https://ndpc.gov.ng', 'https://cert.gov.ng', 'https://fccpc.gov.ng'],
+    verificationNote: 'MVP profile. ngCERT incident reporting at cert.gov.ng (without www subdomain).'
+  },
+  {
+    slug: 'senegal',
+    name: 'Senegal',
+    region: 'West Africa',
+    languages: ['French'],
+    law: 'Law No. 2008-12 on the Protection of Personal Data',
+    authority: 'Commission des Données Personnelles (CDP)',
+    authorityUrl: 'https://cdp.sn',
+    complaintUrl: 'https://cdp.sn/contact',
+    cybercrimeReportingUrl: 'https://signalementcyber.dgpn.sn',
+    consumerProtectionUrl: 'https://www.economie.gouv.sn',
+    financialFraudChannel: 'Bank/mobile-money provider fraud desk and DGPN cybercrime reporting platform',
+    telecomEscalation: 'Mobile network operator support, then ARTP escalation where applicable',
+    childProtectionReference: 'Use national child protection and education ministry references before publication',
+    focusRisks: ['Mobile money fraud', 'WhatsApp impersonation', 'SIM-swap risk', 'Social media impersonation'],
+    rights: ['Information', 'Access', 'Rectification', 'Opposition', 'Complaint to authority'],
+    reportingChannels: ['DGPN cybercrime reporting platform', 'CDP complaint path', 'Financial provider fraud support'],
+    recommendedPersonas: ['mobile-money-user', 'parent-guardian', 'student', 'online-seller'],
+    launchStatus: 'MVP',
+    lastVerifiedDate: '2026-06-03',
+    confidenceLevel: 'needs-official-verification',
+    sourceUrls: ['https://cdp.sn', 'https://signalementcyber.dgpn.sn'],
+    verificationNote: 'MVP profile. Validate CDP complaint workflow and DGPN cybercrime reporting path before production.'
   },
   {
     slug: 'south-africa',
@@ -133,7 +157,7 @@ export const africaCountries: AfricaCountry[] = [
     authority: 'Information Regulator South Africa',
     authorityUrl: 'https://inforegulator.org.za',
     complaintUrl: 'https://inforegulator.org.za',
-    cybercrimeReportingUrl: 'https://www.saps.gov.za',
+    cybercrimeReportingUrl: 'https://www.saps.gov.za/services/report_crime.php',
     consumerProtectionUrl: 'https://www.thencc.gov.za',
     financialFraudChannel: 'Bank fraud desk, sector ombuds where applicable, and police/cybercrime reporting channels',
     telecomEscalation: 'Provider support, then relevant communications regulator escalation where applicable',
@@ -143,10 +167,10 @@ export const africaCountries: AfricaCountry[] = [
     reportingChannels: ['Information Regulator complaint path', 'SAPS cybercrime reporting resources', 'Bank fraud desk'],
     recommendedPersonas: ['private-individual', 'parent-guardian', 'online-seller', 'civil-servant-employee'],
     launchStatus: 'MVP',
-    lastVerifiedDate: '2026-06-01',
+    lastVerifiedDate: '2026-06-03',
     confidenceLevel: 'needs-official-verification',
-    sourceUrls: ['https://inforegulator.org.za', 'https://www.saps.gov.za', 'https://www.thencc.gov.za'],
-    verificationNote: 'MVP profile. Validate complaint forms and current reporting instructions before launch.'
+    sourceUrls: ['https://inforegulator.org.za', 'https://www.saps.gov.za/services/report_crime.php', 'https://www.thencc.gov.za'],
+    verificationNote: 'MVP profile. SAPS crime reporting page for cybercrime victims; visit a station or call 10111 for emergencies.'
   }
 ];
 

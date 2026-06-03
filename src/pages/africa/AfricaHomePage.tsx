@@ -13,6 +13,7 @@ const COUNTRY_ISO: Record<string, string> = {
   ghana: 'GH',
   nigeria: 'NG',
   kenya: 'KE',
+  senegal: 'SN',
   'south-africa': 'ZA',
 };
 
