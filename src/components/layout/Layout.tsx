@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -94,7 +94,9 @@ const Layout: React.FC = () => {
           )}
 
           <main id="main-content" className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'pb-0' : 'pb-14'} md:pb-0`} role="main">
-            <Outlet />
+            <Suspense fallback={null}>
+              <Outlet />
+            </Suspense>
           </main>
           {showContextualNav && <ContextualNav />}
           <Footer className="hidden md:block" />

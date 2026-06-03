@@ -1,5 +1,5 @@
 import React, { type ReactNode, type ElementType } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '../../lib/motion';
 import PageLayout from '../layout/PageLayout';
 import Section from '../common/Section';
 import Card from '../common/Card';

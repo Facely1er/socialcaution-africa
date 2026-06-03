@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '../../lib/motion';
 import { LucideIcon } from 'lucide-react';
 // import Icon from './Icon';
 

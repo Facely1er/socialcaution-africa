@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from '../../lib/motion';
 import { ChevronRight, ArrowLeft } from 'lucide-react';
 import CompactProgressTracker from './CompactProgressTracker';
 import { shouldShowPrivacyJourneyProgress } from '../../data/privacyJourneySteps';

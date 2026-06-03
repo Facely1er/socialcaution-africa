@@ -1,7 +1,11 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { visualizer } from 'rollup-plugin-visualizer';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Custom plugin to handle open event timeout issues
 const handleOpenEventTimeout = () => {
@@ -111,7 +115,8 @@ export default defineConfig(({ mode }) => {
       'react-dom',
       'react/jsx-runtime',
       'react/jsx-dev-runtime',
-      'react-dom/client'
+      'react-dom/client',
+      'react-router-dom',
     ],
     exclude: [],
     // Ensure React is pre-bundled before app code
@@ -142,7 +147,11 @@ export default defineConfig(({ mode }) => {
     }
   },
   resolve: {
-    dedupe: ['react', 'react-dom']
+    dedupe: ['react', 'react-dom', 'react-router-dom'],
+    alias: {
+      // Prevent duplicate React copies from framer-motion breaking router hooks in dev
+      'framer-motion': path.resolve(__dirname, 'src/lib/motion.ts'),
+    },
   },
   build: {
     sourcemap: false,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Home, LayoutDashboard, BookOpen, Globe2, AlertTriangle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from '../../lib/motion';
 
 interface NavItem {
   path: string;

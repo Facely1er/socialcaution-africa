@@ -10,8 +10,9 @@ import Layout from './components/layout/Layout';
 import ProductionChecklist from './components/common/ProductionChecklist';
 import PerformanceMonitor from './components/common/PerformanceMonitor';
 
-// Landing page only — keep eagerly loaded for fast first paint
+// Landing pages — eagerly loaded for fast first paint (avoids router hook errors on /)
 import HomePage from './pages/HomePage';
+import AfricaHomePage from './pages/africa/AfricaHomePage';
 
 // Heavy routes — lazy loaded to avoid circular chunk init errors on landing page
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -46,8 +47,7 @@ const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage'));
 const HelpCenterPage = lazy(() => import('./pages/HelpCenterPage'));
 const PrivacyFocusPage = lazy(() => import('./pages/PrivacyFocusPage'));
 
-// Africa regionalization pages
-const AfricaHomePage = lazy(() => import('./pages/africa/AfricaHomePage'));
+// Africa regionalization pages (home is eager — see import above)
 const AfricaCountriesPage = lazy(() => import('./pages/africa/AfricaCountriesPage'));
 const AfricaCountryPage = lazy(() => import('./pages/africa/AfricaCountryPage'));
 const ScamShieldAfricaPage = lazy(() => import('./pages/africa/ScamShieldAfricaPage'));
@@ -118,8 +118,6 @@ const NotificationsPage = lazy(() => import('./pages/dashboard/NotificationsPage
 const PrivacyAssessmentTool = lazy(() => import('./pages/tools/PrivacyAssessmentTool'));
 const PersonalDataInventory = lazy(() => import('./pages/tools/PersonalDataInventory'));
 const PasswordStrengthChecker = lazy(() => import('./pages/tools/PasswordStrengthChecker'));
-
-const SuspenseFallback = () => null;
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -267,9 +265,7 @@ function App() {
                     <PerformanceMonitor />
                   </>
                 )}
-                <Suspense fallback={<SuspenseFallback />}>
-                  <RouterProvider router={router} />
-                </Suspense>
+                <RouterProvider router={router} />
               </PersonaProvider>
             </AuthProvider>
           </ToastProvider>
