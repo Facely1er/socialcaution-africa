@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { AlertTriangle, FileText, Landmark, ShieldCheck, ExternalLink } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
@@ -14,7 +14,7 @@ const AfricaCountryPage: React.FC = () => {
   if (!country) return <Navigate to="/africa/countries" replace />;
 
   return (
-    <PageLayout title={country.name} subtitle={`${country.region} Digital Trust Profile`} description={`Country-specific safety, privacy rights, and reporting guidance for ${country.name}.`} breadcrumbs={[{ label: 'Africa', path: '/africa' }, { label: 'Countries', path: '/africa/countries' }, { label: country.name, path: `/africa/countries/${country.slug}` }]}>
+    <AfricaPageLayout title={country.name} subtitle={`${country.region} Digital Trust Profile`} description={`Country-specific safety, privacy rights, and reporting guidance for ${country.name}.`}>
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
           <Card className="p-6 lg:col-span-2">
@@ -73,7 +73,7 @@ const AfricaCountryPage: React.FC = () => {
           </div>
         </Card>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

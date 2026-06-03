@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AlertTriangle, Globe2, Landmark, ShieldCheck, Smartphone, Users } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import { africaCountries, scamTypes } from '../../data/africa/countries';
+import { designSystem } from '../../styles/design-system';
 
 const pillars = [
   { icon: Smartphone, title: 'Digital Safety', text: 'Practical guidance against mobile money fraud, WhatsApp scams, fake investments, account takeover, and identity theft.' },
@@ -16,12 +17,11 @@ const pillars = [
 
 const AfricaHomePage: React.FC = () => {
   return (
-    <PageLayout
+    <AfricaPageLayout
       title="SocialCaution Africa"
-      subtitle="Digital Trust & Safety for Africa"
-      description="A regional SocialCaution edition focused on online safety, scam prevention, privacy rights, family protection, and SME digital trust across African countries."
+      subtitle="Help Africans stay safe, informed, and empowered online."
+      description="Digital trust and safety for the region — scam prevention, privacy rights, family protection, and SME practices across African countries."
       heroBackground
-      breadcrumbs={[{ label: 'Africa', path: '/africa' }]}
     >
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
@@ -29,17 +29,20 @@ const AfricaHomePage: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent font-semibold mb-4">
               <Globe2 className="h-4 w-4" /> Regional Edition
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary dark:text-white mb-5">
-              Help Africans stay safe, informed, and empowered online.
-            </h1>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              This edition is not only a rights portal. It combines digital safety, scam prevention, data rights, family protection, and SME trust into one regionalized journey.
+              This edition combines digital safety, scam prevention, data rights, family protection, and SME trust into one regionalized journey — not only a rights portal.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/africa/countries"><Button>Explore Countries</Button></Link>
               <Link to="/africa/scamshield"><Button variant="outline">Open ScamShield</Button></Link>
               <Link to="/africa/sources"><Button variant="outline">Source Register</Button></Link>
             </div>
+            <p className="mt-4 text-sm text-text-secondary dark:text-gray-400">
+              Looking for the global privacy journey?{' '}
+              <Link to="/global" className="text-accent font-semibold hover:underline">
+                Open the international platform overview
+              </Link>
+            </p>
           </div>
           <Card className="p-6">
             <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">MVP Country Coverage</h2>
@@ -69,7 +72,7 @@ const AfricaHomePage: React.FC = () => {
           ))}
         </div>
 
-        <Card className="p-6 md:p-8 bg-light-blue dark:bg-background-secondary">
+        <Card className={`p-6 md:p-8 ${designSystem.gradients.card}`}>
           <div className="flex items-start gap-4 mb-6">
             <AlertTriangle className="h-8 w-8 text-accent flex-shrink-0" />
             <div>
@@ -90,7 +93,7 @@ const AfricaHomePage: React.FC = () => {
           </div>
         </Card>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

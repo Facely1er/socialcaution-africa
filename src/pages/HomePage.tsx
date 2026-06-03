@@ -19,6 +19,7 @@ import PageLayout from '../components/layout/PageLayout';
 import Section from '../components/common/Section';
 import Card from '../components/common/Card';
 import SectionIconCircle from '../components/common/SectionIconCircle';
+import { designSystem } from '../styles/design-system';
 
 const HomePage: React.FC = () => {
   // Data for the "Why It Matters" section
@@ -65,26 +66,27 @@ const HomePage: React.FC = () => {
 
       {/* Africa Edition visible entry point */}
       <Section
+        fullWidth
         title="SocialCaution Africa Edition"
         subtitle="A mobile-first digital trust, safety, scam prevention, and data-rights experience for African citizens, families, students, and small businesses."
         centered
-        className="py-12 md:py-16 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-950 border-y border-emerald-200/60 dark:border-emerald-800/40"
+        className={`py-12 md:py-16 border-y border-border ${designSystem.gradients.africaBand}`}
       >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="p-6 border-emerald-200 dark:border-emerald-800/60">
-            <SectionIconCircle icon={Globe} circleClassName="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="p-6 border-accent/20">
+            <SectionIconCircle icon={Globe} circleClassName="bg-accent/10 text-accent" />
             <h3 className="mt-4 text-lg font-bold text-primary dark:text-white">Country-aware guidance</h3>
             <p className="mt-2 text-sm text-text-secondary dark:text-gray-300">Start with Côte d&apos;Ivoire, Ghana, Kenya, Nigeria, or South Africa and route users to local laws, authorities, risks, and reporting channels.</p>
             <Link to="/africa/countries" className="mt-4 inline-flex items-center text-accent font-semibold hover:underline">Explore countries <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Card>
-          <Card className="p-6 border-emerald-200 dark:border-emerald-800/60">
-            <SectionIconCircle icon={Smartphone} circleClassName="bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300" />
+          <Card className="p-6 border-accent/20">
+            <SectionIconCircle icon={Smartphone} circleClassName="bg-accent/10 text-accent" />
             <h3 className="mt-4 text-lg font-bold text-primary dark:text-white">ScamShield Africa</h3>
             <p className="mt-2 text-sm text-text-secondary dark:text-gray-300">Visible launch module for mobile money fraud, WhatsApp scams, fake investment schemes, account takeover, and online seller risk.</p>
             <Link to="/africa/scamshield" className="mt-4 inline-flex items-center text-accent font-semibold hover:underline">Open ScamShield <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Card>
-          <Card className="p-6 border-emerald-200 dark:border-emerald-800/60">
-            <SectionIconCircle icon={Scale} circleClassName="bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300" />
+          <Card className="p-6 border-accent/20">
+            <SectionIconCircle icon={Scale} circleClassName="bg-primary/10 text-primary dark:text-white" />
             <h3 className="mt-4 text-lg font-bold text-primary dark:text-white">Rights & Safety Action Center</h3>
             <p className="mt-2 text-sm text-text-secondary dark:text-gray-300">Country and persona-aware actions connect privacy rights, scam response, family protection, and SME digital trust into one workflow.</p>
             <Link to="/africa" className="mt-4 inline-flex items-center text-accent font-semibold hover:underline">Start Africa journey <ArrowRight className="ml-2 h-4 w-4" /></Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, FileText, Info, Scale, HelpCircle, ShieldCheck, Scale as ScaleIcon, Cookie, ClipboardList, Globe, Mail, Users } from 'lucide-react';
+import { BookOpen, FileText, Info, Scale, HelpCircle, ShieldCheck, Scale as ScaleIcon, Cookie, ClipboardList, Globe, Mail, Users, MapPin, AlertTriangle, Landmark } from 'lucide-react';
 import Logo from '../common/Logo';
 
 // Footer component with updated styling and layout
@@ -21,17 +21,45 @@ const Footer: React.FC = () => {
                   <span className="text-xl font-bold text-white">SocialCaution</span>
                   <span className="text-xs font-normal text-white ml-0.5 align-super">™</span>
                 </div>
-                <div className="text-sm text-gray-300">Control Your Privacy</div>
-                <div className="text-xs text-gray-400">by ERMITS</div>
+                <div className="text-sm text-gray-300">Africa Edition</div>
+                <div className="text-xs text-gray-400">Digital trust &amp; safety · ERMITS</div>
               </div>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Empowering individuals to take control of their digital privacy and protect their personal data.
+              Regional guidance on scam prevention, privacy rights, and family and SME digital safety across African countries.
             </p>
           </div>
 
-          {/* Column 2: Empty - for spacing */}
-          <div aria-hidden="true"></div>
+          {/* Column 2: Africa Edition */}
+          <div>
+            <h2 className="text-lg font-bold mb-3 text-accent">Africa</h2>
+            <ul className="space-y-1.5">
+              <li>
+                <Link to="/africa" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
+                  <Globe className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  Africa Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/africa/countries" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
+                  <MapPin className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  Countries
+                </Link>
+              </li>
+              <li>
+                <Link to="/africa/scamshield" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
+                  <AlertTriangle className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  ScamShield
+                </Link>
+              </li>
+              <li>
+                <Link to="/africa/sources" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
+                  <Landmark className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  Source Register
+                </Link>
+              </li>
+            </ul>
+          </div>
 
           {/* Column 3: Learn */}
           <div>
@@ -52,7 +80,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/privacy-laws" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
                   <Scale className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Privacy Laws
+                  Intl. Privacy Laws
                 </Link>
               </li>
               <li>
@@ -72,6 +100,12 @@ const Footer: React.FC = () => {
                 <Link to="/about" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
                   <Info className="h-3.5 w-3.5 text-accent flex-shrink-0" />
                   About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/global" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
+                  <Globe className="h-3.5 w-3.5 text-accent flex-shrink-0" />
+                  Global Platform
                 </Link>
               </li>
               <li>

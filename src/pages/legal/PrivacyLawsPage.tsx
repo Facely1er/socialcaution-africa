@@ -1,11 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Scale, Info, ArrowRight, Globe, FileText, Lock, Shield, AlertTriangle, BookOpen, Check } from 'lucide-react';
-import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
-import VerticalNav from '../../components/legal/VerticalNav';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 // import { useTranslation } from 'react-i18next';
 // import { useTranslationContext } from '../../hooks/useTranslationContext';
 
@@ -13,28 +11,14 @@ const PrivacyLawsPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <LegalPageLayout
+      variant="hub"
+      title="Privacy Laws & Regulations"
+      subtitle="International reference — EU, US, and global frameworks"
+      description="For African country laws and reporting paths, use the Africa Edition country profiles first."
+      icon={Scale}
     >
-      <Section className="pt-32">
-        <div className="flex items-center mb-8">
-          <div className="p-4 bg-accent/10 rounded-full mr-4">
-            <Scale className="h-8 w-8 text-accent" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-primary dark:text-white mb-2">Privacy Laws & Regulations</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">Understanding the legal framework that protects your digital privacy</p>
-          </div>
-        </div>
-
-        <div className="layout-sidebar-row">
-          <VerticalNav />
-          
-          <div className="layout-sidebar-content">
-            <Card className="p-8">
+      <Card className="p-8">
               <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Overview</h2>
               
               <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -260,11 +244,8 @@ const PrivacyLawsPage: React.FC = () => {
                   Take Privacy Assessment <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
-            </Card>
-          </div>
-        </div>
-      </Section>
-    </motion.div>
+      </Card>
+    </LegalPageLayout>
   );
 };
 

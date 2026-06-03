@@ -1,13 +1,23 @@
 // Design System Configuration
 // Comprehensive design tokens for the ERMITS Social Caution MVP
 
+/** Shared layout classes — single source for PageLayout, Section, and headers. */
+export const layoutClasses = {
+  pageShell: 'min-h-screen min-w-0 max-w-full overflow-x-clip w-full',
+  contentShell: 'max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 min-w-0 max-w-full w-full box-border',
+  sectionOuter: 'page-section w-full max-w-full min-w-0 overflow-x-clip py-6 md:py-8',
+  proseColumn: 'max-w-4xl mx-auto',
+};
+
 export const designSystem = {
+  layout: layoutClasses,
+
   // Container widths
   container: {
     maxWidth: 'max-w-7xl',
-    padding: 'px-3 sm:px-4 lg:px-6', // Reduced side padding for more content space
-    paddingFull: 'px-0', // For full-bleed sections
-    paddingStandard: 'px-4 sm:px-6 lg:px-8', // Original padding (if needed)
+    padding: 'px-3 sm:px-4 lg:px-6',
+    paddingFull: 'px-0',
+    paddingStandard: 'px-4 sm:px-6 lg:px-8',
   },
 
   // Comprehensive spacing scale
@@ -194,13 +204,14 @@ export const designSystem = {
     },
   },
 
-  // Gradients
+  // Gradients (aligned with variables.css primary + accent)
   gradients: {
-    header: 'bg-gradient-to-r from-indigo-600 to-purple-600',
-    page: 'bg-gray-50',
-    card: 'bg-gradient-to-br from-indigo-50 to-purple-50',
-    primaryButton: 'bg-gradient-to-r from-indigo-600 to-purple-600',
-    heroBackground: 'bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50',
+    header: 'bg-gradient-to-r from-primary to-primary-dark',
+    page: 'bg-background-secondary',
+    card: 'bg-gradient-to-br from-light-blue to-white dark:from-background-secondary dark:to-card',
+    primaryButton: 'bg-gradient-to-r from-primary to-accent',
+    heroBackground: 'bg-gradient-to-br from-light-blue via-white to-accent/5',
+    africaBand: 'bg-gradient-to-br from-light-blue via-white to-accent/10 dark:from-background dark:via-background-secondary dark:to-primary/30',
   },
 
   // Comprehensive button system

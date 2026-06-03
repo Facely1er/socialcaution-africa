@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageContentShell } from '../../contexts/PageContentContext';
+import { designSystem } from '../../styles/design-system';
 
 interface SectionProps {
   children: React.ReactNode;
@@ -8,6 +10,8 @@ interface SectionProps {
   subtitle?: string | React.ReactNode;
   centered?: boolean;
   animate?: boolean;
+  /** Force full-width section even outside PageLayout (e.g. homepage). */
+  fullWidth?: boolean;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -17,8 +21,12 @@ const Section: React.FC<SectionProps> = ({
   subtitle,
   centered = false,
   animate = false,
+  fullWidth = false,
 }) => {
-  
+  const inPageShell = usePageContentShell();
+  const useInnerContainer = !inPageShell && !fullWidth;
+  const innerClass = useInnerContainer ? designSystem.layout.contentShell : 'w-full min-w-0 max-w-full';
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -42,8 +50,8 @@ const Section: React.FC<SectionProps> = ({
   const textAlignClass = centered ? 'text-center' : 'text-left';
 
   return (
-    <section className={`py-4 md:py-6 w-full max-w-full min-w-0 overflow-x-clip ${className}`}>
-      <div className="w-full max-w-7xl mx-auto px-4 md:px-6 min-w-0 box-border">
+    <section className={`${designSystem.layout.sectionOuter} ${className}`}>
+      <div className={innerClass}>
         {animate ? (
           <motion.div
             variants={containerVariants}

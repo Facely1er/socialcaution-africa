@@ -1,9 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { FileText, Shield, Globe, Info, AlertTriangle } from 'lucide-react';
-import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
-import VerticalNav from '../../components/legal/VerticalNav';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 // import { Link } from 'react-router-dom';
 // import { useTranslation } from 'react-i18next';
 // import { useTranslationContext } from '../../hooks/useTranslationContext';
@@ -12,27 +10,13 @@ const USPrivacyPage: React.FC = () => {
 
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <LegalPageLayout
+      variant="hub"
+      title="US Privacy Laws"
+      subtitle="International reference — United States federal and state frameworks"
+      description="For African users, prioritize country profiles and local authorities in the Africa Edition."
+      icon={FileText}
     >
-      <Section className="pt-32">
-        <div className="flex items-center mb-8">
-          <div className="p-4 bg-accent/10 rounded-full mr-4">
-            <FileText className="h-8 w-8 text-accent" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-primary dark:text-white mb-2">US Privacy Laws</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">The evolving landscape of data protection in the United States</p>
-          </div>
-        </div>
-
-        <div className="layout-sidebar-row">
-          <VerticalNav />
-          
-          <div className="layout-sidebar-content">
             <Card className="p-8">
               <div className="prose max-w-none dark:prose-invert">
                 <p className="lead text-lg text-gray-600 dark:text-gray-300 mb-8">
@@ -210,11 +194,8 @@ const USPrivacyPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </Card>
-          </div>
-        </div>
-      </Section>
-    </motion.div>
+      </Card>
+    </LegalPageLayout>
   );
 };
 

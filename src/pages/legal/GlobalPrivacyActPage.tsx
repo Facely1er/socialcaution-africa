@@ -1,9 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Shield, FileText, AlertTriangle, Info, Globe } from 'lucide-react';
-import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
-import VerticalNav from '../../components/legal/VerticalNav';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 // import { useTranslation } from 'react-i18next';
 // import { useTranslationContext } from '../../hooks/useTranslationContext';
 
@@ -11,28 +9,14 @@ const GlobalPrivacyActPage: React.FC = () => {
 
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <LegalPageLayout
+      variant="hub"
+      title="Global Privacy Act"
+      subtitle="International reference — harmonized global framework (educational)"
+      description="Illustrative global framework content; verify against official sources for your jurisdiction."
+      icon={Globe}
     >
-      <Section className="pt-32">
-        <div className="flex items-center mb-8">
-          <div className="p-4 bg-accent/10 rounded-full mr-4">
-            <Globe className="h-8 w-8 text-accent" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-primary dark:text-white mb-2">Global Privacy Laws</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">Understanding privacy regulations around the world</p>
-          </div>
-        </div>
-
-        <div className="layout-sidebar-row">
-          <VerticalNav />
-          
-          <div className="layout-sidebar-content">
-            <Card className="p-8">
+      <Card className="p-8">
               <div className="prose max-w-none dark:prose-invert">
                 <p className="lead text-lg text-gray-600 dark:text-gray-300 mb-8">
                   While there is no single global privacy law, international privacy frameworks continue to evolve through various regional and national regulations. The most significant developments include the European Union's GDPR, various state laws in the United States, and emerging privacy legislation in other countries.
@@ -162,11 +146,8 @@ const GlobalPrivacyActPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </Card>
-          </div>
-        </div>
-      </Section>
-    </motion.div>
+      </Card>
+    </LegalPageLayout>
   );
 };
 

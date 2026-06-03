@@ -111,7 +111,7 @@ main.with-breadcrumbs {
 
 /* Responsive padding adjustments */
 @media (width <= 768px) {
-  section {
+  section:not(.page-section) {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -129,13 +129,19 @@ main.with-breadcrumbs {
   }
 }
 
-/* Ensure sections fill available space */
-section {
-  padding: 2rem 0; /* Reduced from 3rem to 2rem */
+/* Legacy sections outside the Section component */
+section:not(.page-section) {
+  padding: 2rem 0;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+}
+
+/* Section component owns vertical rhythm */
+section.page-section {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* Long-form content should wrap, not widen the viewport */
@@ -152,8 +158,12 @@ section {
   flex-direction: column;
 }
 
-/* Remove spacing between sections */
-section + section {
+/* Remove spacing between stacked legacy sections */
+section:not(.page-section) + section:not(.page-section) {
+  padding-top: 0;
+}
+
+section.page-section + section.page-section {
   padding-top: 0;
 }
 
@@ -167,7 +177,7 @@ section + section {
 
 /* Compact spacing for mobile */
 @media (width <= 640px) {
-  section {
+  section:not(.page-section) {
     padding: 1.5rem 0;
   }
   

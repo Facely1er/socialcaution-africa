@@ -1,22 +1,13 @@
-import PageLayout from '../../components/layout/PageLayout';
-import Section from '../../components/common/Section';
-import Card from '../../components/common/Card';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 
 const CookiePolicyPage = () => {
   return (
-    <PageLayout
+    <LegalPageLayout
+      variant="policy"
       title="Cookie Policy"
       subtitle="How we use cookies and similar technologies on our website"
-      heroBackground={false}
-      backgroundType="privacy"
-      breadcrumbs={[
-        { label: 'Legal', path: '/privacy-laws' },
-        { label: 'Cookie Policy', path: '/cookies' }
-      ]}
     >
-      <Section>
-        <Card className="max-w-4xl mx-auto p-8">
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+      <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="text-gray-600 dark:text-gray-400">
               <strong>Effective Date:</strong> October 31, 2025<br />
               <strong>Last Updated:</strong> October 31, 2025
@@ -325,10 +316,8 @@ const CookiePolicyPage = () => {
 
             <p className="mt-4"><strong>Technical Support:</strong><br />
             Email: contact@ermits.com</p>
-          </div>
-        </Card>
-      </Section>
-    </PageLayout>
+      </div>
+    </LegalPageLayout>
   );
 };
 

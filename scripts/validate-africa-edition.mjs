@@ -54,6 +54,7 @@ for (const file of requiredFiles) {
 const countriesText = read('src/data/africa/countries.ts');
 const personasText = read('src/data/africa/personas.ts');
 const homePageText = read('src/pages/HomePage.tsx');
+const africaHomeText = read('src/pages/africa/AfricaHomePage.tsx');
 const appText = read('src/App.tsx');
 
 assertNoPlaceholders('countries', countriesText);
@@ -93,8 +94,20 @@ for (const route of requiredRoutes) {
   }
 }
 
-if (!homePageText.includes('SocialCaution Africa Edition')) {
-  console.error('HomePage is missing the visible Africa Edition entry section.');
+const rootIsAfricaHome =
+  appText.includes('path="/" element={<AfricaHomePage') ||
+  appText.includes("path='/' element={<AfricaHomePage");
+
+if (!rootIsAfricaHome) {
+  console.error('App.tsx must mount AfricaHomePage at path="/" for Africa-first landing.');
+  process.exit(1);
+}
+
+if (
+  !africaHomeText.includes('SocialCaution Africa') &&
+  !homePageText.includes('SocialCaution Africa Edition')
+) {
+  console.error('Missing Africa Edition entry content on Africa home or global home page.');
   process.exit(1);
 }
 

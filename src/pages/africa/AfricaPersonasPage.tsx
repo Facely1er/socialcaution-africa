@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Users } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
@@ -17,19 +17,13 @@ const AfricaPersonasPage: React.FC = () => {
   const personas = getRecommendedPersonasForCountry(country);
 
   return (
-    <PageLayout
+    <AfricaPageLayout
       title={`${country.name} User Profiles`}
       subtitle="Africa-specific persona routing"
       description={`Select the user profile that best matches your digital safety and privacy context in ${country.name}.`}
-      breadcrumbs={[
-        { label: 'Africa', path: '/africa' },
-        { label: 'Countries', path: '/africa/countries' },
-        { label: country.name, path: `/africa/countries/${country.slug}` },
-        { label: 'Personas', path: `/africa/personas/${country.slug}` }
-      ]}
     >
       <Section>
-        <div className="max-w-3xl mb-8">
+        <div className="mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent font-semibold mb-4">
             <Users className="h-4 w-4" /> Country-aware journey
           </div>
@@ -79,7 +73,7 @@ const AfricaPersonasPage: React.FC = () => {
           ))}
         </div>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

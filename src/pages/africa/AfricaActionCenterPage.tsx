@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
 import { AlertTriangle, ExternalLink, FileText, Landmark } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
@@ -21,16 +21,10 @@ const AfricaActionCenterPage: React.FC = () => {
   const recommendations = buildAfricaActionRecommendations(country, persona);
 
   return (
-    <PageLayout
+    <AfricaPageLayout
       title="Digital Rights & Safety Action Center"
       subtitle={`${country.name}${persona ? ` · ${persona.label}` : ''}`}
       description="Country-aware guidance for scam response, rights requests, evidence collection, and authority escalation."
-      breadcrumbs={[
-        { label: 'Africa', path: '/africa' },
-        { label: 'Countries', path: '/africa/countries' },
-        { label: country.name, path: `/africa/countries/${country.slug}` },
-        { label: 'Action Center', path: `/africa/action-center/${country.slug}` }
-      ]}
     >
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -91,7 +85,7 @@ const AfricaActionCenterPage: React.FC = () => {
           <Link to={`/africa/countries/${country.slug}`}><Button variant="outline">Back to country profile</Button></Link>
         </Card>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

@@ -1,23 +1,14 @@
 import React from 'react';
-import PageLayout from '../../components/layout/PageLayout';
-import Section from '../../components/common/Section';
-import Card from '../../components/common/Card';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 
 const TermsPage = () => {
   return (
-    <PageLayout
+    <LegalPageLayout
+      variant="policy"
       title="Master Terms of Service"
       subtitle="Our commitment to providing secure and reliable privacy services"
-      heroBackground={false}
-      backgroundType="privacy"
-      breadcrumbs={[
-        { label: 'Legal', path: '/privacy-laws' },
-        { label: 'Terms of Service', path: '/terms' }
-      ]}
     >
-      <Section>
-        <Card className="max-w-4xl mx-auto p-8">
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+      <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="text-gray-600 dark:text-gray-400">
               <strong>Effective Date:</strong> October 31, 2025<br />
               <strong>Last Updated:</strong> October 31, 2025
@@ -211,10 +202,8 @@ const TermsPage = () => {
 
             <p className="mt-4"><strong>Compliance and Legal Inquiries:</strong><br />
             Email: contact@ermits.com</p>
-          </div>
-        </Card>
-      </Section>
-    </PageLayout>
+      </div>
+    </LegalPageLayout>
   );
 };
 

@@ -1,22 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, ExternalLink, MessageSquare, FileWarning } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import { scamTypes } from '../../data/africa/countries';
 import { scamIncidents, warningTemplates, countryReportingLinks } from '../../data/africa/scamShield';
+import { designSystem } from '../../styles/design-system';
 
 const ScamShieldAfricaPage: React.FC = () => {
   return (
-    <PageLayout
+    <AfricaPageLayout
       title="ScamShield Africa"
       subtitle="Practical scam prevention for mobile-first digital life"
       description="High-frequency fraud patterns, response steps, and country reporting entry points for African users."
-      breadcrumbs={[
-        { label: 'Africa', path: '/africa' },
-        { label: 'ScamShield', path: '/africa/scamshield' },
-      ]}
     >
       <Section title="Know the pattern" subtitle="Common scams affecting mobile money, messaging apps, and job seekers across the region.">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -35,7 +32,7 @@ const ScamShieldAfricaPage: React.FC = () => {
       </Section>
 
       <Section title="Incident examples" subtitle="Use these scenarios in awareness workshops and family safety conversations." className="bg-card-hover">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {scamIncidents.map((incident) => (
             <Card key={incident.id} className="p-6">
               <FileWarning className="h-6 w-6 text-accent mb-3" />
@@ -49,7 +46,7 @@ const ScamShieldAfricaPage: React.FC = () => {
       </Section>
 
       <Section title="Shareable warning templates">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
           {warningTemplates.map((template) => (
             <Card key={template.title} className="p-5">
               <MessageSquare className="h-5 w-5 text-accent mb-3" />
@@ -58,13 +55,13 @@ const ScamShieldAfricaPage: React.FC = () => {
             </Card>
           ))}
         </div>
-        <p className="text-sm text-text-secondary dark:text-gray-400 max-w-3xl mx-auto text-center">
+        <p className={`text-sm text-text-secondary dark:text-gray-400 ${designSystem.layout.proseColumn} text-center`}>
           Copy and adapt these messages for schools, SMEs, and community groups. Verify local reporting numbers before mass distribution.
         </p>
       </Section>
 
       <Section title="Country reporting links" subtitle="MVP references — verify URLs on official regulator sites before public-sector use." className="bg-card-hover">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {countryReportingLinks.map((country) => (
             <Card key={country.slug} className="p-5">
               <h3 className="font-bold text-primary dark:text-white mb-1">
@@ -109,7 +106,7 @@ const ScamShieldAfricaPage: React.FC = () => {
           </p>
         </Card>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

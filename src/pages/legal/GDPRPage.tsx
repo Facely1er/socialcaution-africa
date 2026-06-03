@@ -1,9 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Shield, Lock, FileText, Info, Check, AlertTriangle } from 'lucide-react';
-import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
-import VerticalNav from '../../components/legal/VerticalNav';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 // import { useTranslation } from 'react-i18next';
 // import { useTranslationContext } from '../../hooks/useTranslationContext';
 
@@ -11,28 +9,14 @@ const GDPRPage: React.FC = () => {
 
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <LegalPageLayout
+      variant="hub"
+      title="GDPR (European Union)"
+      subtitle="International reference — EU data protection framework"
+      description="Educational overview of GDPR; for African regional law, see country profiles in the Africa Edition."
+      icon={Shield}
     >
-      <Section className="pt-32">
-        <div className="flex items-center mb-8">
-          <div className="p-4 bg-accent/10 rounded-full mr-4">
-            <Shield className="h-8 w-8 text-accent" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-primary dark:text-white mb-2">GDPR Updates</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300">Key changes to the European Union's data protection framework</p>
-          </div>
-        </div>
-
-        <div className="layout-sidebar-row">
-          <VerticalNav />
-          
-          <div className="layout-sidebar-content">
-            <Card className="p-8">
+      <Card className="p-8">
               <div className="prose max-w-none dark:prose-invert">
                 <p className="lead text-lg text-gray-600 dark:text-gray-300 mb-8">
                   The European Union's General Data Protection Regulation (GDPR) remains the gold standard for comprehensive privacy protection. While there are ongoing discussions about potential updates, the current GDPR framework continues to provide strong data protection rights and obligations.
@@ -156,11 +140,8 @@ const GDPRPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </Card>
-          </div>
-        </div>
-      </Section>
-    </motion.div>
+      </Card>
+    </LegalPageLayout>
   );
 };
 

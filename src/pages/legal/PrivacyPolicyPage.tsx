@@ -1,23 +1,14 @@
 import React from 'react';
-import PageLayout from '../../components/layout/PageLayout';
-import Section from '../../components/common/Section';
-import Card from '../../components/common/Card';
+import LegalPageLayout from '../../components/legal/LegalPageLayout';
 
 const PrivacyPolicyPage = () => {
   return (
-    <PageLayout
+    <LegalPageLayout
+      variant="policy"
       title="Master Privacy Policy"
       subtitle="How we protect and handle your personal information"
-      heroBackground={false}
-      backgroundType="privacy"
-      breadcrumbs={[
-        { label: 'Legal', path: '/privacy-laws' },
-        { label: 'Privacy Policy', path: '/privacy' }
-      ]}
     >
-      <Section>
-        <Card className="max-w-4xl mx-auto p-8">
-          <div className="prose prose-lg max-w-none dark:prose-invert">
+      <div className="prose prose-lg max-w-none dark:prose-invert">
             <p className="text-gray-600 dark:text-gray-400">
               <strong>Effective Date:</strong> October 31, 2025<br />
               <strong>Last Updated:</strong> October 31, 2025
@@ -267,10 +258,8 @@ const PrivacyPolicyPage = () => {
             <p className="mt-4"><strong>General Inquiries:</strong><br />
             Email: contact@ermits.com<br />
             Website: www.ermits.com</p>
-          </div>
-        </Card>
-      </Section>
-    </PageLayout>
+      </div>
+    </LegalPageLayout>
   );
 };
 

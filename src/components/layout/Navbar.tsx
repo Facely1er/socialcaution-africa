@@ -178,7 +178,7 @@ const Navbar: React.FC = () => {
                   <span className="text-sm font-bold text-white">SocialCaution</span>
                   <span className="text-[10px] font-normal text-white ml-0.5 align-super">™</span>
                 </div>
-                <div className="header-brand-tagline text-[10px] text-gray-300 leading-none -mt-0.5">Control Your Privacy</div>
+                <div className="header-brand-tagline text-[10px] text-gray-300 leading-none -mt-0.5">Africa Edition</div>
               </div>
             </Link>
           </div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Settings, ArrowLeft } from 'lucide-react';
 import StandardPageHeader from '../common/StandardPageHeader';
 import { designSystem } from '../../styles/design-system';
+import { PageContentProvider } from '../../contexts/PageContentContext';
 
 type BackgroundType =
   | 'particles'
@@ -20,7 +21,8 @@ type BackgroundType =
   | 'about'
   | 'features'
   | 'help'
-  | 'legal';
+  | 'legal'
+  | 'africa';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -61,8 +63,8 @@ export default function PageLayout({
 }: PageLayoutProps) {
   const navigate = useNavigate();
   const resolvedVariant = variant ?? (title ? 'default' : 'fullBleed');
-  const pageShellClass = 'min-h-screen min-w-0 max-w-full overflow-x-clip w-full';
-  const contentShellClass = `${designSystem.container.maxWidth} mx-auto ${designSystem.container.padding} ${designSystem.spacing.page} min-w-0 max-w-full w-full box-border`;
+  const pageShellClass = designSystem.layout.pageShell;
+  const contentShellClass = `${designSystem.layout.contentShell} ${designSystem.spacing.page}`;
 
   if (resolvedVariant === 'fullBleed') {
     return <>{children}</>;
@@ -103,10 +105,10 @@ export default function PageLayout({
                   </h1>
                 )}
                 {subtitle && (
-                  <p className="text-indigo-100 text-base sm:text-lg leading-relaxed">{subtitle}</p>
+                  <p className="text-white/85 text-base sm:text-lg leading-relaxed">{subtitle}</p>
                 )}
                 {currentPersona && !subtitle && (
-                  <p className="text-indigo-100 mt-2 text-sm sm:text-base">
+                  <p className="text-white/85 mt-2 text-sm sm:text-base">
                     Tailored for:{' '}
                     <span className="font-semibold">{currentPersona.displayName}</span>{' '}
                     {currentPersona.icon}
@@ -130,9 +132,7 @@ export default function PageLayout({
             </div>
           </div>
         </div>
-        <div className={contentShellClass}>
-          {children}
-        </div>
+        <PageContentShell className={contentShellClass}>{children}</PageContentShell>
       </div>
     );
   }
@@ -151,9 +151,15 @@ export default function PageLayout({
           backgroundType={backgroundType}
         />
       )}
-      <div className={contentShellClass}>
-        {children}
-      </div>
+      <PageContentShell className={contentShellClass}>{children}</PageContentShell>
+    </div>
+  );
+}
+
+function PageContentShell({ className, children }: { className: string; children: ReactNode }) {
+  return (
+    <div className={className}>
+      <PageContentProvider inPageShell>{children}</PageContentProvider>
     </div>
   );
 }

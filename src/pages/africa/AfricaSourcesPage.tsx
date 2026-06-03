@@ -1,22 +1,18 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import { africaCountries } from '../../data/africa/countries';
 
 const AfricaSourcesPage: React.FC = () => (
-  <PageLayout
+  <AfricaPageLayout
     title="Africa Edition Source Register"
     subtitle="Official references used by the regional prototype"
     description="Authority and law references for verification before public-sector or legal use."
-    breadcrumbs={[
-      { label: 'Africa', path: '/africa' },
-      { label: 'Sources', path: '/africa/sources' },
-    ]}
   >
     <Section>
-      <div className="max-w-5xl mx-auto grid gap-4">
+      <div className="grid gap-4">
         {africaCountries.map((country) => (
           <Card key={country.slug} className="p-5">
             <h2 className="text-lg font-bold text-primary dark:text-white mb-1">{country.name}</h2>
@@ -48,7 +44,7 @@ const AfricaSourcesPage: React.FC = () => (
         ))}
       </div>
     </Section>
-  </PageLayout>
+  </AfricaPageLayout>
 );
 
 export default AfricaSourcesPage;

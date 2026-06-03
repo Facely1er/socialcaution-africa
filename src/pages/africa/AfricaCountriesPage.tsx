@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import { africaCountries, africaRegions } from '../../data/africa/countries';
@@ -11,7 +11,7 @@ const AfricaCountriesPage: React.FC = () => {
   const filtered = useMemo(() => region === 'All' ? africaCountries : africaCountries.filter((country) => country.region === region), [region]);
 
   return (
-    <PageLayout title="Africa Country Selector" subtitle="Country-specific digital safety and privacy guidance" description="Select a country to view local data protection law, authority, risk focus, and reporting paths." breadcrumbs={[{ label: 'Africa', path: '/africa' }, { label: 'Countries', path: '/africa/countries' }]}>
+    <AfricaPageLayout title="Africa Country Selector" subtitle="Country-specific digital safety and privacy guidance" description="Select a country to view local data protection law, authority, risk focus, and reporting paths.">
       <Section>
         <div className="flex flex-wrap gap-2 mb-8">
           {['All', ...africaRegions].map((item) => (
@@ -43,7 +43,7 @@ const AfricaCountriesPage: React.FC = () => {
           ))}
         </div>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

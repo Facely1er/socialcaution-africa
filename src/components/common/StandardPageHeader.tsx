@@ -8,6 +8,7 @@ import {
 import PageHero from './PageHero';
 import AnimatedBackground from './AnimatedBackground';
 import Breadcrumb from './Breadcrumb';
+import { designSystem } from '../../styles/design-system';
 // import Icon from './Icon';
 
 interface FloatingElement {
@@ -32,7 +33,7 @@ interface StandardPageHeaderProps {
   heroType?: 'standard' | 'animated' | 'minimal';
   heroBackground?: boolean;
   backgroundType?: 'particles' | 'matrix' | 'network' | 'privacy' | 'pricing' | 'resources' | 'toolkit' | 'blog' | 
-                   'assessment' | 'personas' | 'tools' | 'contact' | 'about' | 'features' | 'help' | 'legal';
+                   'assessment' | 'personas' | 'tools' | 'contact' | 'about' | 'features' | 'help' | 'legal' | 'africa';
   backgroundImage?: string; // URL to background image
   backgroundImageOpacity?: number; // 0-1, default 0.15
   floatingElements?: FloatingElement[];
@@ -62,7 +63,7 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
         {/* Breadcrumbs */}
         {showBreadcrumbs && breadcrumbs.length > 0 && (
           <div className="bg-background-secondary dark:bg-background-secondary py-2 md:py-3 border-b border-gray-200 dark:border-gray-800">
-            <div className="container mx-auto px-4 min-w-0 max-w-full w-full box-border">
+            <div className={designSystem.layout.contentShell}>
               <Breadcrumb items={breadcrumbs} />
             </div>
           </div>
@@ -70,8 +71,8 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
         
         {/* Simple Header Section */}
         <div className="bg-white dark:bg-background py-8 md:py-10">
-          <div className="container mx-auto px-4 min-w-0 max-w-full w-full box-border">
-            <div className={`max-w-4xl ${!heroBackground ? 'mx-auto text-center' : ''}`}>
+          <div className={designSystem.layout.contentShell}>
+            <div className={`${designSystem.layout.proseColumn} ${!heroBackground ? 'text-center' : ''}`}>
               <h1 
                 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary dark:text-white mb-3"
               >
@@ -200,6 +201,12 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
         { icon: FileText, text: "Policies", position: { top: "20%", right: "15%" }, delay: 0.3, duration: 2.3 },
         { icon: Shield, text: "Your Rights", position: { bottom: "20%", left: "15%" }, delay: 0.5, duration: 2.5 },
         { icon: Gavel, text: "Compliance", position: { bottom: "15%", right: "10%" }, delay: 0.7, duration: 1.8 }
+      ],
+      africa: [
+        { icon: Globe, text: "Regional Edition", position: { top: "15%", left: "10%" }, delay: 0, duration: 2 },
+        { icon: Shield, text: "Digital Safety", position: { top: "20%", right: "15%" }, delay: 0.3, duration: 2.3 },
+        { icon: AlertTriangle, text: "Scam Prevention", position: { bottom: "20%", left: "15%" }, delay: 0.5, duration: 2.5 },
+        { icon: Users, text: "Family Protection", position: { bottom: "15%", right: "10%" }, delay: 0.7, duration: 1.8 }
       ]
     };
     
@@ -211,7 +218,7 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
       {/* Breadcrumbs */}
       {showBreadcrumbs && breadcrumbs.length > 0 && (
         <div className="bg-background-secondary dark:bg-background-secondary py-2 md:py-3">
-          <div className="container mx-auto px-4 min-w-0 max-w-full w-full box-border">
+          <div className={designSystem.layout.contentShell}>
             <Breadcrumb items={breadcrumbs} />
           </div>
         </div>
@@ -233,8 +240,8 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
       ) : (
         /* Simple page header when heroBackground is false */
         <div className="bg-background dark:bg-background py-8 md:py-12">
-          <div className="container mx-auto px-4 min-w-0 max-w-full w-full box-border">
-            <div className="max-w-4xl mx-auto text-center">
+          <div className={designSystem.layout.contentShell}>
+            <div className={`${designSystem.layout.proseColumn} text-center`}>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary dark:text-white mb-4 leading-tight">
                 {title}
               </h1>

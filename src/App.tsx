@@ -125,7 +125,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       {/* ── Main ── */}
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<AfricaHomePage />} />
+      <Route path="/global" element={<HomePage />} />
 
       {/* ── MVP (simplified persona-based flow) ── */}
       <Route path="/persona-selection" element={<PersonaSelection />} />
