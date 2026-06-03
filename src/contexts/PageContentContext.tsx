@@ -19,6 +19,8 @@ export function PageContentProvider({
   );
 }
 
+// Hook export alongside provider — standard context pattern
+// eslint-disable-next-line react-refresh/only-export-components
 export function usePageContentShell(): boolean {
   return useContext(PageContentContext).inPageShell;
 }
