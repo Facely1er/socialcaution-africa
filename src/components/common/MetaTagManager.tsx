@@ -18,10 +18,12 @@ const MetaTagManager = () => {
       // Page-specific meta tag updates
       const pageConfigs: Record<string, PageConfig> = {
         '/': {
-          title: 'Social Caution - Privacy Protection Platform',
-          description: 'A comprehensive privacy assessment and education platform that helps users understand and improve their digital privacy through interactive assessments, personalized recommendations, and educational resources.',
-          keywords: 'privacy assessment, digital privacy, data protection, cybersecurity, privacy persona, GDPR rights, CCPA compliance',
-          ogType: 'website'
+          title: 'SocialCaution Africa — Digital Trust & Safety',
+          description:
+            'Africa Edition: country-aware scam prevention, privacy rights, family protection, and SME digital trust across African countries.',
+          keywords:
+            'Africa digital safety, mobile money fraud, WhatsApp scams, data protection Africa, ScamShield, privacy rights',
+          ogType: 'website',
         },
         '/assessment': {
           title: 'Privacy Assessment - Social Caution',

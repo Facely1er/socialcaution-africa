@@ -1,172 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, FileText, Info, Scale, HelpCircle, ShieldCheck, Scale as ScaleIcon, Cookie, ClipboardList, Globe, Mail, Users, MapPin, AlertTriangle, Landmark } from 'lucide-react';
 import Logo from '../common/Logo';
+import { designSystem } from '../../styles/design-system';
+import { africaFooterGroups } from '../../config/africaEditionNav';
 
-// Footer component with updated styling and layout
+interface FooterProps {
+  className?: string;
+}
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white mt-0">
-      <div className="container mx-auto px-6 py-4">
-        <div className="grid grid-cols-1 md:grid-cols-5 mb-3 footer-grid">
-          {/* Column 1: Logo and Branding */}
-          <div className="footer-branding">
-            <Link to="/" className="flex items-center gap-3 mb-3">
-              <Logo size={64} light className="footer-logo" />
-              <div className="flex flex-col justify-center leading-tight">
-                <div className="flex items-baseline">
-                  <span className="text-xl font-bold text-white">SocialCaution</span>
-                  <span className="text-xs font-normal text-white ml-0.5 align-super">™</span>
+    <footer className={`bg-primary text-white mt-0 ${className}`.trim()}>
+      <div className={`${designSystem.layout.contentShell} py-8 md:py-10`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 mb-6 footer-grid">
+          <div className="footer-branding sm:col-span-2 lg:col-span-4">
+            <Link
+              to="/"
+              className="footer-brand-link flex items-center gap-3 mb-4 w-full max-w-md"
+            >
+              <Logo size={48} light className="footer-logo" />
+              <div className="flex flex-col justify-center leading-tight flex-1">
+                <div className="flex items-baseline flex-wrap gap-x-0.5">
+                  <span className="text-lg font-bold text-white whitespace-nowrap">SocialCaution</span>
+                  <span className="text-xs font-normal text-white align-super">™</span>
                 </div>
-                <div className="text-sm text-gray-300">Africa Edition</div>
-                <div className="text-xs text-gray-400">Digital trust &amp; safety · ERMITS</div>
+                <span className="text-sm text-gray-300 whitespace-nowrap">Africa Edition</span>
+                <span className="text-xs text-gray-400">ERMITS · Digital trust &amp; safety</span>
               </div>
             </Link>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Regional guidance on scam prevention, privacy rights, and family and SME digital safety across African countries.
+            <p className="text-gray-300 text-sm leading-relaxed max-w-md">
+              Country-aware scam prevention, privacy rights, and safety guidance for African citizens, families, and SMEs.
             </p>
           </div>
 
-          {/* Column 2: Africa Edition */}
-          <div>
-            <h2 className="text-lg font-bold mb-3 text-accent">Africa</h2>
-            <ul className="space-y-1.5">
-              <li>
-                <Link to="/africa" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Globe className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Africa Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/africa/countries" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <MapPin className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Countries
-                </Link>
-              </li>
-              <li>
-                <Link to="/africa/scamshield" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <AlertTriangle className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  ScamShield
-                </Link>
-              </li>
-              <li>
-                <Link to="/africa/sources" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Landmark className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Source Register
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Learn */}
-          <div>
-            <h2 className="text-lg font-bold mb-3 text-accent">Learn</h2>
-            <ul className="space-y-1.5">
-              <li>
-                <Link to="/resources/guides" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <BookOpen className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Guides
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources/checklists" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <ClipboardList className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Checklists
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-laws" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Scale className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Intl. Privacy Laws
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Globe className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Company */}
-          <div>
-            <h2 className="text-lg font-bold mb-3 text-accent">Company</h2>
-            <ul className="space-y-1.5">
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Info className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/global" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Globe className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Global Platform
-                </Link>
-              </li>
-              <li>
-                <Link to="/help" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <HelpCircle className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Users className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Mail className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 5: Legal */}
-          <div>
-            <h2 className="text-lg font-bold mb-3 text-accent">Legal</h2>
-            <ul className="space-y-1.5">
-              <li>
-                <Link to="/privacy" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <ShieldCheck className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <ScaleIcon className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/cookies" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <Cookie className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Cookie Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/acceptable-use" className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm">
-                  <FileText className="h-3.5 w-3.5 text-accent flex-shrink-0" />
-                  Acceptable Use
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {africaFooterGroups.map((group) => (
+            <div key={group.title} className="footer-column min-w-0 lg:col-span-2">
+              <h2 className="text-sm font-bold mb-3 text-accent uppercase tracking-wide">{group.title}</h2>
+              <ul className="space-y-2">
+                {group.items.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2 text-sm"
+                    >
+                      <item.icon className="h-3.5 w-3.5 text-accent flex-shrink-0" aria-hidden />
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="border-t border-gray-700 pt-3 mt-3">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-xs mb-2 md:mb-0">
-              © {currentYear} ERMITS LLC. All rights reserved.
-            </p>
-          </div>
+        <div className="border-t border-gray-700 pt-4">
+          <p className="text-gray-400 text-xs text-center md:text-left">
+            © {currentYear} ERMITS LLC. Africa Edition prototype — verify country sources before official use.
+          </p>
         </div>
       </div>
     </footer>

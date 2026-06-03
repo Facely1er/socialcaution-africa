@@ -114,30 +114,10 @@ main {
   padding-top: var(--nav-header-height) !important;
 }
 
-/* When breadcrumbs are present, add extra padding to account for sticky breadcrumb bar */
+/* Nav offset lives on .layout-below-nav — keep main flush with breadcrumb chrome */
+main,
 main.with-breadcrumbs {
-  padding-top: calc(var(--nav-header-height) + 1.5rem) !important;
-}
-
-/* Responsive main padding */
-@media (width <= 768px) {
-  main {
-    padding-top: var(--nav-header-height) !important;
-  }
-  
-  main.with-breadcrumbs {
-    padding-top: calc(var(--nav-header-height) + 1.5rem) !important;
-  }
-}
-
-@media (width <= 480px) {
-  main {
-    padding-top: 3rem !important;
-  }
-  
-  main.with-breadcrumbs {
-    padding-top: 4.5rem !important; /* 3rem for navbar + 1.5rem for breadcrumb bar (py-2 + h-8) */
-  }
+  padding-top: 0 !important;
 }
 
 /* Layout utilities - consolidated */

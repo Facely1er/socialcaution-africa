@@ -47,12 +47,17 @@ main {
   min-width: 0;
   max-width: 100%;
   overflow-x: clip;
-  padding-top: var(--nav-header-height) !important; /* Increased padding for fixed navbar */
+  padding-top: 0 !important; /* .layout-below-nav clears the fixed navbar */
 }
 
-/* When breadcrumbs are present, add extra padding to account for sticky breadcrumb bar */
+/* Breadcrumb bar is in-flow inside .layout-below-nav — no extra main offset */
 main.with-breadcrumbs {
-  padding-top: 0 !important; /* breadcrumb bar is in-flow and clears the fixed header */
+  padding-top: 0 !important;
+}
+
+/* Offset for in-flow chrome (local banner, breadcrumbs) below fixed .nav-header */
+.layout-below-nav {
+  padding-top: var(--nav-header-height);
 }
 
 /* Shared sidebar + content row — keeps content inside viewport on mobile */
@@ -116,10 +121,7 @@ main.with-breadcrumbs {
     padding-bottom: 2rem;
   }
   
-  main {
-    padding-top: var(--nav-header-height) !important;
-  }
-  
+  main,
   main.with-breadcrumbs {
     padding-top: 0 !important;
   }

@@ -1,41 +1,10 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home, LayoutDashboard, BookOpen, Globe2, AlertTriangle } from 'lucide-react';
 import { motion } from '../../lib/motion';
+import { africaBottomNav } from '../../config/africaEditionNav';
+import type { EditionNavItem } from '../../config/africaEditionNav';
 
-interface NavItem {
-  path: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const defaultNavItems: NavItem[] = [
-  {
-    path: '/',
-    label: 'Home',
-    icon: Home
-  },
-  {
-    path: '/dashboard',
-    label: 'Dashboard',
-    icon: LayoutDashboard
-  },
-  {
-    path: '/africa',
-    label: 'Africa',
-    icon: Globe2
-  },
-  {
-    path: '/africa/scamshield',
-    label: 'Scams',
-    icon: AlertTriangle
-  },
-  {
-    path: '/resources',
-    label: 'Resources',
-    icon: BookOpen
-  }
-];
+type NavItem = EditionNavItem;
 
 interface BottomNavProps {
   items?: NavItem[];
@@ -43,7 +12,7 @@ interface BottomNavProps {
 }
 
 const BottomNav: React.FC<BottomNavProps> = ({
-  items = defaultNavItems,
+  items = africaBottomNav,
   className = ''
 }) => {
   const location = useLocation();
@@ -68,7 +37,7 @@ const BottomNav: React.FC<BottomNavProps> = ({
       role="navigation"
       aria-label="Mobile navigation"
     >
-      <div className="grid grid-cols-5 gap-0.5 px-2 pt-1 pb-safe">
+      <div className="grid grid-cols-4 gap-0.5 px-2 pt-1 pb-safe">
         {items.map((item) => {
           const Icon = item.icon;
           const active = isActive(item.path);

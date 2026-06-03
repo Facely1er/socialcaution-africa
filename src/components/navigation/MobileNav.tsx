@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from '../../lib/motion';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Menu, 
-  X, 
-  Home, 
-  Search, 
-  Users, 
-  Shield, 
-  BookOpen, 
-  Settings,
-  ArrowRight,
-  Star,
-  Zap,
-  Clock,
-  TrendingUp,
-  Target,
-  CheckCircle,
-  Briefcase,
+import {
+  Menu,
+  X,
+  Home,
+  BookOpen,
   ChevronDown,
   ChevronUp,
   Globe2,
-  AlertTriangle
+  AlertTriangle,
+  MapPin,
+  Landmark,
+  Scale,
+  Info,
 } from 'lucide-react';
+import { africaFooterGroups, africaHeaderMore } from '../../config/africaEditionNav';
 import SearchIcon from './SearchIcon';
 import useStore from '../../store/useStore';
 import AuthModal from '../auth/AuthModal';
@@ -34,7 +27,7 @@ interface MobileNavProps {
 
 const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>('africa');
   const [showAuth, setShowAuth] = useState(false);
   const location = useLocation();
   const store = useStore();
@@ -64,84 +57,26 @@ const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
     setActiveSection(activeSection === section ? null : section);
   };
 
-  // Navigation sections
   const navigationSections = [
-    {
-      id: 'main',
-      title: 'Main',
-      icon: Home,
-      items: [
-        { path: '/', label: 'Home', icon: Home },
-        { path: '/dashboard', label: 'Dashboard', icon: TrendingUp },
-        { path: '/features', label: 'Features', icon: Star },
-        { path: '/pricing', label: 'Pricing', icon: Target }
-      ]
-    },
     {
       id: 'africa',
       title: 'Africa Edition',
       icon: Globe2,
       items: [
-        { path: '/africa', label: 'Africa Home', icon: Globe2 },
-        { path: '/africa/countries', label: 'Countries', icon: Globe2 },
-        { path: '/africa/scamshield', label: 'ScamShield Africa', icon: AlertTriangle },
-        { path: '/africa/sources', label: 'Source Register', icon: BookOpen }
-      ]
+        { path: '/', label: 'Home', icon: Home },
+        { path: '/africa/countries', label: 'Countries', icon: MapPin },
+        { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
+        { path: '/africa/sources', label: 'Sources', icon: Landmark },
+      ],
     },
     {
-      id: 'privacy',
-      title: 'Privacy Tools',
-      icon: Shield,
-      items: [
-        { path: '/assessment/exposure', label: 'Exposure Check', icon: Target },
-        { path: '/assessment/rights', label: 'Rights Checkup', icon: CheckCircle },
-        { path: '/assessment/security', label: 'Security Assessment', icon: Shield }
-      ]
+      id: 'reference',
+      title: 'Reference & Legal',
+      icon: Scale,
+      items: [...africaHeaderMore, ...(africaFooterGroups.find((g) => g.title === 'Legal & ERMITS')?.items ?? [])].filter(
+        (item, index, arr) => arr.findIndex((i) => i.path === item.path) === index
+      ),
     },
-    {
-      id: 'discovery',
-      title: 'Discovery',
-      icon: Users,
-      items: [
-        { path: '/personas', label: 'Personas', icon: Users },
-        { path: '/personas/cautious-parent', label: 'Cautious Parent', icon: Shield },
-        { path: '/personas/privacy-advocate', label: 'Privacy Advocate', icon: Star },
-        { path: '/personas/concerned-employee', label: 'Concerned Employee', icon: Briefcase }
-      ]
-    },
-    {
-      id: 'journey',
-      title: 'Privacy Journey',
-      icon: ArrowRight,
-      items: [
-        { path: '/privacy-journey', label: 'Privacy Journey', icon: ArrowRight },
-        { path: '/30-day-roadmap', label: '30-Day Roadmap', icon: Clock },
-        { path: '/privacy-action-center', label: 'Action Center', icon: Target },
-        { path: '/assessment', label: 'Assessment', icon: Search }
-      ]
-    },
-    {
-      id: 'resources',
-      title: 'Resources',
-      icon: BookOpen,
-      items: [
-        { path: '/resources', label: 'Resources', icon: BookOpen },
-        { path: '/resources/guides', label: 'Guides', icon: BookOpen },
-        { path: '/resources/tools', label: 'Tools', icon: Zap },
-        { path: '/blog', label: 'Blog', icon: BookOpen }
-      ]
-    },
-    {
-      id: 'support',
-      title: 'Support',
-      icon: Settings,
-      items: [
-        { path: '/help', label: 'Help', icon: Settings },
-        { path: '/contact', label: 'Contact', icon: Settings },
-        { path: '/privacy', label: 'Privacy Policy', icon: Shield },
-        { path: '/terms', label: 'Terms', icon: BookOpen }
-      ]
-    }
   ];
 
   const handleSignOut = () => {
@@ -188,7 +123,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    Navigation
+                    SocialCaution Africa
                   </h2>
                   <button
                     type="button"

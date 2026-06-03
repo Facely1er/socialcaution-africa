@@ -7,6 +7,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { PersonaProvider } from './core/providers/PersonaProvider';
 import { ToastProvider } from './components/common/ToastProvider';
 import Layout from './components/layout/Layout';
+import { AFRICA_LEGACY_REDIRECTS } from './config/africaEditionNav';
 import ProductionChecklist from './components/common/ProductionChecklist';
 import PerformanceMonitor from './components/common/PerformanceMonitor';
 
@@ -122,8 +123,14 @@ const PasswordStrengthChecker = lazy(() => import('./pages/tools/PasswordStrengt
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
+      {/* Legacy global marketing routes → Africa edition (stakeholder focus) */}
+      {Object.entries(AFRICA_LEGACY_REDIRECTS).map(([from, to]) => (
+        <Route key={from} path={from} element={<Navigate to={to} replace />} />
+      ))}
+
       {/* ── Main ── */}
       <Route path="/" element={<AfricaHomePage />} />
+      <Route path="/africa" element={<Navigate to="/" replace />} />
       <Route path="/global" element={<HomePage />} />
 
       {/* ── MVP (simplified persona-based flow) ── */}

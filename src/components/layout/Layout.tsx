@@ -13,6 +13,7 @@ import BottomNav from '../navigation/BottomNav';
 import LocalOnlyBanner from '../common/LocalOnlyBanner';
 import { useSearchShortcut } from '../../hooks/useKeyboardShortcut';
 import { shouldShowPrivacyJourneyProgress } from '../../data/privacyJourneySteps';
+import { AFRICA_EDITION } from '../../config/africaEditionNav';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -28,14 +29,18 @@ const Layout: React.FC = () => {
   const showBreadcrumbs = !location.pathname.includes('/dashboard') && 
                          location.pathname !== '/' && 
                          !location.pathname.includes('/resources/tools');
-  const showProgress = shouldShowPrivacyJourneyProgress(location.pathname);
-  
-  // Show contextual nav on relevant pages (not on home, dashboard, or tool pages)
-  const showContextualNav = !isDashboardRoute && 
-                           location.pathname !== '/' && 
-                           !location.pathname.includes('/resources/tools') &&
-                           !location.pathname.includes('/blog') &&
-                           !location.pathname.includes('/legal');
+  const showProgress =
+    !AFRICA_EDITION && shouldShowPrivacyJourneyProgress(location.pathname);
+
+  // Floating “privacy journey” promos are not part of the Africa edition UX
+  const showContextualNav =
+    !AFRICA_EDITION &&
+    !isDashboardRoute &&
+    location.pathname !== '/' &&
+    !location.pathname.startsWith('/africa') &&
+    !location.pathname.includes('/resources/tools') &&
+    !location.pathname.includes('/blog') &&
+    !location.pathname.includes('/legal');
 
   const isHomePage = location.pathname === '/';
 
@@ -77,21 +82,24 @@ const Layout: React.FC = () => {
           <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
           <Navbar />
-          <LocalOnlyBanner />
 
-          {/* Unified Breadcrumbs and Progress Navigation Bar */}
-          {(showBreadcrumbs || showProgress) && (
-            <div className="sticky top-[var(--nav-header-height)] z-40 bg-white dark:bg-card border-b border-border px-4 py-2 shadow-sm mt-[var(--nav-header-height)] overflow-x-clip max-w-full">
-              <div className="max-w-7xl mx-auto min-w-0 w-full">
-                <div className="flex items-center w-full min-h-8">
-                  <SmartBreadcrumb
-                    showBackButton={true}
-                    showProgress={showProgress}
-                  />
+          {/* Single offset below fixed header — banner + breadcrumbs share this stack */}
+          <div className="layout-below-nav">
+            <LocalOnlyBanner />
+
+            {(showBreadcrumbs || showProgress) && (
+              <div className="sticky-navbar px-4 py-1.5 overflow-x-clip max-w-full">
+                <div className="max-w-7xl mx-auto min-w-0 w-full">
+                  <div className="flex items-center w-full min-h-8">
+                    <SmartBreadcrumb
+                      showBackButton={true}
+                      showProgress={showProgress}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <main id="main-content" className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'pb-0' : 'pb-14'} md:pb-0`} role="main">
             <Suspense fallback={null}>
