@@ -1,4 +1,4 @@
-import { Key, Shield, Smartphone, MessageCircle, CreditCard, Wifi } from 'lucide-react';
+import { Shield, Smartphone, MessageCircle, CreditCard } from 'lucide-react';
 import type { ElementType } from 'react';
 
 export type AfricaAssessmentOption = {

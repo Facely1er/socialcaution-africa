@@ -11,6 +11,8 @@ import {
   ShieldCheck,
   FileText,
   Cookie,
+  ClipboardList,
+  Map,
 } from 'lucide-react';
 
 /** Single source of truth: this deployment is the Africa regional edition. */
@@ -23,27 +25,36 @@ export type EditionNavItem = {
   highlight?: boolean;
 };
 
-/** Desktop header — core stakeholder journeys only */
+/** Desktop header — primary journeys (keep ≤4 items + More) */
 export const africaHeaderNav: EditionNavItem[] = [
   { path: '/africa/countries', label: 'Countries', icon: MapPin },
   { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
-  { path: '/africa/sources', label: 'Sources', icon: Landmark },
-  { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake, highlight: true },
+  { path: '/africa/partner', label: 'Partner', icon: HeartHandshake, highlight: true },
 ];
 
-/** “More” menu — secondary / reference */
+/** Desktop “More” — secondary links */
 export const africaHeaderMore: EditionNavItem[] = [
-  { path: '/privacy-laws', label: 'Intl. laws (reference)', icon: Scale },
-  { path: '/about', label: 'About ERMITS', icon: Info },
+  { path: '/africa/sources', label: 'Sources', icon: Landmark },
+  { path: '/assessment', label: 'Assessment', icon: ShieldCheck },
+  { path: '/africa/roadmap', label: 'Roadmap', icon: Map },
+  { path: '/about', label: 'About', icon: Info },
   { path: '/contact', label: 'Contact', icon: Mail },
+  { path: '/privacy-laws', label: 'Intl. laws', icon: Scale },
 ];
 
-/** Mobile bottom bar */
+/** Mobile bottom bar — four highest-frequency destinations */
 export const africaBottomNav: EditionNavItem[] = [
   { path: '/', label: 'Home', icon: Home },
   { path: '/africa/countries', label: 'Countries', icon: MapPin },
   { path: '/africa/scamshield', label: 'Scams', icon: AlertTriangle },
-  { path: '/africa/sources', label: 'Sources', icon: Landmark },
+  { path: '/assessment', label: 'Assess', icon: ClipboardList },
+];
+
+/** Full Africa menu for mobile drawer */
+export const africaMobileNavItems: EditionNavItem[] = [
+  { path: '/', label: 'Home', icon: Home },
+  ...africaHeaderNav,
+  ...africaHeaderMore,
 ];
 
 export type FooterLinkGroup = {
@@ -59,6 +70,7 @@ export const africaFooterGroups: FooterLinkGroup[] = [
       { path: '/africa/scamshield', label: 'ScamShield Africa', icon: AlertTriangle },
       { path: '/africa/sources', label: 'Source register', icon: Landmark },
       { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake },
+      { path: '/africa/roadmap', label: 'Privacy roadmap', icon: Map },
     ],
   },
   {

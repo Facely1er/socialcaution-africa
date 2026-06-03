@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from '../../lib/motion';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  Menu,
-  X,
-  Home,
-  ChevronDown,
-  ChevronUp,
-  Globe2,
-  AlertTriangle,
-  MapPin,
-  Landmark,
-  HeartHandshake,
-  Scale,
-} from 'lucide-react';
-import { africaFooterGroups, africaHeaderMore } from '../../config/africaEditionNav';
-import SearchIcon from './SearchIcon';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogOut, User } from 'lucide-react';
+import { africaMobileNavItems } from '../../config/africaEditionNav';
+import { isEditionNavActive } from '../../utils/editionNav';
+import ThemeSwitcher from '../ThemeSwitcher';
 import useStore from '../../store/useStore';
 import AuthModal from '../auth/AuthModal';
 
@@ -26,242 +15,137 @@ interface MobileNavProps {
 
 const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>('africa');
   const [showAuth, setShowAuth] = useState(false);
   const location = useLocation();
-  const store = useStore();
-  const { user } = store;
+  const navigate = useNavigate();
+  const { user, signOut } = useStore();
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
-    setActiveSection(null);
   }, [location.pathname]);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleSection = (section: string) => {
-    setActiveSection(activeSection === section ? null : section);
-  };
-
-  const navigationSections = [
-    {
-      id: 'africa',
-      title: 'Africa Edition',
-      icon: Globe2,
-      items: [
-        { path: '/', label: 'Home', icon: Home },
-        { path: '/africa/countries', label: 'Countries', icon: MapPin },
-        { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
-        { path: '/africa/sources', label: 'Sources', icon: Landmark },
-        { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake },
-      ],
-    },
-    {
-      id: 'reference',
-      title: 'Reference & Legal',
-      icon: Scale,
-      items: [...africaHeaderMore, ...(africaFooterGroups.find((g) => g.title === 'Legal & ERMITS')?.items ?? [])].filter(
-        (item, index, arr) => arr.findIndex((i) => i.path === item.path) === index
-      ),
-    },
-  ];
-
   const handleSignOut = () => {
-    store.signOut();
+    signOut();
     setIsOpen(false);
+    navigate('/');
   };
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         type="button"
-        onClick={toggleMenu}
-        className={`md:hidden text-white hover:text-accent transition-colors p-2 ${className}`}
-        aria-label="Toggle mobile menu"
+        onClick={() => setIsOpen((v) => !v)}
+        className={`lg:hidden text-white hover:bg-white/10 rounded-md p-2 transition-colors ${className}`}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
       </button>
 
-      {/* Mobile Menu Overlay — portaled outside header to avoid nav-header color/height overrides */}
       {createPortal(
         <AnimatePresence>
           {isOpen && (
             <>
-              <motion.div
+              <motion.button
+                type="button"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 z-[1100] md:hidden"
-                onClick={toggleMenu}
-                role="button"
-                tabIndex={0}
-                aria-label="Close mobile menu"
+                className="fixed inset-0 bg-black/50 z-[1100] lg:hidden border-0 cursor-default"
+                onClick={() => setIsOpen(false)}
+                aria-label="Close menu"
               />
 
-              <motion.div
+              <motion.nav
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="mobile-nav-drawer fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-card z-[1101] shadow-2xl overflow-y-auto md:hidden"
+                transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                className="mobile-nav-drawer fixed top-0 right-0 h-full w-[min(20rem,88vw)] bg-white dark:bg-card z-[1101] shadow-2xl overflow-y-auto lg:hidden flex flex-col"
+                aria-label="Mobile navigation"
               >
-              <div className="p-6">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    SocialCaution Africa
-                  </h2>
+                <div className="flex items-center justify-between p-4 border-b border-border">
+                  <p className="font-bold text-primary dark:text-white text-base">SocialCaution Africa</p>
                   <button
                     type="button"
-                    onClick={toggleMenu}
-                    aria-label="Close mobile menu"
-                    title="Close mobile menu"
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-card-hover"
+                    aria-label="Close menu"
                   >
-                    <X size={24} />
+                    <X size={22} />
                   </button>
                 </div>
 
-                {/* Search */}
-                <div className="mb-6 flex justify-center mobile-nav-search">
-                  <SearchIcon />
+                <div className="p-4 border-b border-border flex items-center justify-between">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Theme</span>
+                  <ThemeSwitcher
+                    showLabel
+                    className="!text-gray-800 dark:!text-gray-100 hover:!bg-gray-100 dark:hover:!bg-card-hover"
+                  />
                 </div>
 
-                {/* Navigation Sections */}
-                <div className="space-y-2">
-                  {navigationSections.map((section) => {
-                    const SectionIcon = section.icon;
-                    const isActive = activeSection === section.id;
-                    
+                <ul className="flex-1 p-3 space-y-0.5 overflow-y-auto">
+                  {africaMobileNavItems.map(({ path, label, icon: Icon }) => {
+                    const active = isEditionNavActive(location.pathname, path);
                     return (
-                      <div key={section.id}>
-                        <button
-                          type="button"
-                          onClick={() => toggleSection(section.id)}
-                          className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-card-hover transition-colors group"
+                      <li key={path}>
+                        <Link
+                          to={path}
+                          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                            active
+                              ? 'bg-accent/15 text-accent'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-card-hover'
+                          }`}
                         >
-                          <div className="flex items-center gap-3">
-                            <SectionIcon className="h-5 w-5 text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors" />
-                            <span className="font-medium text-gray-900 dark:text-white">
-                              {section.title}
-                            </span>
-                          </div>
-                          {isActive ? (
-                            <ChevronUp className="h-4 w-4 text-gray-400" />
-                          ) : (
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
+                          <Icon className="h-5 w-5 flex-shrink-0 text-accent" aria-hidden />
+                          {label}
+                          {active && (
+                            <span className="ml-auto h-2 w-2 rounded-full bg-accent" aria-hidden />
                           )}
-                        </button>
-                        
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pl-8 space-y-1">
-                                {section.items.map((item) => {
-                                  const ItemIcon = item.icon;
-                                  const isCurrentPage = location.pathname === item.path;
-                                  
-                                  return (
-                                    <Link
-                                      key={item.path}
-                                      to={item.path}
-                                      className={`flex items-center gap-3 p-2 rounded-md transition-colors group ${
-                                        isCurrentPage
-                                          ? 'bg-accent/10 text-accent'
-                                          : 'text-gray-600 dark:text-gray-400 hover:text-accent hover:bg-gray-50 dark:hover:bg-card-hover'
-                                      }`}
-                                    >
-                                      <ItemIcon className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                                      <span className="text-sm font-medium">
-                                        {item.label}
-                                      </span>
-                                      {isCurrentPage && (
-                                        <div className="ml-auto w-2 h-2 bg-accent rounded-full" />
-                                      )}
-                                    </Link>
-                                  );
-                                })}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
+                        </Link>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
 
-                {/* User Actions */}
-                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div className="p-4 border-t border-border mt-auto">
                   {user ? (
                     <div className="space-y-3">
-                      <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-card-hover">
-                        <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                          <span className="text-white text-sm font-medium">
-                            {user.email?.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                            {user.email}
-                          </p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            Signed in
-                          </p>
-                        </div>
-                      </div>
+                      <p className="text-xs text-gray-500 truncate px-1">{user.email}</p>
                       <button
                         type="button"
                         onClick={handleSignOut}
-                        className="w-full flex items-center gap-3 p-3 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-red-200 text-red-600 dark:border-red-800 dark:text-red-400 text-sm font-medium"
                       >
-                        <X className="h-4 w-4" />
-                        <span className="text-sm font-medium">
-                          Sign Out
-                        </span>
+                        <LogOut className="h-4 w-4" />
+                        Sign out
                       </button>
                     </div>
                   ) : (
-                    <div className="space-y-3">
-                      <button
-                        type="button"
-                        onClick={() => setShowAuth(true)}
-                        className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-accent text-white hover:bg-accent-dark transition-colors"
-                      >
-                        <span className="text-sm font-medium">
-                          Sign In
-                        </span>
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowAuth(true)}
+                      className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-accent text-white text-sm font-medium"
+                    >
+                      <User className="h-4 w-4" />
+                      Sign in
+                    </button>
                   )}
                 </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>,
-      document.body
+              </motion.nav>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
       )}
-      
+
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} defaultMode="signin" />}
     </>
   );

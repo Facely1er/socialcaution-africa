@@ -101,7 +101,7 @@ const Layout: React.FC = () => {
             )}
           </div>
 
-          <main id="main-content" className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'pb-0' : 'pb-14'} md:pb-0`} role="main">
+          <main id="main-content" className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'pb-0' : 'pb-16'} lg:pb-0`} role="main">
             <Suspense fallback={null}>
               <Outlet />
             </Suspense>

@@ -1,127 +1,124 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import {
-  Shield, ArrowRight, AlertTriangle, CheckCircle, Search, FileCheck,
+  Shield,
+  ArrowRight,
+  AlertTriangle,
+  CheckCircle,
+  Search,
+  FileCheck,
+  MapPin,
+  Map,
 } from 'lucide-react';
-import PageLayout from '../../components/layout/PageLayout';
+import AfricaPageLayout from '../africa/AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import Badge from '../../components/common/Badge';
-import { useABTestStore } from '../../store/abTestStore';
 
 const AssessmentResultsPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { results, type } = location.state || {};
+  const { results, type } = (location.state as { results?: Record<string, unknown>; type?: string }) || {};
 
-  // Parent-journey awareness — used to surface family dashboard CTA
-  const { familyProfile } = useABTestStore();
-  const isParentJourney = familyProfile.completedOnboarding;
-
-  if (!results) {
+  if (!results || typeof results.overallScore !== 'number') {
     return (
-      <PageLayout
-        title="No Results Found"
-        subtitle="Please complete a privacy assessment to view your results."
-        breadcrumbs={[
-          { label: 'Assessment', path: '/assessment' },
-          { label: 'Results', path: '/assessment/results' },
-        ]}
+      <AfricaPageLayout
+        title="No results"
+        subtitle="Complete an assessment first"
+        description="Your score is saved after you finish a security, exposure, or rights assessment."
       >
         <Section>
           <Card className="p-6 text-center">
-            <AlertTriangle className="h-16 w-16 text-warning mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-primary mb-4">No Results Found</h2>
-            <p className="text-gray-600 mb-6">
-              Please complete a privacy assessment to view your results.
-            </p>
+            <AlertTriangle className="h-12 w-12 text-accent mx-auto mb-4" />
             <Button variant="primary" onClick={() => navigate('/assessment')}>
-              Take Assessment
+              Go to assessments
             </Button>
           </Card>
         </Section>
-      </PageLayout>
+      </AfricaPageLayout>
     );
   }
 
+  const overallScore = results.overallScore as number;
+  const categoryScores = results.categoryScores as Record<string, number> | undefined;
+  const priorityAreas = results.priorityAreas as string[] | undefined;
+  const recommendations = results.recommendations as string[] | undefined;
+
   const getAssessmentTitle = () => {
     switch (type) {
-      case 'exposure': return 'Digital Exposure Assessment Results';
-      case 'rights':   return 'Privacy Rights Assessment Results';
-      case 'security': return 'Security Assessment Results';
-      default:         return 'Assessment Results';
+      case 'exposure':
+        return 'Digital exposure results';
+      case 'rights':
+        return 'Privacy rights results';
+      case 'security':
+        return 'Security assessment results';
+      default:
+        return 'Assessment results';
     }
   };
 
-  const AssessmentIcon =
-    type === 'exposure' ? Search : type === 'rights' ? FileCheck : Shield;
+  const AssessmentIcon = type === 'exposure' ? Search : type === 'rights' ? FileCheck : Shield;
 
   const scoreDescription =
-    results.overallScore >= 80 ? 'Excellent Privacy Protection'
-    : results.overallScore >= 60 ? 'Good Privacy Practices'
-    : 'Privacy Needs Attention';
+    overallScore >= 80
+      ? 'Strong practices'
+      : overallScore >= 60
+        ? 'Good — room to improve'
+        : 'Needs attention';
 
   const scoreMessage =
-    results.overallScore >= 80
-      ? 'Your privacy practices are strong. Keep up the good work!'
-      : results.overallScore >= 60
-      ? 'You have good privacy practices with some room for improvement.'
-      : 'Your privacy practices need significant improvement to better protect your data.';
+    overallScore >= 80
+      ? 'Your habits align well with safer digital and mobile-money practices.'
+      : overallScore >= 60
+        ? 'You are on the right track; focus on the priority areas below.'
+        : 'Prioritize scam prevention and your country’s reporting paths next.';
 
   return (
-    <PageLayout
-      title={getAssessmentTitle()}
-      breadcrumbs={[
-        { label: 'Assessment', path: '/assessment' },
-        { label: 'Results', path: '/assessment/results' },
-      ]}
-    >
+    <AfricaPageLayout title={getAssessmentTitle()} subtitle="Africa Edition — educational scores only">
       <Section>
         <div className="max-w-4xl mx-auto">
-          {/* Overall Score */}
           <Card className="p-8 mb-6">
             <div className="text-center mb-8">
               <div className="relative w-32 h-32 mx-auto mb-4">
-                <svg className="w-full h-full" viewBox="0 0 100 100">
+                <svg className="w-full h-full" viewBox="0 0 100 100" aria-hidden>
                   <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" strokeWidth="10" />
                   <circle
-                    cx="50" cy="50" r="45" fill="none"
-                    stroke={
-                      results.overallScore >= 80 ? '#4CAF50'
-                      : results.overallScore >= 60 ? '#FFC107'
-                      : '#F44336'
-                    }
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    fill="none"
+                    stroke={overallScore >= 80 ? '#4CAF50' : overallScore >= 60 ? '#FFC107' : '#F44336'}
                     strokeWidth="10"
-                    strokeDasharray={`${results.overallScore * 2.83} 283`}
+                    strokeDasharray={`${overallScore * 2.83} 283`}
                     transform="rotate(-90 50 50)"
                   />
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center flex-col">
-                  <span className="text-4xl font-bold">{results.overallScore}%</span>
-                  <span className="text-sm text-gray-500">Overall Score</span>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-4xl font-bold text-primary dark:text-white">{overallScore}%</span>
+                  <span className="text-sm text-gray-500">Overall</span>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{scoreDescription}</h3>
-              <p className="text-gray-600">{scoreMessage}</p>
+              <h3 className="text-xl font-semibold text-primary dark:text-white mb-2">{scoreDescription}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{scoreMessage}</p>
             </div>
 
-            {results.categoryScores && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.entries(results.categoryScores).map(([category, score]) => (
-                  <div key={category} className="bg-light-blue/10 p-4 rounded-lg">
+            {categoryScores && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {Object.entries(categoryScores).map(([category, score]) => (
+                  <div key={category} className="p-4 rounded-lg border border-border bg-background-secondary/50">
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-medium text-primary">{category}</h4>
-                      <Badge variant={Number(score) >= 80 ? 'success' : Number(score) >= 60 ? 'warning' : 'danger'}>
+                      <h4 className="font-medium text-primary dark:text-white text-sm">{category}</h4>
+                      <Badge
+                        variant={Number(score) >= 80 ? 'success' : Number(score) >= 60 ? 'warning' : 'danger'}
+                      >
                         {score}%
                       </Badge>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full ${
-                          Number(score) >= 80 ? 'bg-success'
-                          : Number(score) >= 60 ? 'bg-warning'
-                          : 'bg-danger'
+                          Number(score) >= 80 ? 'bg-success' : Number(score) >= 60 ? 'bg-warning' : 'bg-danger'
                         }`}
                         style={{ width: `${score}%` }}
                       />
@@ -132,116 +129,84 @@ const AssessmentResultsPage: React.FC = () => {
             )}
           </Card>
 
-          {/* Priority Areas */}
-          {results.priorityAreas && results.priorityAreas.length > 0 && (
+          {priorityAreas && priorityAreas.length > 0 && (
             <Card className="p-6 mb-6">
-              <h3 className="text-xl font-semibold mb-6">Priority Areas for Improvement</h3>
-              <div className="space-y-4">
-                {results.priorityAreas.map((area: string, index: number) => (
-                  <div key={index} className="flex items-start p-4 bg-light-blue/10 rounded-lg">
-                    <AlertTriangle className="h-5 w-5 text-warning mt-1 mr-3" />
-                    <div>
-                      <h4 className="font-medium text-primary mb-1">{area}</h4>
-                      <p className="text-sm text-gray-600">
-                        This area requires attention to improve your overall privacy protection.
-                      </p>
-                    </div>
-                  </div>
+              <h3 className="text-xl font-semibold text-primary dark:text-white mb-4">Priority areas</h3>
+              <ul className="space-y-3">
+                {priorityAreas.map((area) => (
+                  <li key={area} className="flex items-start gap-3 p-3 rounded-lg bg-accent/5">
+                    <AlertTriangle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{area}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </Card>
           )}
 
-          {/* Recommendations */}
-          {results.recommendations && results.recommendations.length > 0 && (
+          {recommendations && recommendations.length > 0 && (
             <Card className="p-6 mb-6">
-              <h3 className="text-xl font-semibold mb-6">Recommendations</h3>
-              <div className="space-y-4">
-                {results.recommendations.map((rec: string, index: number) => (
-                  <div key={index} className="flex items-start p-4 bg-light-blue/10 rounded-lg">
-                    <CheckCircle className="h-5 w-5 text-accent mt-1 mr-3" />
-                    <p className="text-gray-600">{rec}</p>
-                  </div>
+              <h3 className="text-xl font-semibold text-primary dark:text-white mb-4">Recommendations</h3>
+              <ul className="space-y-3">
+                {recommendations.map((rec) => (
+                  <li key={rec} className="flex items-start gap-3 p-3 rounded-lg border border-border">
+                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{rec}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </Card>
           )}
 
-          {/* Next Steps */}
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-6">Next Steps</h3>
-
-            {/* Parent journey: family dashboard is the primary CTA */}
-            {isParentJourney && (
-              <div className="mb-6 p-5 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700 rounded-xl text-center">
-                <Shield className="h-8 w-8 text-orange-500 mx-auto mb-3" />
-                <h4 className="font-semibold text-orange-800 dark:text-orange-300 mb-1">
-                  Your Family Dashboard is ready
-                </h4>
-                <p className="text-sm text-orange-700 dark:text-orange-400 mb-4">
-                  Your score has been added to your family profile. View your personalised action plan and 30-day roadmap.
-                </p>
-                <Button
-                  variant="primary"
-                  onClick={() => navigate('/parent/dashboard')}
-                  className="w-full sm:w-auto"
-                >
-                  <Shield className="mr-2 h-4 w-4" />
-                  View your Family Dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            )}
-
-            {/* Standard next-step cards (always shown) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-light-blue/10 p-4 rounded-lg">
-                <div className="flex items-center mb-4">
-                  <AssessmentIcon className="h-5 w-5 text-accent mr-2" />
-                  <h4 className="font-medium text-primary">View Detailed Action Plan</h4>
+            <h3 className="text-xl font-semibold text-primary dark:text-white mb-4">Next steps</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
+              Turn your score into country-specific actions — not a generic dashboard.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-4 rounded-xl border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Map className="h-5 w-5 text-accent" />
+                  <h4 className="font-semibold text-primary dark:text-white">Privacy roadmap</h4>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">
-                  Get a personalised step-by-step plan to improve your privacy protection.
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  Mobile money PIN, SIM checks, and complaint paths tailored for Africa.
                 </p>
-                <Button
-                  variant="primary"
-                  onClick={() => navigate('/dashboard/action-plan')}
-                  className="w-full"
-                >
-                  View Detailed Action Plan
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link to="/africa/roadmap">
+                  <Button variant="primary" className="w-full">
+                    Open roadmap
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
-
-              <div className="bg-light-blue/10 p-4 rounded-lg">
-                <div className="flex items-center mb-4">
-                  <CheckCircle className="h-5 w-5 text-accent mr-2" />
-                  <h4 className="font-medium text-primary">Take Another Assessment</h4>
+              <div className="p-4 rounded-xl border border-border">
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="h-5 w-5 text-accent" />
+                  <h4 className="font-semibold text-primary dark:text-white">Country profile</h4>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">
-                  Complete additional assessments to get a comprehensive privacy profile.
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  Laws, regulators, personas, and your action center by country.
                 </p>
-                <Button
-                  variant="primary"
-                  onClick={() => navigate('/assessment')}
-                  className="w-full"
-                >
-                  More Assessments
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link to="/africa/countries">
+                  <Button variant="outline" className="w-full">
+                    Choose country
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
-
-            <div className="flex justify-center">
-              <Button variant="outline" onClick={() => navigate('/dashboard')}>
-                Go to Dashboard
-                <ArrowRight className="ml-2 h-4 w-4" />
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button variant="outline" onClick={() => navigate('/assessment')}>
+                <AssessmentIcon className="mr-2 h-4 w-4" />
+                More assessments
+              </Button>
+              <Button variant="outline" onClick={() => navigate('/africa/scamshield')}>
+                ScamShield
               </Button>
             </div>
           </Card>
         </div>
       </Section>
-    </PageLayout>
+    </AfricaPageLayout>
   );
 };
 

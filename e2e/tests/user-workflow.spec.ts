@@ -104,6 +104,7 @@ test.describe('User workflow — navigation', () => {
       { path: '/africa/sources', heading: /Source|Register/i },
       { path: '/about', heading: /About|ERMITS|Africa/i },
       { path: '/contact', heading: /Contact|ERMITS/i },
+      { path: '/africa/roadmap', heading: /Africa Privacy Roadmap|roadmap/i },
     ];
 
     for (const { path, heading } of routes) {
