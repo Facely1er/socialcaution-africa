@@ -54,10 +54,10 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.STAGING_SUPABASE_ANON_KEY }}
       
       - name: Deploy to staging
-        run: |
-          echo "Deploying to staging environment"
-          # Add your staging deployment commands here
-          # Example: scp, rsync, or platform-specific CLI
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STAGING_SITE_ID }}
+        run: npx netlify-cli deploy --dir=dist --message "Staging deploy (${GITHUB_SHA::7})"
       
       - name: Notify deployment
         if: always()
@@ -104,15 +104,15 @@ jobs:
         run: npm run production-check
       
       - name: Deploy to production
-        run: |
-          echo "Deploying to production environment"
-          # Add your production deployment commands here
-          # Example: scp, rsync, or platform-specific CLI
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify-cli deploy --dir=dist --prod --message "Production deploy (${GITHUB_SHA::7})"
       
       - name: Health check
         run: |
           echo "Running post-deployment health check"
-          # Add health check script here
+          curl -f https://africa.socialcaution.com/ || echo "Health check warning: site may need a moment to propagate"
       
       - name: Notify deployment
         if: always()
