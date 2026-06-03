@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ArrowRight, Users } from 'lucide-react';
+import { ArrowLeft, MapPin } from 'lucide-react';
 import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
-import Card from '../../components/common/Card';
-import Button from '../../components/common/Button';
+import PersonaCard from '../../components/africa/PersonaCard';
+import { designSystem } from '../../styles/design-system';
 import { getAfricaCountryBySlug } from '../../data/africa/countries';
 import { getRecommendedPersonasForCountry } from '../../data/africa/personas';
-import { getPersonaVisual } from '../../data/africa/personaVisuals';
 
 const AfricaPersonasPage: React.FC = () => {
   const { countrySlug } = useParams();
@@ -19,69 +18,47 @@ const AfricaPersonasPage: React.FC = () => {
 
   return (
     <AfricaPageLayout
-      title={`${country.name} User Profiles`}
-      subtitle="Choose your profile"
-      description={`Select the profile that fits your situation in ${country.name}.`}
+      title="What describes you best?"
+      subtitle={`Profiles for ${country.name}`}
+      description="Pick the profile closest to your situation — we'll open a safety plan tailored to you."
     >
       <Section>
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent font-semibold mb-4">
-            <Users className="h-4 w-4" /> {country.name}
+        <div className="mb-8 md:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent font-semibold text-sm mb-4">
+            <MapPin className="h-4 w-4" />
+            {country.name} · {country.region}
           </div>
-          <p className="text-gray-700 dark:text-gray-300">
-            Select the profile that fits your situation in {country.name}. Your selection opens a tailored
-            action plan in the Digital Rights &amp; Safety Action Center.
+          <p className="text-sm text-text-secondary dark:text-gray-300 max-w-2xl leading-relaxed">
+            These profiles are recommended for {country.name} based on local risk patterns. Select one to jump
+            straight to your personal action plan.
           </p>
+          <Link
+            to={`/africa/countries/${country.slug}`}
+            className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-accent hover:underline"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Back to {country.name} profile
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {personas.map((persona) => {
-            const { Icon, iconBg, iconColor } = getPersonaVisual(persona.slug);
-            return (
-              <Card key={persona.slug} className="p-6 h-full flex flex-col">
-                <div className="flex items-start gap-3 mb-4">
-                  <div className={`p-3 rounded-xl ${iconBg} flex items-center justify-center flex-shrink-0`}>
-                    <Icon className={`h-6 w-6 ${iconColor}`} />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-primary dark:text-white">{persona.label}</h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{persona.description}</p>
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <h3 className="font-semibold text-primary dark:text-white mb-2">Priority risks</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {persona.priorityRisks.map((risk) => (
-                      <span
-                        key={risk}
-                        className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-background-secondary text-gray-700 dark:text-gray-300"
-                      >
-                        {risk}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mb-5 flex-grow">
-                  <h3 className="font-semibold text-primary dark:text-white mb-2">First actions</h3>
-                  <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                    {persona.primaryActions.slice(0, 3).map((action) => (
-                      <li key={action}>• {action}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Link to={`/africa/action-center/${country.slug}?persona=${persona.slug}`}>
-                  <Button fullWidth>
-                    Continue to Action Center
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </Card>
-            );
-          })}
+        <div className={`${designSystem.grid.personas} gap-4 md:gap-5`}>
+          {personas.map((persona) => (
+            <PersonaCard
+              key={persona.slug}
+              persona={persona}
+              to={`/africa/action-center/${country.slug}?persona=${persona.slug}`}
+              ctaLabel="Open my plan"
+            />
+          ))}
         </div>
+
+        <p className="text-center text-sm text-text-secondary dark:text-gray-400 mt-8">
+          Not sure?{' '}
+          <Link to="/" className="text-accent font-semibold hover:underline">
+            Start from the homepage
+          </Link>{' '}
+          to browse all profiles.
+        </p>
       </Section>
     </AfricaPageLayout>
   );

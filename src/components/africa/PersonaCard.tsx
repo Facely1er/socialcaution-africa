@@ -4,8 +4,16 @@ import { motion } from '../../lib/motion';
 import type { AfricaPersona } from '../../data/africa/personas';
 import { getPersonaVisual } from '../../data/africa/personaVisuals';
 
-export default function PersonaCard({ persona }: { persona: AfricaPersona }) {
+type PersonaCardProps = {
+  persona: AfricaPersona;
+  /** Override destination — defaults to persona-first country picker */
+  to?: string;
+  ctaLabel?: string;
+};
+
+export default function PersonaCard({ persona, to, ctaLabel = 'Get my plan' }: PersonaCardProps) {
   const { Icon, iconBg, iconColor, cardBorder, leftAccent } = getPersonaVisual(persona.slug);
+  const href = to ?? `/africa/personas/start/${persona.slug}`;
 
   return (
     <motion.div
@@ -14,7 +22,7 @@ export default function PersonaCard({ persona }: { persona: AfricaPersona }) {
       className="h-full"
     >
       <Link
-        to={`/africa/personas/start/${persona.slug}`}
+        to={href}
         className={`flex flex-col h-full p-5 rounded-2xl border border-l-4 bg-white dark:bg-card transition-all duration-200 ${leftAccent} ${cardBorder} hover:shadow-lg group`}
       >
         <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4`}>
@@ -41,7 +49,7 @@ export default function PersonaCard({ persona }: { persona: AfricaPersona }) {
         </div>
 
         <div className="mt-auto pt-3 border-t border-border/60 flex items-center text-sm font-semibold text-accent">
-          Get my plan <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          {ctaLabel} <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </div>
       </Link>
     </motion.div>
