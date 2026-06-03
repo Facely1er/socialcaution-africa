@@ -1,28 +1,14 @@
 import { NavLink } from 'react-router-dom';
-import type { LucideIcon } from 'lucide-react';
+import type { EditionNavItem } from '../../config/africaEditionNav';
+import { headerNavLinkClasses } from './headerNav';
 
-type HeaderNavLinkProps = {
-  to: string;
-  label: string;
-  icon: LucideIcon;
-  highlight?: boolean;
-};
-
-export default function HeaderNavLink({ to, label, icon: Icon, highlight }: HeaderNavLinkProps) {
+export default function HeaderNavLink({ path, label, icon: Icon, highlight }: EditionNavItem) {
   return (
     <NavLink
-      to={to}
-      end={to === '/'}
+      to={path}
+      end={path === '/'}
       title={label}
-      className={({ isActive }) =>
-        [
-          'header-nav-link',
-          isActive ? 'header-nav-link--active' : '',
-          highlight && !isActive ? 'header-nav-link--highlight' : '',
-        ]
-          .filter(Boolean)
-          .join(' ')
-      }
+      className={({ isActive }) => headerNavLinkClasses(isActive, highlight)}
     >
       <Icon className="header-nav-link__icon" aria-hidden />
       <span className="header-nav-link__label">{label}</span>

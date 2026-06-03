@@ -73,7 +73,6 @@ const Layout: React.FC = () => {
           <a
             href="#main-content"
             className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            aria-label="Skip to main content"
           >
             Skip to main content
           </a>
@@ -101,7 +100,11 @@ const Layout: React.FC = () => {
             )}
           </div>
 
-          <main id="main-content" className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'pb-0' : 'pb-16'} lg:pb-0`} role="main">
+          <main
+            id="main-content"
+            className={`flex-grow flex flex-col min-w-0 max-w-full overflow-x-clip layout-main ${(showBreadcrumbs || showProgress) ? 'with-breadcrumbs' : ''} ${isHomePage ? 'layout-main--home' : ''}`}
+            role="main"
+          >
             <Suspense fallback={null}>
               <Outlet />
             </Suspense>

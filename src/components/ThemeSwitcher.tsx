@@ -2,24 +2,31 @@ import React from 'react';
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 import { motion } from 'framer-motion';
+import { ariaPressedFalse, ariaPressedTrue } from '../utils/aria';
 
 interface ThemeSwitcherProps {
   className?: string;
   showLabel?: boolean;
+  ariaDescribedBy?: string;
 }
 
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ 
+const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   className = '',
-  showLabel = false 
+  showLabel = false,
+  ariaDescribedBy,
 }) => {
   const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(isDark ? 'light' : 'dark');
   };
+
+  const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
 
   return (
     <motion.button
+      type="button"
       onClick={toggleTheme}
       className={`
         flex items-center gap-2 
@@ -28,24 +35,26 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
         p-2 rounded-lg hover:bg-white/10 dark:hover:bg-white/10
         ${className}
       `}
-      aria-label="Toggle theme"
+      aria-label={label}
+      {...(isDark ? ariaPressedTrue : ariaPressedFalse)}
+      aria-describedby={ariaDescribedBy}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
       <motion.div
         initial={false}
-        animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+        animate={{ rotate: isDark ? 180 : 0 }}
         transition={{ duration: 0.3 }}
       >
-        {theme === 'light' ? (
-          <Sun className="h-4 w-4 text-accent" />
+        {isDark ? (
+          <Moon className="h-4 w-4 text-accent" aria-hidden />
         ) : (
-          <Moon className="h-4 w-4 text-accent" />
+          <Sun className="h-4 w-4 text-accent" aria-hidden />
         )}
       </motion.div>
       {showLabel && (
-        <span className="text-sm font-medium">
-          {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+        <span className="text-sm font-medium" aria-hidden>
+          {isDark ? 'Light Mode' : 'Dark Mode'}
         </span>
       )}
     </motion.button>

@@ -1,30 +1,43 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, LucideIcon, MoreHorizontal } from 'lucide-react';
+import { ChevronDown, MoreHorizontal } from 'lucide-react';
+import type { EditionNavItem } from '../../config/africaEditionNav';
 import { isEditionNavActive } from '../../utils/editionNav';
+import {
+  ariaExpandedFalse,
+  ariaExpandedTrue,
+  ariaHiddenFalse,
+  ariaHiddenTrue,
+} from '../../utils/aria';
+import {
+  HEADER_MORE_MENU_ID,
+  HEADER_MORE_MENU_WIDTH_PX,
+  headerMorePanelLinkClasses,
+  headerNavLinkClasses,
+} from './headerNav';
 
-export type HeaderMoreItem = {
-  path: string;
-  label: string;
-  icon: LucideIcon;
+type HeaderMoreMenuProps = {
+  items: EditionNavItem[];
 };
 
-type MenuPosition = {
-  top: number;
-  left: number;
-};
+function computeMenuPosition(trigger: HTMLButtonElement): { top: number; left: number } {
+  const rect = trigger.getBoundingClientRect();
+  let left = rect.left;
+  if (left + HEADER_MORE_MENU_WIDTH_PX > window.innerWidth - 12) {
+    left = Math.max(12, rect.right - HEADER_MORE_MENU_WIDTH_PX);
+  }
+  return { top: rect.bottom + 6, left };
+}
 
-export default function HeaderMoreMenu({ items }: { items: HeaderMoreItem[] }) {
+export default function HeaderMoreMenu({ items }: HeaderMoreMenuProps) {
   const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState<MenuPosition>({ top: 0, left: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLUListElement>(null);
   const location = useLocation();
 
-  const moreActive = items.some((item) => isEditionNavActive(location.pathname, item.path));
+  const submenuActive = items.some((item) => isEditionNavActive(location.pathname, item.path));
   const close = useCallback(() => setOpen(false), []);
-
   useEffect(() => {
     close();
   }, [location.pathname, close]);
@@ -33,13 +46,10 @@ export default function HeaderMoreMenu({ items }: { items: HeaderMoreItem[] }) {
     if (!open || !triggerRef.current) return;
 
     const updatePosition = () => {
-      const rect = triggerRef.current!.getBoundingClientRect();
-      const menuWidth = 208;
-      let left = rect.left;
-      if (left + menuWidth > window.innerWidth - 12) {
-        left = Math.max(12, rect.right - menuWidth);
-      }
-      setPosition({ top: rect.bottom + 6, left });
+      if (!triggerRef.current || !panelRef.current) return;
+      const { top, left } = computeMenuPosition(triggerRef.current);
+      panelRef.current.style.setProperty('--header-more-top', `${top}px`);
+      panelRef.current.style.setProperty('--header-more-left', `${left}px`);
     };
 
     updatePosition();
@@ -56,10 +66,7 @@ export default function HeaderMoreMenu({ items }: { items: HeaderMoreItem[] }) {
 
     const onPointerDown = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (
-        triggerRef.current?.contains(target) ||
-        menuRef.current?.contains(target)
-      ) {
+      if (triggerRef.current?.contains(target) || panelRef.current?.contains(target)) {
         return;
       }
       close();
@@ -77,58 +84,52 @@ export default function HeaderMoreMenu({ items }: { items: HeaderMoreItem[] }) {
     };
   }, [open, close]);
 
+  const triggerClass = headerNavLinkClasses(open || submenuActive);
+
   return (
     <>
       <button
         ref={triggerRef}
         type="button"
-        className={[
-          'header-nav-link header-more-trigger',
-          open || moreActive ? 'header-nav-link--active' : '',
-        ]
-          .filter(Boolean)
-          .join(' ')}
+        className={`${triggerClass} header-more-trigger`}
         onClick={() => setOpen((value) => !value)}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        aria-controls={open ? 'header-more-menu' : undefined}
+        {...(open ? ariaExpandedTrue : ariaExpandedFalse)}
+        aria-haspopup="true"
+        aria-controls={HEADER_MORE_MENU_ID}
       >
         <MoreHorizontal className="header-nav-link__icon" aria-hidden />
         <span className="header-nav-link__label">More</span>
         <ChevronDown
-          className={`header-nav-link__icon header-more-trigger__chevron ${open ? 'header-more-trigger__chevron--open' : ''}`}
+          className={`header-nav-link__icon header-more-trigger__chevron${open ? ' header-more-trigger__chevron--open' : ''}`}
           aria-hidden
         />
       </button>
 
-      {open &&
-        createPortal(
-          <div
-            ref={menuRef}
-            id="header-more-menu"
-            role="menu"
-            className="header-more-panel"
-            style={{ top: position.top, left: position.left }}
-          >
-            {items.map(({ path, label, icon: Icon }) => (
+      {createPortal(
+        <ul
+          ref={panelRef}
+          id={HEADER_MORE_MENU_ID}
+          className={`header-more-panel${open ? '' : ' header-more-panel--hidden'}`}
+          aria-label="More navigation"
+          {...(open ? ariaHiddenFalse : ariaHiddenTrue)}
+          hidden={!open}
+        >
+          {items.map(({ path, label, icon: Icon }) => (
+            <li key={path} className="header-more-panel__item">
               <NavLink
-                key={path}
                 to={path}
-                role="menuitem"
-                className={({ isActive }) =>
-                  ['header-more-panel__link', isActive ? 'header-more-panel__link--active' : '']
-                    .filter(Boolean)
-                    .join(' ')
-                }
+                className={({ isActive }) => headerMorePanelLinkClasses(isActive)}
                 onClick={close}
+                tabIndex={open ? undefined : -1}
               >
                 <Icon className="header-more-panel__icon" aria-hidden />
                 {label}
               </NavLink>
-            ))}
-          </div>,
-          document.body
-        )}
+            </li>
+          ))}
+        </ul>,
+        document.body
+      )}
     </>
   );
 }

@@ -50,11 +50,41 @@ export const africaBottomNav: EditionNavItem[] = [
   { path: '/assessment', label: 'Assess', icon: ClipboardList },
 ];
 
-/** Full Africa menu for mobile drawer */
-export const africaMobileNavItems: EditionNavItem[] = [
-  { path: '/', label: 'Home', icon: Home },
-  ...africaHeaderNav,
-  ...africaHeaderMore,
+function uniqueNavByPath(items: EditionNavItem[]): EditionNavItem[] {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    if (seen.has(item.path)) return false;
+    seen.add(item.path);
+    return true;
+  });
+}
+
+export type MobileNavSection = {
+  id: string;
+  title: string;
+  items: EditionNavItem[];
+};
+
+/** Mobile drawer — grouped sections */
+export const africaMobileNavSections: MobileNavSection[] = [
+  {
+    id: 'explore',
+    title: 'Explore',
+    items: uniqueNavByPath([
+      { path: '/', label: 'Home', icon: Home },
+      ...africaHeaderNav,
+      ...africaHeaderMore,
+    ]),
+  },
+  {
+    id: 'legal',
+    title: 'Legal',
+    items: [
+      { path: '/privacy', label: 'Privacy policy', icon: ShieldCheck },
+      { path: '/terms', label: 'Terms of service', icon: FileText },
+      { path: '/cookies', label: 'Cookie policy', icon: Cookie },
+    ],
+  },
 ];
 
 export type FooterLinkGroup = {
