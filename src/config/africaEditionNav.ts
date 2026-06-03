@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   AlertTriangle,
   Globe2,
+  HeartHandshake,
   Home,
   Info,
   Landmark,
@@ -20,6 +21,7 @@ export type EditionNavItem = {
   path: string;
   label: string;
   icon: LucideIcon;
+  highlight?: boolean;
 };
 
 /** Desktop header — core stakeholder journeys only */
@@ -27,6 +29,7 @@ export const africaHeaderNav: EditionNavItem[] = [
   { path: '/africa/countries', label: 'Countries', icon: MapPin },
   { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
   { path: '/africa/sources', label: 'Sources', icon: Landmark },
+  { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake, highlight: true },
 ];
 
 /** “More” menu — secondary / reference */
@@ -57,6 +60,7 @@ export const africaFooterGroups: FooterLinkGroup[] = [
       { path: '/africa/countries', label: 'Country profiles', icon: MapPin },
       { path: '/africa/scamshield', label: 'ScamShield Africa', icon: AlertTriangle },
       { path: '/africa/sources', label: 'Source register', icon: Landmark },
+      { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake },
     ],
   },
   {

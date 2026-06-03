@@ -9,14 +9,9 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({ size = 62.4, showTagline = false, light = false, className = '' }) => {
-  const dimension = `${size}px`;
-
   return (
     <div className={`flex items-center shrink-0 ${className}`.trim()}>
-      <div
-        className={styles.logoContainer}
-        style={{ width: dimension, height: dimension, flexShrink: 0 }}
-      >
+      <div className={styles.logoContainer}>
         {/* Use socialcaution.png logo from public folder */}
         <img
           src="/socialcaution.png"
@@ -24,7 +19,6 @@ const Logo: React.FC<LogoProps> = ({ size = 62.4, showTagline = false, light = f
           width={size}
           height={size}
           className={styles.logoImage}
-          style={{ width: dimension, height: dimension }}
           onError={(e) => {
             // Fallback to favicon if logo fails to load
             const target = e.target as HTMLImageElement;

@@ -1,6 +1,6 @@
 # SocialCaution Africa — Consistency Audit & Fix Handoff
 ## Repo: `Facely1er/socialcaution-africa`
-## Status: Africa infrastructure built; several files not updated
+## Status: **COMPLETE** — all 7 fixes applied (2026-06-03)
 
 ---
 
@@ -384,15 +384,15 @@ Import `Handshake` from lucide-react.
 
 | File | Status | Change type |
 |------|--------|-------------|
-| `src/components/home/Hero.tsx` | NOT DONE | Edit — 5 string replacements |
-| `src/core/providers/PersonaProvider.tsx` | NOT DONE | Edit — 6 descriptions + assessment descriptions |
-| `src/pages/PersonaSelectionPage.tsx` | NOT DONE | Edit — 4 strings |
-| `src/components/home/FactsAndFigures.tsx` | NOT DONE | Edit — stats array + section text + disclaimer |
-| `src/pages/PrivacyRoadmapPage.tsx` | NOT DONE | Edit — add banner |
-| `src/pages/africa/AfricaHomePage.tsx` | PARTIAL | Edit — 2 prop strings |
-| `src/pages/africa/AfricaPartnerPage.tsx` | MISSING | Create new |
-| `src/App.tsx` | PARTIAL | Add 1 route |
-| `src/components/layout/Navbar.tsx` | PARTIAL | Add 1 nav link |
+| `src/components/home/Hero.tsx` | **DONE** | Edit — 5 string replacements |
+| `src/core/providers/PersonaProvider.tsx` | **DONE** | Edit — 6 descriptions + assessment descriptions |
+| `src/pages/PersonaSelectionPage.tsx` | **DONE** | Edit — 4 strings |
+| `src/components/home/FactsAndFigures.tsx` | **DONE** | Edit — stats array + section text + disclaimer |
+| `src/pages/PrivacyRoadmapPage.tsx` | **DONE** | Edit — add banner |
+| `src/pages/africa/AfricaHomePage.tsx` | **DONE** | Edit — 2 prop strings |
+| `src/pages/africa/AfricaPartnerPage.tsx` | **DONE** | Created new |
+| `src/App.tsx` | **DONE** | Add 1 route |
+| `src/config/africaEditionNav.ts` | **DONE** | Add partner nav link (+ Navbar/MobileNav/Footer via config) |
 
 ---
 

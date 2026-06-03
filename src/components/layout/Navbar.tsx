@@ -29,20 +29,44 @@ const MoreDropdown = ({ items }: { items: NavItem[] }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [open]);
 
+  const toggleOpen = () => setOpen(!open);
+  const buttonClassName =
+    'header-nav-item flex items-center gap-1 text-white hover:bg-white/5 px-1.5 py-1.5 rounded-md transition-all duration-200 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-accent';
+  const buttonContent = (
+    <>
+      <MoreHorizontal className="h-4 w-4 text-accent flex-shrink-0" />
+      <span className="text-sm">More</span>
+      <ChevronDown
+        className={`h-4 w-4 text-accent flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+      />
+    </>
+  );
+
   return (
     <div className="relative dropdown-container" ref={dropdownRef}>
-      <button
-        type="button"
-        className="header-nav-item flex items-center gap-1 text-white hover:bg-white/5 px-1.5 py-1.5 rounded-md transition-all duration-200 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-accent"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        aria-haspopup="true"
-        aria-label="More menu"
-      >
-        <MoreHorizontal className="h-4 w-4 text-accent flex-shrink-0" />
-        <span className="text-sm">More</span>
-        <ChevronDown className={`h-4 w-4 text-accent flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
+      {open ? (
+        <button
+          type="button"
+          className={buttonClassName}
+          onClick={toggleOpen}
+          aria-expanded="true"
+          aria-haspopup="true"
+          aria-label="More menu"
+        >
+          {buttonContent}
+        </button>
+      ) : (
+        <button
+          type="button"
+          className={buttonClassName}
+          onClick={toggleOpen}
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="More menu"
+        >
+          {buttonContent}
+        </button>
+      )}
       {open && (
         <nav
           className="dropdown-menu absolute top-full left-0 mt-1 w-56 z-[1100] rounded-md bg-card text-text shadow-xl border border-border"
@@ -108,8 +132,14 @@ const Navbar: React.FC = () => {
               <span className="text-sm">Home</span>
             </NavLink>
 
-            {africaHeaderNav.map(({ path, label, icon: Icon }) => (
-              <NavLink key={path} to={path} className={navLinkClass}>
+            {africaHeaderNav.map(({ path, label, icon: Icon, highlight }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `${navLinkClass({ isActive })}${highlight ? ' ring-1 ring-accent/40' : ''}`
+                }
+              >
                 <Icon className="h-4 w-4 text-accent flex-shrink-0" />
                 <span className="text-sm">{label}</span>
               </NavLink>

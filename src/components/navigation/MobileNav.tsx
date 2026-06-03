@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   MapPin,
   Landmark,
+  HeartHandshake,
   Scale,
   Info,
 } from 'lucide-react';
@@ -67,6 +68,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ className = '' }) => {
         { path: '/africa/countries', label: 'Countries', icon: MapPin },
         { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
         { path: '/africa/sources', label: 'Sources', icon: Landmark },
+        { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake },
       ],
     },
     {

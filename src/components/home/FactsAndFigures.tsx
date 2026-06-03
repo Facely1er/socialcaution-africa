@@ -1,52 +1,54 @@
 import React from 'react';
 import { motion } from '../../lib/motion';
-import { DollarSign, AlertTriangle, Users, Scale } from 'lucide-react';
+import { Globe, AlertTriangle, Smartphone, Scale } from 'lucide-react';
 import Section from '../../components/common/Section';
 import SectionIconCircle from '../../components/common/SectionIconCircle';
 
 const FactsAndFigures: React.FC = () => {
   const stats = [
     {
-      value: '$10.5T',
-      label: 'Annual Cybercrime Cost',
-      description: 'Global cost of cybercrime expected to reach $10.5 trillion annually by 2025',
-      source: 'Cybersecurity Ventures',
-      icon: DollarSign,
+      value: '54',
+      label: 'Nations, One Platform',
+      description: 'SocialCaution Africa is designed for use across all 54 African nations, with country-specific legal and regulatory content.',
+      source: 'ERMITS Advisory',
+      icon: Globe,
       color: 'bg-accent/10 text-accent'
     },
     {
-      value: '$4.88M',
-      label: 'Average Data Breach Cost',
-      description: 'Average cost of a data breach for organizations worldwide',
-      source: 'IBM Security Report 2023',
-      icon: AlertTriangle,
+      value: '43%',
+      label: 'Mobile-Only Internet',
+      description: 'An estimated 43% of African internet users access the web exclusively via mobile — making mobile-first design a privacy necessity, not a preference.',
+      source: 'GSMA Mobile Economy Africa 2023',
+      icon: Smartphone,
       color: 'bg-warning/10 text-warning'
     },
     {
-      value: '353M+',
-      label: 'People Affected',
-      description: 'Over 353 million people affected by data breaches in 2023 alone',
-      source: 'Statista',
-      icon: Users,
+      value: '38',
+      label: 'African Data Protection Laws',
+      description: 'As of 2024, 38 African countries have enacted or are developing national data protection legislation — rights most citizens are unaware of.',
+      source: 'AU Data Policy Framework 2022',
+      icon: Scale,
       color: 'bg-danger/10 text-danger'
     },
     {
-      value: '75%',
-      label: 'Privacy Laws Coverage',
-      description: '75% of the world\'s population will be covered by modern privacy regulations by 2024',
-      source: 'Gartner',
-      icon: Scale,
+      value: '$530M+',
+      label: 'African Fintech Fraud Losses',
+      description: 'Annual financial losses from mobile money fraud, SIM swap attacks, and digital scams affecting African users and small businesses.',
+      source: 'Interpol Africa Cyberthreat Assessment 2023',
+      icon: AlertTriangle,
       color: 'bg-success/10 text-success'
     }
   ];
 
   return (
     <Section
-      title="The State of Privacy Today"
+      title="Digital Privacy in Africa — The Real Picture"
       subtitle={
         <div className="space-y-3 max-w-3xl mx-auto">
-          <p className="text-xl text-accent font-semibold">The Numbers Don't Lie</p>
-          <p className="text-gray-600 dark:text-gray-300">Privacy threats are growing at an unprecedented rate. Here's what the data tells us:</p>
+          <p className="text-xl text-accent font-semibold">Why this matters here</p>
+          <p className="text-gray-600 dark:text-gray-300">
+            African digital life has distinct risks, contexts, and rights. These are the numbers that shape this platform.
+          </p>
         </div>
       }
       centered
@@ -107,6 +109,11 @@ const FactsAndFigures: React.FC = () => {
           );
         })}
       </div>
+
+      <p className="text-center text-xs text-text-secondary dark:text-gray-400 mt-8 max-w-2xl mx-auto">
+        Statistics are sourced from publicly available reports. Figures should be verified
+        against current official sources before citation in formal documents.
+      </p>
     </Section>
   );
 };

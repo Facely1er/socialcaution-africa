@@ -55,6 +55,7 @@ const ScamShieldAfricaPage = lazy(() => import('./pages/africa/ScamShieldAfricaP
 const AfricaPersonasPage = lazy(() => import('./pages/africa/AfricaPersonasPage'));
 const AfricaActionCenterPage = lazy(() => import('./pages/africa/AfricaActionCenterPage'));
 const AfricaSourcesPage = lazy(() => import('./pages/africa/AfricaSourcesPage'));
+const AfricaPartnerPage = lazy(() => import('./pages/africa/AfricaPartnerPage'));
 
 // Privacy journey related pages
 const PrivacyActionCenterPage = lazy(() => import('./pages/PrivacyActionCenterPage'));
@@ -158,6 +159,7 @@ const router = createBrowserRouter(
       <Route path="/africa/personas/:countrySlug" element={<AfricaPersonasPage />} />
       <Route path="/africa/action-center/:countrySlug" element={<AfricaActionCenterPage />} />
       <Route path="/africa/sources" element={<AfricaSourcesPage />} />
+      <Route path="/africa/partner" element={<AfricaPartnerPage />} />
 
       {/* ── Core pages ── */}
       <Route path="/about" element={<AboutPage />} />

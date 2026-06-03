@@ -19,8 +19,8 @@ const AfricaHomePage: React.FC = () => {
   return (
     <AfricaPageLayout
       title="SocialCaution Africa"
-      subtitle="Help Africans stay safe, informed, and empowered online."
-      description="Digital trust and safety for the region — scam prevention, privacy rights, family protection, and SME practices across African countries."
+      subtitle="Building digital trust across Africa."
+      description="Privacy awareness, cyber hygiene, and responsible digital citizenship for citizens, families, schools, and small businesses — tailored to African digital realities."
       heroBackground
     >
       <Section>

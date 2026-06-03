@@ -150,7 +150,7 @@ const PersonaSelectionPage: React.FC = () => {
   return (
     <PageLayout
       title="Find Your Privacy Profile"
-      description="Everyone's privacy needs are different. Select the profile that best matches your situation to get personalized recommendations and guidance tailored to your specific needs and concerns."
+      description="Privacy needs differ across African digital life — whether you manage a family, run a small business, use mobile money daily, or navigate e-government services. Select the profile that fits your situation."
       heroBackground={false}
       backgroundType="privacy"
       showBreadcrumbs={false}
@@ -178,21 +178,21 @@ const PersonaSelectionPage: React.FC = () => {
                 <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="font-semibold text-text dark:text-white mb-2">Personalized Recommendations</h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300">Get privacy advice that actually applies to your specific situation and concerns.</p>
+              <p className="text-sm text-text-secondary dark:text-gray-300">Get privacy guidance relevant to your situation and the platforms, services, and laws that apply to your country.</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Clock className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
               <h3 className="font-semibold text-text dark:text-white mb-2">Save Time</h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300">Skip irrelevant features and focus on what matters most for your privacy goals.</p>
+              <p className="text-sm text-text-secondary dark:text-gray-300">Focus on what matters for your context — family safety, mobile money hygiene, small business data handling, or digital rights.</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Lightbulb className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
               <h3 className="font-semibold text-text dark:text-white mb-2">Relevant Learning</h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300">Learn privacy concepts and techniques that are relevant to your digital lifestyle.</p>
+              <p className="text-sm text-text-secondary dark:text-gray-300">Learn privacy rights and practices that apply to African digital life — not generic advice written for different markets.</p>
             </div>
           </div>
         </motion.div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Scale, Lock, DollarSign, Zap, Shield, GraduationCap, XCircle, KeyRound, Users } from 'lucide-react';
+import { Search, Scale, Lock, DollarSign, Zap, Shield, GraduationCap, XCircle, Globe, Users } from 'lucide-react';
 import Button from '../common/Button';
 import MatrixBackground from './MatrixBackground';
 
@@ -19,8 +19,8 @@ const Hero: React.FC = () => {
         <div className="w-full max-w-4xl mx-auto text-center pt-3 sm:pt-4 pb-2">
           <div className="mb-3">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-relaxed px-4">
-              <span className="block mb-2">Stop Data Theft</span>
-              <span className="block">Take Back Control</span>
+              <span className="block mb-2">Building Digital Trust</span>
+              <span className="block">Across Africa</span>
             </h1>
           </div>
 
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
               <div className="p-1.5 sm:p-2 bg-white/10 rounded-full">
                 <Lock className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
               </div>
-              <span className="text-center">Your data is being sold</span>
+              <span className="text-center">Privacy awareness, cyber hygiene, and digital citizenship</span>
               <div className="p-1.5 sm:p-2 bg-white/10 rounded-full">
                 <DollarSign className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
               </div>
@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
               <div className="hidden sm:block p-2 bg-white/10 rounded-full">
                 <Zap className="h-6 w-6 text-white" />
               </div>
-              <span className="text-center">Choose your profile — get a tailored privacy journey</span>
+              <span className="text-center">Choose your profile — get a journey built for African digital life</span>
               <div className="hidden sm:block p-2 bg-white/10 rounded-full">
                 <Shield className="h-6 w-6 text-white" />
               </div>
@@ -82,8 +82,8 @@ const Hero: React.FC = () => {
               <span>No account needed</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-full">
-              <KeyRound className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              <span>No data storage</span>
+              <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              <span>African context</span>
             </div>
           </div>
         </div>
@@ -100,14 +100,14 @@ const Hero: React.FC = () => {
         <div className="absolute top-[60%] right-[5%] bg-white/10 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg opacity-70">
           <div className="flex items-center gap-2">
             <Scale className="h-5 w-5 text-white" />
-            <span className="text-white text-sm font-medium">Know Your Rights</span>
+            <span className="text-white text-sm font-medium">African Laws</span>
           </div>
         </div>
 
         <div className="absolute top-[50%] left-[8%] bg-white/10 backdrop-blur-sm px-4 py-3 rounded-full shadow-lg opacity-70">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-white" />
-            <span className="text-white text-sm font-medium">Protect Data</span>
+            <span className="text-white text-sm font-medium">Your Journey</span>
           </div>
         </div>
       </div>

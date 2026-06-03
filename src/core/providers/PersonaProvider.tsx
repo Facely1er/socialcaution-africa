@@ -15,7 +15,7 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
   [PersonaType.CAUTIOUS_PARENT]: {
     id: PersonaType.CAUTIOUS_PARENT,
     title: 'Cautious Parent',
-    description: 'Protecting your family\'s digital presence while fostering healthy online experiences.',
+    description: 'Navigating connected family life across Africa — managing children\'s exposure to social media, mobile money apps, and the online platforms they use daily.',
     primaryColor: 'blue-600',
     secondaryColor: 'green-500',
     icon: 'Heart',
@@ -41,14 +41,14 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
       {
         id: 'family-privacy-checkup',
         title: 'Family Privacy Checkup',
-        description: 'Comprehensive evaluation of your family\'s digital privacy protection',
+        description: 'Review your family\'s digital safety — covering children\'s app permissions, social media exposure, and mobile money hygiene in an African household context.',
         estimatedTime: '15 minutes',
         priority: 'high'
       },
       {
         id: 'parental-controls-audit',
         title: 'Parental Controls Audit',
-        description: 'Review and optimize your current parental control settings',
+        description: 'Check and strengthen the settings controlling what your children can access and share on devices and platforms commonly used across Africa.',
         estimatedTime: '20 minutes',
         priority: 'medium'
       }
@@ -62,7 +62,7 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
   [PersonaType.PRIVACY_ADVOCATE]: {
     id: PersonaType.PRIVACY_ADVOCATE,
     title: 'Privacy Advocate',
-    description: 'Advanced privacy protection and digital rights awareness for power users.',
+    description: 'Advanced understanding of digital rights and African data protection laws — equipped to assess your own exposure and support others in your community.',
     primaryColor: 'purple-600',
     secondaryColor: 'indigo-500',
     icon: 'Users',
@@ -88,7 +88,7 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
       {
         id: 'comprehensive-privacy-audit',
         title: 'Comprehensive Privacy Audit',
-        description: 'Deep dive into all aspects of your digital privacy',
+        description: 'A thorough review of your digital privacy posture, your rights under applicable African data protection laws, and how to exercise them.',
         estimatedTime: '30 minutes',
         priority: 'high'
       }
@@ -102,7 +102,7 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
   [PersonaType.ONLINE_SHOPPER]: {
     id: PersonaType.ONLINE_SHOPPER,
     title: 'Online Shopper',
-    description: 'Securing your financial information and protecting your shopping data.',
+    description: 'Navigating African e-commerce platforms (Jumia, Jiji, local marketplaces) and mobile payment services with awareness of how they handle your data.',
     primaryColor: 'emerald-600',
     secondaryColor: 'teal-500',
     icon: 'ShoppingBag',
@@ -128,7 +128,7 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
       {
         id: 'shopping-privacy-checkup',
         title: 'Shopping Privacy Checkup',
-        description: 'Evaluate your online shopping privacy and security',
+        description: 'Review your data exposure across African e-commerce platforms and mobile payment services — what they collect, store, and share.',
         estimatedTime: '12 minutes',
         priority: 'high'
       }
@@ -141,8 +141,8 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
 
   [PersonaType.SOCIAL_INFLUENCER]: {
     id: PersonaType.SOCIAL_INFLUENCER,
-    title: 'Social Influencer',
-    description: 'Balancing public presence with personal privacy and security.',
+    title: 'Content Creator',
+    description: 'Building an audience across African and global platforms while managing personal data exposure, account security, and the risks that come with visibility.',
     primaryColor: 'pink-600',
     secondaryColor: 'rose-500',
     icon: 'Camera',
@@ -181,8 +181,8 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
 
   [PersonaType.PRIVATE_INDIVIDUAL]: {
     id: PersonaType.PRIVATE_INDIVIDUAL,
-    title: 'Private Individual',
-    description: 'Maintaining personal privacy and controlling your digital footprint.',
+    title: 'Private Citizen',
+    description: 'Managing personal data across social media, e-government services, and mobile banking — with limited visibility into what is collected and by whom.',
     primaryColor: 'slate-600',
     secondaryColor: 'gray-500',
     icon: 'Shield',
@@ -221,8 +221,8 @@ const personaConfigs: Record<PersonaType, PersonaConfig> = {
 
   [PersonaType.CONCERNED_EMPLOYEE]: {
     id: PersonaType.CONCERNED_EMPLOYEE,
-    title: 'Concerned Employee',
-    description: 'Protecting your personal data and privacy in the workplace while understanding your rights and risks.',
+    title: 'SME Owner / Employee',
+    description: 'Handling customer data, mobile payments, and device hygiene in a small or informal business — the most common digital work context across Africa.',
     primaryColor: 'orange-600',
     secondaryColor: 'amber-500',
     icon: 'AlertTriangle',

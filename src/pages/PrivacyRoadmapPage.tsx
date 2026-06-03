@@ -10,7 +10,8 @@ import {
   FileText,
   Users,
   Settings,
-  BarChart3
+  BarChart3,
+  Globe
 } from 'lucide-react';
 import Section from '../components/common/Section';
 import Card from '../components/common/Card';
@@ -82,6 +83,23 @@ const PrivacyRoadmapPage: React.FC = () => {
           <RoadmapNav />
           
           <div className="layout-sidebar-content">
+            <Card className="p-4 mb-8 bg-accent/5 border border-accent/20">
+              <div className="flex items-start gap-3">
+                <Globe className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-text dark:text-white text-sm mb-1">
+                    African regulatory context
+                  </p>
+                  <p className="text-sm text-text-secondary dark:text-gray-300">
+                    Your privacy roadmap references applicable frameworks including the ECOWAS
+                    Supplementary Act on Personal Data, the AU Malabo Convention, and national
+                    data protection laws in your country. Assessments cover platforms and services
+                    common across Africa.
+                  </p>
+                </div>
+              </div>
+            </Card>
+
             <div className="mb-12">
               <Card className="p-6">
                 <div className="flex flex-col md:flex-row gap-6 items-center">
