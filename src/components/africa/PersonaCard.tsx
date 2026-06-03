@@ -13,7 +13,7 @@ export default function PersonaCard({ persona }: { persona: AfricaPersona }) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
       <Link
-        to={`/africa/start/${persona.slug}`}
+        to={`/africa/personas/start/${persona.slug}`}
         className={`block p-5 rounded-xl border border-border bg-white dark:bg-card transition-all duration-200 h-full ${cardBorder} hover:shadow-md group`}
       >
         <div className={`w-11 h-11 rounded-xl ${iconBg} flex items-center justify-center mb-4`}>
