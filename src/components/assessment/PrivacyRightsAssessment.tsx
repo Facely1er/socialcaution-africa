@@ -6,6 +6,11 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 import Badge from '../common/Badge';
 import PrivacyRightsStartScreen from './PrivacyRightsStartScreen';
+import { AFRICA_EDITION } from '../../config/africaEditionNav';
+import {
+  africaRightsQuestions,
+  AFRICA_RIGHTS_STANDARDS_APPEND,
+} from '../../data/africa/assessmentQuestions';
 
 interface Question {
   id: string;
@@ -36,7 +41,7 @@ const PrivacyRightsAssessment: React.FC<PrivacyRightsAssessmentProps> = ({ onCom
 
   // Get questions
   const getTranslatedQuestions = (): Question[] => {
-    return [
+    const base: Question[] = [
         {
           id: 'be_informed',
           text: 'How often do you read privacy policies?',
@@ -210,6 +215,16 @@ const PrivacyRightsAssessment: React.FC<PrivacyRightsAssessmentProps> = ({ onCom
           ]
         }
       ];
+
+    if (AFRICA_EDITION) {
+      const withAfricaStandards = base.map((q) =>
+        q.id === 'be_informed'
+          ? { ...q, standards: [...(q.standards ?? []), ...AFRICA_RIGHTS_STANDARDS_APPEND] }
+          : q
+      );
+      return [...withAfricaStandards, ...africaRightsQuestions];
+    }
+    return base;
   };
 
   const questions = getTranslatedQuestions();
@@ -246,7 +261,8 @@ const PrivacyRightsAssessment: React.FC<PrivacyRightsAssessmentProps> = ({ onCom
       'Data Protection': ['be_informed', 'access'],
       'Privacy Controls': ['restriction', 'object'],
       'Data Management': ['rectification', 'erasure', 'portability'],
-      'Security': ['security']
+      'Security': ['security'],
+      ...(AFRICA_EDITION ? { 'African Data Rights': ['dpa_complaint'] } : {}),
     };
     
     // Calculate overall score

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Scale, Info, ArrowRight, Globe, FileText, Lock, Shield, AlertTriangle, BookOpen, Check } from 'lucide-react';
+import { Scale, Info, ArrowRight, Globe, FileText, Lock, Shield, AlertTriangle, BookOpen, Check, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import LegalPageLayout from '../../components/legal/LegalPageLayout';
@@ -18,6 +19,26 @@ const PrivacyLawsPage: React.FC = () => {
       description="For African country laws and reporting paths, use the Africa Edition country profiles first."
       icon={Scale}
     >
+      <Card className="p-6 mb-6 border-2 border-accent/30 bg-accent/5">
+        <div className="flex items-start gap-3">
+          <MapPin className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+          <div>
+            <h2 className="text-lg font-bold text-primary dark:text-white mb-2">Africa Edition — use country profiles first</h2>
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+              This section covers international (EU, US, and global) frameworks for reference only. For African laws,
+              regulators, and reporting paths, start with your{' '}
+              <Link to="/africa/countries" className="text-accent font-semibold hover:underline">
+                country profile
+              </Link>{' '}
+              and the{' '}
+              <Link to="/africa/sources" className="text-accent font-semibold hover:underline">
+                source register
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </Card>
       <Card className="p-8">
               <h2 className="text-2xl font-bold text-primary dark:text-white mb-6">Overview</h2>
               

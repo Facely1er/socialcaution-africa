@@ -5,6 +5,7 @@ import PageLayout from '../../components/layout/PageLayout';
 import Section from '../../components/common/Section';
 import SecurityAssessment from '../../components/assessment/SecurityAssessment';
 import Button from '../../components/common/Button';
+import AfricaAssessmentBanner from '../../components/africa/AfricaAssessmentBanner';
 import { useAssessmentStore } from '../../store/assessmentStore';
 import { useProgressStore } from '../../store/progressStore';
 import { persistMiniAssessment, type MiniAssessmentResult } from '../../utils/dashboardData';
@@ -348,7 +349,7 @@ const SecurityAssessmentPage: React.FC = () => {
   };
 
   const getTranslatedSubtitle = () => {
-    return "Comprehensive security evaluation covering all aspects of your digital privacy";
+    return 'Security evaluation including mobile money, WhatsApp scams, and device hygiene (Africa Edition beta)';
   };
 
   const getTranslatedBackToAssessment = () => {
@@ -377,7 +378,8 @@ const SecurityAssessmentPage: React.FC = () => {
             {getTranslatedBackToAssessment()}
           </Button>
         </div>
-        
+
+        <AfricaAssessmentBanner />
         <SecurityAssessment onComplete={handleComplete} />
       </Section>
     </PageLayout>

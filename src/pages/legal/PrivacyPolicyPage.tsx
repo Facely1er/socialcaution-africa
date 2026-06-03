@@ -233,6 +233,38 @@ const PrivacyPolicyPage = () => {
               <li><strong>Right to Non-Discrimination:</strong> Equal service and pricing regardless of privacy rights exercise</li>
             </ul>
 
+            <h3 className="text-xl font-semibold mt-6 mb-3">6.4 Additional Rights for Users in Africa</h3>
+            <p>
+              If you use SocialCaution Africa or are located in an African jurisdiction, you may have rights under
+              applicable national and regional frameworks, including but not limited to:
+            </p>
+            <ul className="list-disc ml-6 mt-2 space-y-1">
+              <li>
+                <strong>South Africa — POPIA:</strong> Rights to access, correct, delete, and object to processing; complaints
+                to the Information Regulator
+              </li>
+              <li>
+                <strong>Nigeria — NDPR:</strong> Rights regarding lawful processing, consent, and data subject requests;
+                complaints via NITDA / Nigeria Data Protection Commission pathways
+              </li>
+              <li>
+                <strong>Kenya — Data Protection Act:</strong> Rights exercised through the Office of the Data Protection
+                Commissioner (ODPC)
+              </li>
+              <li>
+                <strong>ECOWAS Supplementary Act on Personal Data Protection:</strong> Regional principles for member states
+                harmonizing data protection standards
+              </li>
+              <li>
+                <strong>Other national laws:</strong> Country-specific rights (e.g. CDP Senegal, ARTCI Côte d&apos;Ivoire, Ghana
+                DPA) as described in your country profile on this platform
+              </li>
+            </ul>
+            <p className="mt-4">
+              Country-specific authorities, complaint channels, and practical steps are listed in the Africa Edition country
+              profiles and source register. This policy does not replace legal advice in your jurisdiction.
+            </p>
+
             <h2 className="text-2xl font-semibold mt-8 mb-4">7. Contact Information</h2>
 
             <p><strong>Privacy Inquiries:</strong><br />

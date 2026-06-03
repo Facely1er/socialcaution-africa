@@ -5,6 +5,8 @@ import { Shield, Key, Smartphone, Wifi, Globe } from 'lucide-react';
 import Card from '../common/Card';
 import Button from '../common/Button';
 import ProgressBar from './ProgressBar';
+import { AFRICA_EDITION } from '../../config/africaEditionNav';
+import { africaSecurityQuestions } from '../../data/africa/assessmentQuestions';
 
 interface Question {
   id: string;
@@ -31,7 +33,7 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
 
   // Get questions
   const getTranslatedQuestions = (): Question[] => {
-    return [
+    const base: Question[] = [
         {
           id: 'password_security',
           text: 'How do you manage your passwords?',
@@ -193,6 +195,11 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
           ]
         }
       ];
+
+    if (AFRICA_EDITION) {
+      return [...base, ...africaSecurityQuestions];
+    }
+    return base;
   };
 
   const questions = getTranslatedQuestions();
@@ -229,8 +236,9 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
       'Password Management': ['password_security', 'two_factor'],
       'Device Security': ['device_security', 'software_updates'],
       'Network Protection': ['network_security'],
-      'Access Monitoring': ['login_monitoring', 'security_monitoring'],
-      'App Security': ['app_permissions']
+      ...(AFRICA_EDITION
+        ? { 'Mobile & Scam Safety': ['mobile_money_pin', 'whatsapp_scam', 'sim_registration'] }
+        : {}),
     };
     
     // Calculate overall score
@@ -329,6 +337,9 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
           case 'App Security':
             rec = 'Regularly audit and restrict third-party app permissions';
             break;
+          case 'Mobile & Scam Safety':
+            rec = 'Review ScamShield guidance: protect mobile money PINs, verify WhatsApp payment requests, and check SIM registration';
+            break;
         }
         
         if (rec && !addedRecommendations.has(rec)) {
@@ -361,6 +372,15 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
           case 'software_updates':
             recommendation = 'Set up automatic updates for all your devices and software to ensure security patches are applied';
             break;
+          case 'mobile_money_pin':
+            recommendation = 'Never share your mobile money PIN; enable app lock and use unique PINs for money apps';
+            break;
+          case 'whatsapp_scam':
+            recommendation = 'Verify urgent payment requests by calling saved numbers — never share OTPs in chat';
+            break;
+          case 'sim_registration':
+            recommendation = 'Check SIM registrations with your operator or national telecom portal';
+            break;
         }
         
         if (recommendation && !addedRecommendations.has(recommendation)) {
@@ -385,7 +405,9 @@ const SecurityAssessment: React.FC<SecurityAssessmentProps> = ({ onComplete }) =
             {'Security Assessment'}
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 mb-8">
-            {'Comprehensive security evaluation covering all aspects of your digital privacy'}
+            {AFRICA_EDITION
+              ? 'Security evaluation including mobile money, WhatsApp scams, and device hygiene for African digital life'
+              : 'Comprehensive security evaluation covering all aspects of your digital privacy'}
           </p>
           <button
             onClick={handleStart}

@@ -1,7 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   AlertTriangle,
-  Globe2,
   HeartHandshake,
   Home,
   Info,
@@ -37,7 +36,6 @@ export const africaHeaderMore: EditionNavItem[] = [
   { path: '/privacy-laws', label: 'Intl. laws (reference)', icon: Scale },
   { path: '/about', label: 'About ERMITS', icon: Info },
   { path: '/contact', label: 'Contact', icon: Mail },
-  { path: '/global', label: 'Global platform (legacy)', icon: Globe2 },
 ];
 
 /** Mobile bottom bar */
@@ -67,7 +65,7 @@ export const africaFooterGroups: FooterLinkGroup[] = [
     title: 'Reference',
     items: [
       { path: '/privacy-laws', label: 'International privacy laws', icon: Scale },
-      { path: '/global', label: 'Global platform overview', icon: Globe2 },
+      { path: '/assessment', label: 'Privacy assessment (beta)', icon: ShieldCheck },
     ],
   },
   {
@@ -80,22 +78,6 @@ export const africaFooterGroups: FooterLinkGroup[] = [
     ],
   },
 ];
-
-/** Legacy global marketing routes → Africa edition entry points */
-export const AFRICA_LEGACY_REDIRECTS: Record<string, string> = {
-  '/pricing': '/africa',
-  '/features': '/africa',
-  '/personas': '/africa/countries',
-  '/persona-selection': '/africa/countries',
-  '/privacy-journey': '/africa',
-  '/30-day-roadmap': '/africa',
-  '/privacy-action-center': '/africa',
-  '/parent': '/africa',
-  '/cautions': '/africa',
-  '/simple-dashboard': '/africa',
-  '/toolkit': '/africa/scamshield',
-  '/blog': '/global',
-};
 
 export function isAfricaPath(pathname: string): boolean {
   return pathname === '/' || pathname.startsWith('/africa');

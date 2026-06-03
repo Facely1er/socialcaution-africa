@@ -5,6 +5,8 @@ import Card from '../common/Card';
 import Button from '../common/Button';
 import Badge from '../common/Badge';
 import ExposureStartScreen from './ExposureStartScreen';
+import { AFRICA_EDITION } from '../../config/africaEditionNav';
+import { africaExposureQuestions } from '../../data/africa/assessmentQuestions';
 
 interface Question {
   id: string;
@@ -37,7 +39,7 @@ const ExposureAssessment: React.FC<ExposureAssessmentProps> = ({ onComplete, nav
 
   // Get questions
   const getTranslatedQuestions = (): Question[] => {
-    return [
+    const base: Question[] = [
         {
           id: 'public_wifi',
           text: 'How often do you use public Wi-Fi networks?',
@@ -349,6 +351,11 @@ const ExposureAssessment: React.FC<ExposureAssessmentProps> = ({ onComplete, nav
           ]
         }
       ];
+
+    if (AFRICA_EDITION) {
+      return [...base, ...africaExposureQuestions];
+    }
+    return base;
   };
 
   const questions = getTranslatedQuestions();
@@ -398,7 +405,10 @@ const ExposureAssessment: React.FC<ExposureAssessmentProps> = ({ onComplete, nav
       'Password Security': ['password_management', 'password_manager'],
       'Data Sharing': ['app_permissions'],
       'Device Security': ['device_security'],
-      'Online Presence': ['tracking_protection']
+      'Online Presence': ['tracking_protection'],
+      ...(AFRICA_EDITION
+        ? { 'Mobile Money & OTP': ['mobile_money_usage', 'otp_sharing'] }
+        : {}),
     };
     
     // Calculate overall score

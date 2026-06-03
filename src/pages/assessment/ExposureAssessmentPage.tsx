@@ -5,6 +5,7 @@ import PageLayout from '../../components/layout/PageLayout';
 import Section from '../../components/common/Section';
 import ExposureAssessment from '../../components/assessment/ExposureAssessment';
 import Button from '../../components/common/Button';
+import AfricaAssessmentBanner from '../../components/africa/AfricaAssessmentBanner';
 import { useABTestStore } from '../../store/abTestStore';
 import { trackABEvent } from '../../ab-test/config';
 import { useAssessmentStore } from '../../store/assessmentStore';
@@ -39,7 +40,7 @@ const ExposureAssessmentPage: React.FC = () => {
   return (
     <PageLayout
       title="Digital Exposure Check"
-      subtitle="Identify potential privacy vulnerabilities and exposure risks in your digital presence"
+      subtitle="Exposure check with mobile money and OTP scenarios (Africa Edition beta)"
       heroBackground={false}
       breadcrumbs={[
         { label: 'Assessment', path: '/assessment' },
@@ -58,6 +59,7 @@ const ExposureAssessmentPage: React.FC = () => {
           </Button>
         </div>
 
+        <AfricaAssessmentBanner />
         <ExposureAssessment onComplete={handleComplete} />
       </Section>
     </PageLayout>

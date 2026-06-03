@@ -28,7 +28,7 @@ const AfricaPersonasPage: React.FC = () => {
             <Users className="h-4 w-4" /> Country-aware journey
           </div>
           <p className="text-gray-700 dark:text-gray-300">
-            This replaces the generic persona jump with Africa-specific user profiles. The next step routes the selected profile into the Digital Rights & Safety Action Center.
+            Choose the profile that best matches your situation in {country.name}. Your selection opens a tailored action plan in the Digital Rights &amp; Safety Action Center.
           </p>
         </div>
 

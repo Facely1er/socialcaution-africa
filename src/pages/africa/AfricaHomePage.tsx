@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, Globe2, Landmark, ShieldCheck, Smartphone, Users } from 'lucide-react';
+import { Globe2, Landmark, ShieldCheck, Smartphone, Users } from 'lucide-react';
 import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
 import { africaCountries, scamTypes } from '../../data/africa/countries';
-import { designSystem } from '../../styles/design-system';
 
 const pillars = [
   { icon: Smartphone, title: 'Digital Safety', text: 'Practical guidance against mobile money fraud, WhatsApp scams, fake investments, account takeover, and identity theft.' },
   { icon: Landmark, title: 'Privacy & Data Rights', text: 'Country-specific explanations of rights, authorities, complaint channels, and request workflows.' },
   { icon: Users, title: 'Family & School Protection', text: 'Parent, student, teacher, and community-facing resources adapted for African digital realities.' },
-  { icon: ShieldCheck, title: 'SME Digital Trust', text: 'Basic privacy, cybersecurity, and customer data protection practices for small organizations.' }
+  { icon: ShieldCheck, title: 'SME Digital Trust', text: 'Basic privacy, cybersecurity, and customer data protection practices for small organizations.' },
 ];
 
 const AfricaHomePage: React.FC = () => {
@@ -30,22 +29,16 @@ const AfricaHomePage: React.FC = () => {
               <Globe2 className="h-4 w-4" /> Regional Edition
             </div>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              This edition combines digital safety, scam prevention, data rights, family protection, and SME trust into one regionalized journey — not only a rights portal.
+              Digital safety, scam prevention, data rights, family protection, and SME trust in one regional journey — built for African platforms, laws, and everyday risks.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/africa/countries"><Button>Explore Countries</Button></Link>
               <Link to="/africa/scamshield"><Button variant="outline">Open ScamShield</Button></Link>
               <Link to="/africa/sources"><Button variant="outline">Source Register</Button></Link>
             </div>
-            <p className="mt-4 text-sm text-text-secondary dark:text-gray-400">
-              Looking for the global privacy journey?{' '}
-              <Link to="/global" className="text-accent font-semibold hover:underline">
-                Open the international platform overview
-              </Link>
-            </p>
           </div>
           <Card className="p-6">
-            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">MVP Country Coverage</h2>
+            <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Country coverage</h2>
             <div className="space-y-3">
               {africaCountries.map((country) => (
                 <Link key={country.slug} to={`/africa/countries/${country.slug}`} className="block p-4 rounded-xl border border-border hover:border-accent transition-colors">
@@ -72,16 +65,11 @@ const AfricaHomePage: React.FC = () => {
           ))}
         </div>
 
-        <Card className={`p-6 md:p-8 ${designSystem.gradients.card}`}>
-          <div className="flex items-start gap-4 mb-6">
-            <AlertTriangle className="h-8 w-8 text-accent flex-shrink-0" />
-            <div>
-              <h2 className="text-2xl font-bold text-primary dark:text-white">Launch with high-engagement safety content first</h2>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">
-                Rights content builds legitimacy, but safety content drives adoption. The first release should lead with scam prevention and digital trust, then route users into privacy rights and action workflows.
-              </p>
-            </div>
-          </div>
+        <Card className="p-6 md:p-8">
+          <h2 className="text-2xl font-bold text-primary dark:text-white mb-4">Common scams to watch for</h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-6">
+            Start with practical scam awareness, then move into your country profile for rights and reporting paths.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {scamTypes.map((scam) => (
               <div key={scam.title} className="p-4 bg-white dark:bg-card rounded-xl border border-border">
@@ -90,6 +78,11 @@ const AfricaHomePage: React.FC = () => {
                 <p className="text-sm font-medium text-accent">{scam.action}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-6">
+            <Link to="/africa/scamshield">
+              <Button variant="outline">View full ScamShield guide</Button>
+            </Link>
           </div>
         </Card>
       </Section>

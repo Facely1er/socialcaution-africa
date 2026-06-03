@@ -5,6 +5,7 @@ import PageLayout from '../../components/layout/PageLayout';
 import Section from '../../components/common/Section';
 import PrivacyRightsAssessment from '../../components/assessment/PrivacyRightsAssessment';
 import Button from '../../components/common/Button';
+import AfricaAssessmentBanner from '../../components/africa/AfricaAssessmentBanner';
 import { useAssessmentStore } from '../../store/assessmentStore';
 import { useProgressStore } from '../../store/progressStore';
 import { persistMiniAssessment, type MiniAssessmentResult } from '../../utils/dashboardData';
@@ -348,7 +349,7 @@ const PrivacyRightsAssessmentPage: React.FC = () => {
   };
 
   const getTranslatedSubtitle = () => {
-    return "Evaluate your understanding and exercise of privacy rights across platforms";
+    return 'Privacy rights awareness with African law references (Africa Edition beta)';
   };
 
   const getTranslatedBackToAssessment = () => {
@@ -377,7 +378,8 @@ const PrivacyRightsAssessmentPage: React.FC = () => {
             {getTranslatedBackToAssessment()}
           </Button>
         </div>
-        
+
+        <AfricaAssessmentBanner />
         <PrivacyRightsAssessment onComplete={handleComplete} />
       </Section>
     </PageLayout>

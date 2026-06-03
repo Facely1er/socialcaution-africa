@@ -3,20 +3,20 @@
   <url><loc>https://africa.socialcaution.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/countries</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/countries/cote-divoire</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://africa.socialcaution.com/africa/countries/ghana</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://africa.socialcaution.com/africa/countries/kenya</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://africa.socialcaution.com/africa/countries/senegal</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/countries/nigeria</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://africa.socialcaution.com/africa/countries/kenya</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://africa.socialcaution.com/africa/countries/ghana</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/countries/south-africa</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/scamshield</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/sources</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://africa.socialcaution.com/africa/partner</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://africa.socialcaution.com/assessment</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://africa.socialcaution.com/dashboard</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://africa.socialcaution.com/toolkit</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://africa.socialcaution.com/resources</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://africa.socialcaution.com/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://africa.socialcaution.com/help</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://africa.socialcaution.com/africa/roadmap</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://africa.socialcaution.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://africa.socialcaution.com/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://africa.socialcaution.com/privacy-laws</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://africa.socialcaution.com/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://africa.socialcaution.com/terms</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://africa.socialcaution.com/cookies</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
 </urlset>
