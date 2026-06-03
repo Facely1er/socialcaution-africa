@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Navigate } from 'react-router-dom';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import EnhancedErrorBoundary from './components/common/EnhancedErrorBoundary';
@@ -152,7 +152,6 @@ const router = createBrowserRouter(
       </Route>
 
       {/* ── Africa Regional Edition ── */}
-      <Route path="/africa" element={<AfricaHomePage />} />
       <Route path="/africa/countries" element={<AfricaCountriesPage />} />
       <Route path="/africa/countries/:countrySlug" element={<AfricaCountryPage />} />
       <Route path="/africa/scamshield" element={<ScamShieldAfricaPage />} />

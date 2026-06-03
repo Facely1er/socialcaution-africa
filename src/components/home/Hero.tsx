@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Scale, Lock, DollarSign, Zap, Shield, GraduationCap, XCircle, Globe, Users } from 'lucide-react';
+import { Search, Scale, Lock, Shield, GraduationCap, XCircle, Globe, Users } from 'lucide-react';
 import Button from '../common/Button';
 import MatrixBackground from './MatrixBackground';
 

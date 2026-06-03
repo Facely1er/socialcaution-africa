@@ -6,7 +6,6 @@ import {
   Menu,
   X,
   Home,
-  BookOpen,
   ChevronDown,
   ChevronUp,
   Globe2,
@@ -15,7 +14,6 @@ import {
   Landmark,
   HeartHandshake,
   Scale,
-  Info,
 } from 'lucide-react';
 import { africaFooterGroups, africaHeaderMore } from '../../config/africaEditionNav';
 import SearchIcon from './SearchIcon';
