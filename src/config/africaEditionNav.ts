@@ -11,8 +11,6 @@ import {
   ShieldCheck,
   FileText,
   Cookie,
-  ClipboardList,
-  Map,
 } from 'lucide-react';
 
 /** Single source of truth: this deployment is the Africa regional edition. */
@@ -34,12 +32,10 @@ export const africaHeaderNav: EditionNavItem[] = [
 
 /** Desktop “More” — secondary links */
 export const africaHeaderMore: EditionNavItem[] = [
-  { path: '/africa/sources', label: 'Sources', icon: Landmark },
-  { path: '/assessment', label: 'Assessment', icon: ShieldCheck },
-  { path: '/africa/roadmap', label: 'Roadmap', icon: Map },
-  { path: '/about', label: 'About', icon: Info },
+  { path: '/africa/sources', label: 'Source register', icon: Landmark },
+  { path: '/about', label: 'About ERMITS', icon: Info },
   { path: '/contact', label: 'Contact', icon: Mail },
-  { path: '/privacy-laws', label: 'Intl. laws', icon: Scale },
+  { path: '/privacy-laws', label: 'Intl. laws (reference)', icon: Scale },
 ];
 
 /** Mobile bottom bar — four highest-frequency destinations */
@@ -47,7 +43,7 @@ export const africaBottomNav: EditionNavItem[] = [
   { path: '/', label: 'Home', icon: Home },
   { path: '/africa/countries', label: 'Countries', icon: MapPin },
   { path: '/africa/scamshield', label: 'Scams', icon: AlertTriangle },
-  { path: '/assessment', label: 'Assess', icon: ClipboardList },
+  { path: '/africa/partner', label: 'Partner', icon: HeartHandshake },
 ];
 
 function uniqueNavByPath(items: EditionNavItem[]): EditionNavItem[] {
@@ -100,14 +96,12 @@ export const africaFooterGroups: FooterLinkGroup[] = [
       { path: '/africa/scamshield', label: 'ScamShield Africa', icon: AlertTriangle },
       { path: '/africa/sources', label: 'Source register', icon: Landmark },
       { path: '/africa/partner', label: 'Partner With Us', icon: HeartHandshake },
-      { path: '/africa/roadmap', label: 'Privacy roadmap', icon: Map },
     ],
   },
   {
     title: 'Reference',
     items: [
       { path: '/privacy-laws', label: 'International privacy laws', icon: Scale },
-      { path: '/assessment', label: 'Privacy assessment (beta)', icon: ShieldCheck },
     ],
   },
   {

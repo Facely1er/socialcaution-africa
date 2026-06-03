@@ -34,6 +34,7 @@ const AfricaCountriesPage = lazy(() => import('./pages/africa/AfricaCountriesPag
 const AfricaCountryPage = lazy(() => import('./pages/africa/AfricaCountryPage'));
 const ScamShieldAfricaPage = lazy(() => import('./pages/africa/ScamShieldAfricaPage'));
 const AfricaPersonasPage = lazy(() => import('./pages/africa/AfricaPersonasPage'));
+const AfricaPersonaStartPage = lazy(() => import('./pages/africa/AfricaPersonaStartPage'));
 const AfricaActionCenterPage = lazy(() => import('./pages/africa/AfricaActionCenterPage'));
 const AfricaSourcesPage = lazy(() => import('./pages/africa/AfricaSourcesPage'));
 const AfricaPartnerPage = lazy(() => import('./pages/africa/AfricaPartnerPage'));
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
       <Route path="/africa/countries" element={<AfricaCountriesPage />} />
       <Route path="/africa/countries/:countrySlug" element={<AfricaCountryPage />} />
       <Route path="/africa/scamshield" element={<ScamShieldAfricaPage />} />
+      <Route path="/africa/personas/start/:personaSlug" element={<AfricaPersonaStartPage />} />
       <Route path="/africa/personas/:countrySlug" element={<AfricaPersonasPage />} />
       <Route path="/africa/action-center/:countrySlug" element={<AfricaActionCenterPage />} />
       <Route path="/africa/sources" element={<AfricaSourcesPage />} />

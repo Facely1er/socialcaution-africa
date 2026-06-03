@@ -57,7 +57,7 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
 
         <div className="border-t border-gray-700 pt-4">
           <p className="text-gray-400 text-xs text-center md:text-left">
-            © {currentYear} ERMITS LLC. Africa Edition prototype — verify country sources before official use.
+            © {currentYear} ERMITS LLC. Country data is regularly reviewed. Verify authoritative sources before formal or legal use. By ERMITS Advisory LLC.
           </p>
         </div>
       </div>

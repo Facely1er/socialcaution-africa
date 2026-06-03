@@ -64,12 +64,20 @@ const AfricaCountryPage: React.FC = () => {
         </Card>
 
         <Card className="p-6 bg-light-blue dark:bg-background-secondary">
-          <h2 className="text-2xl font-bold text-primary dark:text-white mb-3">Recommended user journey</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-5">Start with safety education, then route users into the rights workflow when they need to request access, correction, deletion, objection, or file a complaint.</p>
+          <h2 className="text-xl font-bold text-primary dark:text-white mb-2">
+            Ready to get your personal safety plan?
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-5 text-sm">
+            Start with ScamShield for immediate safety guidance, or choose your profile to get a plan tailored to
+            your situation in {country.name}.
+          </p>
           <div className="flex flex-wrap gap-3">
-            <Link to="/africa/scamshield"><Button>Start with ScamShield</Button></Link>
-            <Link to={`/africa/personas/${country.slug}`}><Button variant="outline">Choose User Profile</Button></Link>
-            <Link to={`/africa/action-center/${country.slug}`}><Button variant="outline">Use Digital Rights & Safety Center</Button></Link>
+            <Link to={`/africa/personas/${country.slug}`}>
+              <Button>Choose my profile →</Button>
+            </Link>
+            <Link to="/africa/scamshield">
+              <Button variant="outline">Open ScamShield</Button>
+            </Link>
           </div>
         </Card>
       </Section>

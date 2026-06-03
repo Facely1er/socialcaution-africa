@@ -4,6 +4,8 @@ import { LogOut, User } from 'lucide-react';
 import useStore from '../../store/useStore';
 import AuthModal from '../auth/AuthModal';
 
+const SHOW_AUTH = false;
+
 export default function HeaderAuthActions() {
   const [showAuth, setShowAuth] = useState(false);
   const navigate = useNavigate();
@@ -13,6 +15,8 @@ export default function HeaderAuthActions() {
     signOut();
     navigate('/');
   };
+
+  if (!SHOW_AUTH) return null;
 
   return (
     <>
