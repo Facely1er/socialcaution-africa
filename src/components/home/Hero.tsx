@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
               </div>
               <span className="text-center">Privacy awareness, cyber hygiene, and digital citizenship</span>
               <div className="p-1.5 sm:p-2 bg-white/10 rounded-full">
-                <DollarSign className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
+                <Shield className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
           <div className="mb-6">
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-base sm:text-xl md:text-2xl text-white font-semibold px-4">
               <div className="hidden sm:block p-2 bg-white/10 rounded-full">
-                <Zap className="h-6 w-6 text-white" />
+                <Users className="h-6 w-6 text-white" />
               </div>
               <span className="text-center">Choose your profile — get a journey built for African digital life</span>
               <div className="hidden sm:block p-2 bg-white/10 rounded-full">
