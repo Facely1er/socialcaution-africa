@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LogOut, Menu, User, X } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { africaMobileNavSections } from '../../config/africaEditionNav';
 import {
   MOBILE_NAV_DRAWER_ID,
@@ -10,8 +10,6 @@ import {
   setMobileNavOpen,
 } from '../layout/headerNav';
 import ThemeSwitcher from '../ThemeSwitcher';
-import useStore from '../../store/useStore';
-import AuthModal from '../auth/AuthModal';
 import {
   ariaExpandedFalse,
   ariaExpandedTrue,
@@ -26,10 +24,7 @@ type MobileNavProps = {
 
 export default function MobileNav({ className = '' }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const { user, signOut } = useStore();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -67,12 +62,6 @@ export default function MobileNav({ className = '' }: MobileNavProps) {
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [isOpen, close]);
-
-  const handleSignOut = () => {
-    signOut();
-    close();
-    navigate('/');
-  };
 
   const drawer = createPortal(
     <div className={`mobile-nav-root${isOpen ? ' mobile-nav-root--open' : ''}`}>
@@ -160,33 +149,9 @@ export default function MobileNav({ className = '' }: MobileNavProps) {
         </div>
 
         <div className="mobile-nav-drawer__footer">
-          {user ? (
-            <>
-              <p className="mobile-nav-drawer__email">{user.email}</p>
-              <button
-                type="button"
-                className="mobile-nav-drawer__signout"
-                onClick={handleSignOut}
-                tabIndex={isOpen ? undefined : -1}
-              >
-                <LogOut className="h-4 w-4" aria-hidden />
-                Sign out
-              </button>
-            </>
-          ) : (
-            <button
-              type="button"
-              className="mobile-nav-drawer__signin"
-              onClick={() => {
-                close();
-                setShowAuth(true);
-              }}
-              tabIndex={isOpen ? undefined : -1}
-            >
-              <User className="h-4 w-4" aria-hidden />
-              Sign in
-            </button>
-          )}
+          <p className="mobile-nav-drawer__attribution m-0 text-center text-xs text-text-secondary">
+            SocialCaution® Africa · by ERMITS Advisory
+          </p>
         </div>
       </div>
     </div>,
@@ -209,8 +174,6 @@ export default function MobileNav({ className = '' }: MobileNavProps) {
       </button>
 
       {drawer}
-
-      {showAuth && <AuthModal onClose={() => setShowAuth(false)} defaultMode="signin" />}
     </>
   );
 }

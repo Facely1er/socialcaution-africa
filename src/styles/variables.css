@@ -1,8 +1,8 @@
 :root {
   /* Colors - Light Theme */
   --color-primary: 10 35 66;
-  --color-accent: 255 107 53;
-  --color-accent-dark: 229 90 41;
+  --color-accent: 234 88 12;
+  --color-accent-dark: 194 65 12;
   --color-background: 255 255 255;
   --color-background-secondary: 249 250 251;
   --color-text: 17 24 39;
@@ -16,6 +16,12 @@
   --color-danger: 244 67 54;
   --color-light-blue: 232 241 249;
   --color-secondary: 107 114 128;
+
+  /* Section accent colors */
+  --color-scam: 220 38 38;
+  --color-rights: 37 99 235;
+  --color-journey: 5 150 105;
+  --color-partner: 10 35 66;
   
   /* Additional theme colors for consistency */
   --color-muted: 156 163 175;
@@ -46,8 +52,8 @@
 .dark {
   /* Colors - Dark Theme */
   --color-primary: 17 24 39;
-  --color-accent: 255 107 53;
-  --color-accent-dark: 229 90 41;
+  --color-accent: 234 88 12;
+  --color-accent-dark: 194 65 12;
   --color-background: 15 23 42;
   --color-background-secondary: 30 41 59;
   --color-text: 226 232 240;

@@ -2,10 +2,6 @@
 @import url('./styles/layout.css');
 @import url('./styles/africa.css');
 @import url('./styles/header-footer.css');
-@import url('./styles/home.css');
-@import url('./styles/blog.css');
-@import url('./styles/modern-dashboard.css');
-@import url('./styles/dashboard-optimized.css');
 
 @tailwind base;
 @tailwind components;

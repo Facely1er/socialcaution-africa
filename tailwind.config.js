@@ -20,6 +20,10 @@ export default {
           DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
           dark: 'rgb(var(--color-accent-dark) / <alpha-value>)',
         },
+        scam: 'rgb(var(--color-scam) / <alpha-value>)',
+        rights: 'rgb(var(--color-rights) / <alpha-value>)',
+        journey: 'rgb(var(--color-journey) / <alpha-value>)',
+        partner: 'rgb(var(--color-partner) / <alpha-value>)',
         danger: '#F44336',
         success: '#4CAF50',
         warning: '#FFC107',
@@ -31,15 +35,9 @@ export default {
         'light-blue': '#E8F1F9'
       },
       fontFamily: {
-        sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'Helvetica Neue',
-          'Arial',
-          'sans-serif',
-        ],
+        sans: ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        mono: ['IBM Plex Mono', 'Consolas', 'monospace'],
       },
       boxShadow: {
         card: 'var(--shadow)',

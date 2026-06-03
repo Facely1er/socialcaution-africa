@@ -1,21 +1,11 @@
 /* Africa Edition — shared visual patterns */
 
 .africa-hero-band {
-  background: linear-gradient(
-    165deg,
-    rgb(var(--color-light-blue) / 1) 0%,
-    rgb(var(--color-background) / 1) 45%,
-    rgb(var(--color-accent) / 0.06) 100%
-  );
+  background: rgb(var(--color-primary));
 }
 
 .dark .africa-hero-band {
-  background: linear-gradient(
-    165deg,
-    rgb(var(--color-background) / 1) 0%,
-    rgb(var(--color-background-secondary) / 1) 50%,
-    rgb(var(--color-primary) / 0.35) 100%
-  );
+  background: rgb(10 16 30);
 }
 
 .africa-page-header {

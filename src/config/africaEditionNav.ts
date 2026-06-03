@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   AlertTriangle,
+  ClipboardList,
   HeartHandshake,
   Home,
   Info,
@@ -30,20 +31,23 @@ export const africaHeaderNav: EditionNavItem[] = [
   { path: '/africa/partner', label: 'Partner', icon: HeartHandshake, highlight: true },
 ];
 
+/** Default persona journey entry — most common Africa Edition user */
+export const AFRICA_DEFAULT_PLAN_PATH = '/africa/personas/start/mobile-money-user';
+
 /** Desktop “More” — secondary links */
 export const africaHeaderMore: EditionNavItem[] = [
   { path: '/africa/sources', label: 'Source register', icon: Landmark },
   { path: '/about', label: 'About ERMITS', icon: Info },
   { path: '/contact', label: 'Contact', icon: Mail },
-  { path: '/privacy-laws', label: 'Intl. laws (reference)', icon: Scale },
+  { path: '/privacy-laws', label: 'Intl. laws', icon: Scale },
 ];
 
 /** Mobile bottom bar — four highest-frequency destinations */
 export const africaBottomNav: EditionNavItem[] = [
   { path: '/', label: 'Home', icon: Home },
   { path: '/africa/countries', label: 'Countries', icon: MapPin },
-  { path: '/africa/scamshield', label: 'Scams', icon: AlertTriangle },
-  { path: '/africa/partner', label: 'Partner', icon: HeartHandshake },
+  { path: '/africa/scamshield', label: 'ScamShield', icon: AlertTriangle },
+  { path: AFRICA_DEFAULT_PLAN_PATH, label: 'My Plan', icon: ClipboardList },
 ];
 
 function uniqueNavByPath(items: EditionNavItem[]): EditionNavItem[] {
@@ -64,13 +68,22 @@ export type MobileNavSection = {
 /** Mobile drawer — grouped sections */
 export const africaMobileNavSections: MobileNavSection[] = [
   {
+    id: 'start',
+    title: 'Start',
+    items: [
+      { path: '/', label: 'Home', icon: Home },
+      { path: AFRICA_DEFAULT_PLAN_PATH, label: 'My Plan', icon: ClipboardList },
+    ],
+  },
+  {
     id: 'explore',
     title: 'Explore',
-    items: uniqueNavByPath([
-      { path: '/', label: 'Home', icon: Home },
-      ...africaHeaderNav,
-      ...africaHeaderMore,
-    ]),
+    items: uniqueNavByPath([...africaHeaderNav]),
+  },
+  {
+    id: 'more',
+    title: 'More',
+    items: uniqueNavByPath([...africaHeaderMore]),
   },
   {
     id: 'legal',

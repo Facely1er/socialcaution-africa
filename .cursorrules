@@ -1,0 +1,13 @@
+This is the SocialCaution Africa Edition — a privacy and digital safety platform
+for African users. Built with React 18, TypeScript, Vite, Tailwind CSS.
+
+Standing rules
+- No emoji anywhere in any file
+- No AI claims about any tool
+- No protect, secure, ensure safety language — use check, review, assess
+- No outcome guarantees — assessment framing only
+- Import motion from srclibmotion — never directly from framer-motion
+- Icons from lucide-react only
+- Do not touch srcdataafrica — data layer is final
+- Do not mix phases from BLUEPRINT.md in a single session
+- FTC compliance every claim must be substantiable
