@@ -51,9 +51,7 @@ const AfricaCountryPage: React.FC = () => {
         </div>
 
         <Card className="p-6 mb-10 border border-warning/40 bg-warning/5">
-          <h2 className="text-2xl font-bold text-primary dark:text-white mb-3">Verification status</h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-3"><strong>Confidence:</strong> {country.confidenceLevel.replaceAll('-', ' ')}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-4">{country.verificationNote}</p>
+          <h2 className="text-2xl font-bold text-primary dark:text-white mb-3">Official sources</h2>
           <div className="flex flex-wrap gap-3">
             {country.sourceUrls.map((url) => (
               <a key={url} href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">

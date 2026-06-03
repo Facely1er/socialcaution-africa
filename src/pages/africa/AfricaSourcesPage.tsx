@@ -8,7 +8,7 @@ import { africaCountries } from '../../data/africa/countries';
 const AfricaSourcesPage: React.FC = () => (
   <AfricaPageLayout
     title="Africa Edition Source Register"
-    subtitle="Official references used by the regional prototype"
+    subtitle="Official authority and law references for the Africa Edition"
     description="Authority and law references for verification before public-sector or legal use."
   >
     <Section>
