@@ -17,7 +17,7 @@ export const AFRICA_ROUTE_REDIRECTS: Record<string, string> = {
   '/personas/concerned-employee': '/africa/personas/start/civil-servant-employee',
   '/privacy-journey': '/africa/roadmap',
   '/30-day-roadmap': '/',
-  '/privacy-action-center': '/africa/countries',
+  '/privacy-action-center': '/',
   '/privacy-focus': '/',
   '/parent': '/',
   '/parent/onboarding': '/',

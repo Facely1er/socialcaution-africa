@@ -6,6 +6,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import AfricaPersonaStartAliasRedirect from './pages/africa/AfricaPersonaStartAliasRedirect';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import EnhancedErrorBoundary from './components/common/EnhancedErrorBoundary';
 import { AuthProvider } from './components/auth/AuthProvider';
@@ -64,6 +65,7 @@ const router = createBrowserRouter(
       <Route path="/africa/countries" element={<AfricaCountriesPage />} />
       <Route path="/africa/countries/:countrySlug" element={<AfricaCountryPage />} />
       <Route path="/africa/scamshield" element={<ScamShieldAfricaPage />} />
+      <Route path="/africa/start/:personaSlug" element={<AfricaPersonaStartAliasRedirect />} />
       <Route path="/africa/personas/start/:personaSlug" element={<AfricaPersonaStartPage />} />
       <Route path="/africa/personas/:countrySlug" element={<AfricaPersonasPage />} />
       <Route path="/africa/action-center/:countrySlug" element={<AfricaActionCenterPage />} />
