@@ -85,7 +85,6 @@ html, :host {
   font-variation-settings: normal;
   -webkit-tap-highlight-color: transparent;
 }
-
 body {
   margin: 0;
   line-height: inherit;
