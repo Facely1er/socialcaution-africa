@@ -6,7 +6,7 @@
 
 # Test info
 
-- Name: routes.spec.ts >> Route audit — registered pages >> loads without 404: /africa/countries/cote-divoire
+- Name: routes.spec.ts >> Route audit — registered pages >> loads without 404: /africa/scamshield
 - Location: e2e\tests\routes.spec.ts:138:5
 
 # Error details
@@ -20,7 +20,7 @@ Timeout: 15000ms
 
 Call log:
   - Expect "not toHaveURL" with timeout 15000ms
-    32 × unexpected value "https://beta.socialcaution.com/404"
+    31 × unexpected value "https://beta.socialcaution.com/404"
 
 ```
 
