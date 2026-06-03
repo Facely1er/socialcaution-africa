@@ -20,11 +20,15 @@ const AfricaActionCenterPage: React.FC = () => {
   return (
     <AfricaPageLayout
       title={persona ? 'Your safety plan' : 'Safety plan'}
-      subtitle={country.name}
+      subtitle={
+        persona
+          ? `${persona.shortLabel} · ${country.name}`
+          : `${country.name} — personalize with a profile`
+      }
       description={
         persona
-          ? `Tailored steps for ${persona.shortLabel} — scams, rights, and reporting in ${country.name}.`
-          : `Country-specific guidance for ${country.name}. Pick a profile on the homepage to personalize this plan.`
+          ? 'Work through the steps below — scams, rights, and reporting tailored to you.'
+          : 'Country-specific guidance. Choose a profile on the homepage to personalize risks and first actions.'
       }
     >
       <Section>

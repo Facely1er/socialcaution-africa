@@ -70,11 +70,16 @@ const StandardPageHeader: React.FC<StandardPageHeaderProps> = ({
         )}
         
         {/* Simple Header Section */}
-        <div className="bg-white dark:bg-background py-8 md:py-10">
+        <div className={`py-8 md:py-10 ${backgroundType === 'africa' ? 'africa-page-header' : 'bg-white dark:bg-background'}`}>
           <div className={designSystem.layout.contentShell}>
-            <div className={`${designSystem.layout.proseColumn} ${!heroBackground ? 'text-center' : ''}`}>
+            <div className={`${designSystem.layout.proseColumn} mx-auto ${!heroBackground ? 'text-center' : ''}`}>
+              {backgroundType === 'africa' && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent font-semibold text-sm mb-4">
+                  Africa Edition
+                </div>
+              )}
               <h1 
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary dark:text-white mb-3"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary dark:text-white mb-3 leading-tight"
               >
                 {title}
               </h1>

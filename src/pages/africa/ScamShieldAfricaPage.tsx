@@ -1,110 +1,187 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, CheckCircle2, ExternalLink, MessageSquare, FileWarning } from 'lucide-react';
+import {
+  AlertTriangle,
+  CheckCircle2,
+  ExternalLink,
+  MessageSquare,
+  FileWarning,
+  ShieldAlert,
+  MapPin,
+} from 'lucide-react';
 import AfricaPageLayout from './AfricaPageLayout';
 import Section from '../../components/common/Section';
-import Card from '../../components/common/Card';
 import { scamTypes } from '../../data/africa/countries';
 import { scamIncidents, warningTemplates, countryReportingLinks } from '../../data/africa/scamShield';
-import { designSystem } from '../../styles/design-system';
+
+function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
+  return (
+    <div className="africa-section-heading">
+      <h2>{title}</h2>
+      {subtitle && <p>{subtitle}</p>}
+    </div>
+  );
+}
 
 const ScamShieldAfricaPage: React.FC = () => {
   return (
     <AfricaPageLayout
       title="ScamShield Africa"
       subtitle="Practical scam prevention for mobile-first digital life"
-      description="High-frequency fraud patterns, response steps, and country reporting entry points for African users."
+      description="High-frequency fraud patterns, response steps, and country reporting entry points."
     >
-      <Section title="Know the pattern" subtitle="Common scams affecting mobile money, messaging apps, and job seekers across the region.">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      <Section>
+        <SectionHeading
+          title="Know the pattern"
+          subtitle="Common scams affecting mobile money, messaging apps, and job seekers across the region."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {scamTypes.map((scam) => (
-            <Card key={scam.title} className="p-6 h-full">
-              <AlertTriangle className="h-8 w-8 text-accent mb-4" />
-              <h2 className="text-2xl font-bold text-primary dark:text-white mb-3">{scam.title}</h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-4">{scam.description}</p>
-              <div className="flex items-start gap-2 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/40">
-                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-green-900 dark:text-green-100 font-medium">{scam.action}</p>
+            <article key={scam.title} className="scam-alert-card">
+              <span className="scam-alert-badge">
+                <ShieldAlert className="h-3 w-3" />
+                Active threat
+              </span>
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center flex-shrink-0">
+                  <AlertTriangle className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold text-primary dark:text-white leading-snug pt-1">
+                  {scam.title}
+                </h3>
               </div>
-            </Card>
+              <p className="text-sm text-text-secondary dark:text-gray-300 mb-4 leading-relaxed flex-grow">
+                {scam.description}
+              </p>
+              <div className="scam-action-callout">
+                <CheckCircle2 className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-success mb-0.5">What to do</p>
+                  <p className="text-sm font-medium text-primary dark:text-white leading-relaxed">{scam.action}</p>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </Section>
 
-      <Section title="Incident examples" subtitle="Use these scenarios in awareness workshops and family safety conversations." className="bg-card-hover">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          {scamIncidents.map((incident) => (
-            <Card key={incident.id} className="p-6">
-              <FileWarning className="h-6 w-6 text-accent mb-3" />
-              <p className="text-xs font-semibold text-accent uppercase tracking-wide mb-2">{incident.relatedScam}</p>
-              <h3 className="text-lg font-bold text-primary dark:text-white mb-2">{incident.title}</h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300 mb-3">{incident.pattern}</p>
-              <p className="text-sm font-medium text-primary dark:text-white">{incident.whatToDo}</p>
-            </Card>
-          ))}
+      <Section>
+        <div className="africa-section-band p-6 md:p-8">
+          <SectionHeading
+            title="Real incident examples"
+            subtitle="Use these scenarios in family conversations, school workshops, or SME staff briefings."
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5">
+            {scamIncidents.map((incident) => (
+              <article key={incident.id} className="scam-incident-card">
+                <div className="flex items-center gap-2 mb-2">
+                  <FileWarning className="h-4 w-4 text-warning flex-shrink-0" />
+                  <p className="text-xs font-bold text-accent uppercase tracking-wide">{incident.relatedScam}</p>
+                </div>
+                <h3 className="text-base font-bold text-primary dark:text-white mb-2">{incident.title}</h3>
+                <p className="text-sm text-text-secondary dark:text-gray-300 leading-relaxed">{incident.pattern}</p>
+                <div className="scam-incident-response">
+                  <p className="text-xs font-bold uppercase tracking-wide text-accent mb-1">Your response</p>
+                  <p className="text-sm font-medium text-primary dark:text-white leading-relaxed">
+                    {incident.whatToDo}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section title="Shareable warning templates">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+      <Section>
+        <SectionHeading
+          title="Shareable warning templates"
+          subtitle="Copy and adapt for WhatsApp groups, staff alerts, or school notices."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-4">
           {warningTemplates.map((template) => (
-            <Card key={template.title} className="p-5">
-              <MessageSquare className="h-5 w-5 text-accent mb-3" />
-              <h3 className="font-bold text-primary dark:text-white mb-2">{template.title}</h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300 whitespace-pre-wrap">{template.body}</p>
-            </Card>
+            <article key={template.title} className="scam-template-card">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4 text-accent flex-shrink-0" />
+                <h3 className="font-bold text-primary dark:text-white text-sm">{template.title}</h3>
+              </div>
+              <blockquote className="scam-template-body">{template.body}</blockquote>
+            </article>
           ))}
         </div>
-        <p className={`text-sm text-text-secondary dark:text-gray-400 ${designSystem.layout.proseColumn} text-center`}>
-          Copy and adapt these messages for schools, SMEs, and community groups. Verify local reporting numbers before mass distribution.
-        </p>
-      </Section>
-
-      <Section title="Country reporting links" subtitle="MVP references — verify URLs on official regulator sites before public-sector use." className="bg-card-hover">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {countryReportingLinks.map((country) => (
-            <Card key={country.slug} className="p-5">
-              <h3 className="font-bold text-primary dark:text-white mb-1">
-                <Link to={`/africa/countries/${country.slug}`} className="hover:text-accent">
-                  {country.name}
-                </Link>
-              </h3>
-              <p className="text-sm text-text-secondary dark:text-gray-300 mb-3">{country.authority}</p>
-              <ul className="space-y-2 text-sm">
-                {country.authorityUrl && (
-                  <li>
-                    <a href={country.authorityUrl} target="_blank" rel="noreferrer" className="text-accent font-semibold inline-flex items-center hover:underline">
-                      Data protection authority <ExternalLink className="h-3.5 w-3.5 ml-1" />
-                    </a>
-                  </li>
-                )}
-                {country.cybercrimeReportingUrl && (
-                  <li>
-                    <a href={country.cybercrimeReportingUrl} target="_blank" rel="noreferrer" className="text-accent font-semibold inline-flex items-center hover:underline">
-                      Cybercrime / police reporting <ExternalLink className="h-3.5 w-3.5 ml-1" />
-                    </a>
-                  </li>
-                )}
-              </ul>
-              <p className="mt-3 text-xs text-text-secondary dark:text-gray-400">{country.financialFraudChannel}</p>
-            </Card>
-          ))}
-        </div>
-        <p className="text-center mt-6">
-          <Link to="/africa/sources" className="text-accent font-semibold hover:underline">
-            View full source register →
-          </Link>
+        <p className="text-sm text-text-secondary dark:text-gray-400 text-center max-w-xl mx-auto">
+          Verify local reporting numbers before mass distribution in your community.
         </p>
       </Section>
 
       <Section>
-        <Card className="p-6 border border-amber-200 dark:border-amber-800/50 bg-amber-50/50 dark:bg-amber-950/20">
-          <h2 className="text-xl font-bold text-primary dark:text-white mb-2">Before production launch</h2>
-          <p className="text-gray-700 dark:text-gray-300">
-            Country authority URLs and complaint workflows must be validated against official pages.
-            This module is educational — not a substitute for law enforcement or regulated financial advice.
+        <div className="africa-section-band p-6 md:p-8">
+          <SectionHeading
+            title="Report in your country"
+            subtitle="Official authority and cybercrime reporting links for each covered country."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {countryReportingLinks.map((country) => (
+              <article key={country.slug} className="scam-reporting-card">
+                <div className="flex items-start gap-2 mb-2">
+                  <MapPin className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-bold text-primary dark:text-white">
+                      <Link to={`/africa/countries/${country.slug}`} className="hover:text-accent transition-colors">
+                        {country.name}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-text-secondary dark:text-gray-300 mt-0.5">{country.authority}</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm mt-3">
+                  {country.authorityUrl && (
+                    <li>
+                      <a
+                        href={country.authorityUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-accent font-semibold inline-flex items-center hover:underline"
+                      >
+                        Data protection authority <ExternalLink className="h-3.5 w-3.5 ml-1" />
+                      </a>
+                    </li>
+                  )}
+                  {country.cybercrimeReportingUrl && (
+                    <li>
+                      <a
+                        href={country.cybercrimeReportingUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-accent font-semibold inline-flex items-center hover:underline"
+                      >
+                        Cybercrime / police reporting <ExternalLink className="h-3.5 w-3.5 ml-1" />
+                      </a>
+                    </li>
+                  )}
+                </ul>
+                {country.financialFraudChannel && (
+                  <p className="mt-3 text-xs text-text-secondary dark:text-gray-400 leading-relaxed">
+                    {country.financialFraudChannel}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+          <p className="text-center mt-6">
+            <Link to="/africa/sources" className="text-accent font-semibold hover:underline text-sm">
+              View full source register →
+            </Link>
           </p>
-        </Card>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="rounded-xl border border-border bg-background-secondary dark:bg-background-secondary/50 p-5 md:p-6 text-center">
+          <p className="text-sm text-text-secondary dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            ScamShield is educational guidance — not a substitute for law enforcement or regulated financial advice.
+            Always verify reporting channels on official government websites.
+          </p>
+        </div>
       </Section>
     </AfricaPageLayout>
   );

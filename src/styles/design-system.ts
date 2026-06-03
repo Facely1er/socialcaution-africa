@@ -5,7 +5,7 @@
 export const layoutClasses = {
   pageShell: 'min-h-screen min-w-0 max-w-full overflow-x-clip w-full',
   contentShell: 'max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 min-w-0 max-w-full w-full box-border',
-  sectionOuter: 'page-section w-full max-w-full min-w-0 overflow-x-clip py-6 md:py-8',
+  sectionOuter: 'page-section w-full max-w-full min-w-0 overflow-x-clip py-8 md:py-10',
   proseColumn: 'max-w-4xl mx-auto',
 };
 

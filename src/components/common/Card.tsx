@@ -38,10 +38,10 @@ const Card: React.FC<CardProps> = ({
   };
 
   const baseClasses = `
-    rounded-lg transition-all duration-200
+    rounded-xl transition-all duration-200
     ${variantClasses[variant]}
     ${paddingClasses[padding]}
-    ${hover ? 'cursor-pointer hover:shadow-xl dark:hover:shadow-2xl hover:-translate-y-1' : ''}
+    ${hover ? 'cursor-pointer hover:shadow-lg dark:hover:shadow-xl hover:-translate-y-0.5' : ''}
     ${onClick ? 'cursor-pointer' : ''}
     ${className}
   `;
